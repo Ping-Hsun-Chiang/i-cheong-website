@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SANY 三一集團 | 台灣授權經銷商</title>
+    <title>SANY 三一集團 | 臺灣授權經銷商</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,9 +103,11 @@
 </head>
 <body class="bg-gray-900 text-white">
 
-<!-- ══════════════════════════════════════════════════════════════
-     NAVBAR
-══════════════════════════════════════════════════════════════ -->
+<!-- ====【 導覽列 Navbar 】====
+     內容：Logo、桌機導覽連結、手機漢堡選單
+     修改：更換公司名稱請找 Logo 區塊；新增導覽項目請在桌機 nav 與 mobile-menu 各加一行
+==== -->
+
 <nav id="navbar" class="fixed top-0 inset-x-0 z-50 bg-gray-900/95 backdrop-blur border-b border-gray-800 transition-shadow">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16 md:h-20">
@@ -118,11 +120,11 @@
                 <div class="leading-none">
                     <!-- Primary: SANY brand -->
                     <div class="font-black text-base sm:text-lg tracking-wide leading-tight">
-                        <span class="text-sr">SANY</span><span class="text-white"> 三一集團</span>
+                        <span class="text-sr">SANY</span><span class="text-white"> 三一集團 臺灣經銷商</span>
                     </div>
                     <!-- Sub: Taiwan entities -->
-                    <div class="text-gray-500 text-[10px] tracking-wider mt-0.5 hidden sm:block">
-                        台灣授權經銷 &nbsp;|&nbsp; xx起重 &nbsp;·&nbsp; yy起重 &nbsp;·&nbsp; zz起重
+                    <div class="text-gray-500 text-[12px] tracking-wider mt-0.5 hidden sm:block">
+                        1起重公司 &nbsp;·&nbsp; 2起重公司 &nbsp;·&nbsp; 3起重公司
                     </div>
                 </div>
             </a>
@@ -132,6 +134,7 @@
                 <a href="#home"    class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">首頁</a>
                 <a href="#brand"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">品牌介紹</a>
                 <a href="#fleet"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">車型總覽</a>
+                <a href="#events"  class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">活動特輯</a>
                 <a href="#about"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">關於我們</a>
                 <a href="#contact" class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">聯絡業務</a>
             </div>
@@ -151,12 +154,13 @@
     <div id="mobile-menu" class="lg:hidden bg-gray-800 border-t border-gray-700">
         <div class="px-4 py-3 flex flex-col gap-1">
             <!-- Mobile sub label -->
-            <div class="px-4 py-2 text-gray-600 text-[10px] tracking-widest border-b border-gray-700 mb-1">
-                台灣授權 · xx起重 · yy起重 · zz起重
+            <div class="px-4 py-2 text-gray-600 text-[12px] tracking-widest border-b border-gray-700 mb-1">
+                臺灣授權 · 1起重公司 · 2起重公司 · 3起重公司
             </div>
             <a href="#home"    class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">首頁</a>
             <a href="#brand"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">品牌介紹</a>
             <a href="#fleet"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">車型總覽</a>
+            <a href="#events"  class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">活動特輯</a>
             <a href="#about"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">關於我們</a>
             <a href="#contact" class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">聯絡業務</a>
             <a href="#contact" class="mob-link mt-2 bg-cy text-gray-900 font-black text-sm px-4 py-3 uppercase tracking-widest text-center hover:bg-yellow-400 transition-colors">
@@ -167,9 +171,10 @@
 </nav>
 
 
-<!-- ══════════════════════════════════════════════════════════════
-     HERO
-══════════════════════════════════════════════════════════════ -->
+<!-- ====【 首頁主視覺 Hero 】====
+     內容：背景大圖、主標題、副標題、統計數字、CTA 按鈕
+     修改：標題文字直接改 h1 內文；背景圖替換 <img src="...">
+==== -->
 <section id="home" class="relative min-h-screen flex items-center overflow-hidden pt-16">
     <div class="absolute inset-0">
         <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80"
@@ -184,14 +189,14 @@
             <div class="flex items-center gap-3 mb-5">
                 <div class="h-px w-10 bg-cy"></div>
                 <span class="bg-sr text-white font-black text-xs px-3 py-1 uppercase tracking-widest">SANY 三一起重機</span>
-                <span class="text-gray-400 font-bold text-xs tracking-widest uppercase">台灣授權銷售</span>
+                <span class="text-gray-400 font-bold text-xs tracking-widest uppercase">臺灣授權銷售</span>
             </div>
 
             <h1 class="font-black leading-none mb-6">
                 <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tight">全球頂尖</span>
                 <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-cy uppercase tracking-tight">吊裝實力</span>
                 <span class="block text-lg sm:text-2xl md:text-3xl font-bold text-gray-300 mt-3 tracking-wide normal-case">
-                    SANY 三一起重機 &nbsp;·&nbsp; 台灣授權經銷
+                    SANY 三一起重機 &nbsp;·&nbsp; 臺灣授權經銷
                 </span>
             </h1>
 
@@ -238,9 +243,10 @@
 </section>
 
 
-<!-- ══════════════════════════════════════════════════════════════
-     SANY BRAND INTRO
-══════════════════════════════════════════════════════════════ -->
+<!-- ====【 品牌介紹 Brand 】====
+     內容：SANY 三一品牌說明段落、應用領域格、四項品牌優勢
+     修改：說明文字直接改段落內文；應用領域新增請複製 <div class="flex items-center..."> 區塊
+==== -->
 <section id="brand" class="py-20 md:py-28 bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -267,7 +273,7 @@
                     SANY 起重機以<strong class="text-cy">高性能、穩定性、安全性</strong>與智慧化操作為核心，廣泛應用於建築工程、科技廠房、橋樑建設、風電工程、石化廠區、港口碼頭與大型設備吊裝作業。
                 </p>
                 <p class="text-gray-400 text-sm leading-relaxed">
-                    對台灣吊裝市場而言，SANY 起重機具備<strong class="text-white">車型選擇多、噸位完整、維修支援便利、性能表現穩定</strong>等優勢，適合起重工程公司、設備安裝工程、科技廠吊裝與大型工程承包商使用。
+                    對臺灣吊裝市場而言，SANY 起重機具備<strong class="text-white">車型選擇多、噸位完整、維修支援便利、性能表現穩定</strong>等優勢，適合起重工程公司、設備安裝工程、科技廠吊裝與大型工程承包商使用。
                 </p>
             </div>
 
@@ -325,16 +331,18 @@
             <div class="text-center p-5 bg-gray-800 border border-gray-700 border-t-2 border-t-cy">
                 <i class="fa-solid fa-wrench text-cy text-2xl mb-3"></i>
                 <div class="text-white font-black text-sm uppercase tracking-wide">維修便利</div>
-                <div class="text-gray-500 text-xs mt-1">台灣在地支援</div>
+                <div class="text-gray-500 text-xs mt-1">臺灣在地支援</div>
             </div>
         </div>
     </div>
 </section>
 
 
-<!-- ══════════════════════════════════════════════════════════════
-     FLEET
-══════════════════════════════════════════════════════════════ -->
+<!-- ====【 車型總覽 Fleet 】====
+     內容：11 款 SANY 起重機卡片，點擊「車型說明」開啟 Modal 彈窗
+     修改：新增車型請複製一整個 <div class="card-hover..."> 區塊，並在下方 FLEET{} 物件補上對應資料
+     注意：圖片佔位區為 <div class="img-placeholder...">，待有圖後改為 <img src="...">
+==== -->
 <section id="fleet" class="py-20 md:py-28" style="background:#0b0f17">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -632,7 +640,7 @@
                 </div>
             </div>
 
-            <!-- SAC2500T 台灣規格 -->
+            <!-- SAC2500T 臺灣規格 -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
                 <div class="img-placeholder h-48 sm:h-52 relative">
                     <div class="img-placeholder-inner">
@@ -643,7 +651,7 @@
                         <span class="flex items-center gap-1.5 bg-gray-900/90 text-xs font-bold px-2.5 py-1 border border-gray-600">
                             <span class="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>全地面起重機
                         </span>
-                        <span class="bg-cy text-gray-900 font-black text-[10px] px-2 py-1">台灣規格</span>
+                        <span class="bg-cy text-gray-900 font-black text-[10px] px-2 py-1">臺灣規格</span>
                     </div>
                 </div>
                 <div class="p-5">
@@ -653,7 +661,7 @@
                     </div>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-blue-400">最大起重：2500T</span>
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-blue-400">台灣道路規格</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-blue-400">臺灣道路規格</span>
                     </div>
                     <button onclick="openModal('SAC2500T')"
                         class="w-full border border-gray-600 text-gray-300 font-bold text-xs py-2.5 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors flex items-center justify-center gap-2">
@@ -701,9 +709,11 @@
 </section>
 
 
-<!-- ══════════════════════════════════════════════════════════════
-     MODAL
-══════════════════════════════════════════════════════════════ -->
+<!-- ====【 車型詳情彈窗 Modal 】====
+     內容：點擊「車型說明」後顯示的彈出視窗，規格表 + 說明文字
+     修改：此處為 HTML 結構，車型內容資料請至下方 JavaScript 的 FLEET{} 物件更新
+     操作：按 Esc 或點擊背景遮罩可關閉彈窗
+==== -->
 <div id="modal-overlay" onclick="handleOverlayClick(event)">
     <div id="modal-box">
         <!-- Modal Header -->
@@ -761,9 +771,150 @@
 </div>
 
 
-<!-- ══════════════════════════════════════════════════════════════
-     ABOUT / WHY CHOOSE US
-══════════════════════════════════════════════════════════════ -->
+<!-- ====【 活動特輯 Events 】====
+     內容：展覽資訊、促銷方案、教育訓練等活動卡片
+     修改：更換活動請直接修改各卡片內的日期、標題、描述文字；新增活動請複製整個卡片 <article> 區塊
+     注意：category badge 顏色 ── 展覽=藍、促銷=黃、培訓=綠，可依需求自行調整
+==== -->
+<section id="events" class="py-20 md:py-28 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- 區塊標題 -->
+        <div class="text-center mb-16 fade-in">
+            <div class="inline-flex items-center gap-3 mb-4">
+                <div class="h-px w-10 bg-cy"></div>
+                <span class="text-cy font-bold text-xs tracking-[.25em] uppercase">Events &amp; Promotions</span>
+                <div class="h-px w-10 bg-cy"></div>
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-4">活動特輯</h2>
+            <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto">
+                最新展覽、購機優惠與原廠培訓資訊，掌握第一手 SANY 動態。
+            </p>
+            <div class="flex items-center justify-center gap-4 mt-8">
+                <div class="h-px flex-1 max-w-xs bg-gray-800"></div>
+                <div class="w-3 h-3 bg-cy rotate-45"></div>
+                <div class="h-px flex-1 max-w-xs bg-gray-800"></div>
+            </div>
+        </div>
+
+        <!-- 活動卡片列表 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+            <!-- 活動卡片 1：展覽資訊 -->
+            <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
+                <!-- 活動圖片佔位 -->
+                <div class="img-placeholder h-44 relative">
+                    <div class="img-placeholder-inner">
+                        <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
+                        <span class="text-gray-600 text-xs uppercase tracking-widest">活動圖片待上傳</span>
+                    </div>
+                    <!-- 分類標籤 -->
+                    <span class="absolute top-3 left-3 z-10 bg-blue-600 text-white font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
+                        <i class="fa-solid fa-flag mr-1"></i>展覽資訊
+                    </span>
+                </div>
+
+                <div class="p-5 flex flex-col flex-1">
+                    <!-- 日期 -->
+                    <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
+                        <i class="fa-solid fa-calendar-days text-cy"></i>
+                        <span>2025 / 00 / 00 &nbsp;—&nbsp; 2025 / 00 / 00</span>
+                    </div>
+                    <!-- 標題 -->
+                    <h3 class="text-white font-black text-base leading-snug mb-2">
+                        2025 國際工程機械展 <br>
+                        <span class="text-cy">SANY 三一參展資訊</span>
+                    </h3>
+                    <!-- 說明 -->
+                    <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">
+                        待補充活動內容
+                    </p>
+                    <!-- CTA -->
+                    <a href="#contact" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
+                        了解更多 <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- 活動卡片 2：促銷方案 -->
+            <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
+                <div class="img-placeholder h-44 relative">
+                    <div class="img-placeholder-inner">
+                        <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
+                        <span class="text-gray-600 text-xs uppercase tracking-widest">活動圖片待上傳</span>
+                    </div>
+                    <span class="absolute top-3 left-3 z-10 bg-cy text-gray-900 font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
+                        <i class="fa-solid fa-tag mr-1"></i>限時優惠
+                    </span>
+                </div>
+
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
+                        <i class="fa-solid fa-calendar-days text-cy"></i>
+                        <span>活動期間：待補充</span>
+                    </div>
+                    <h3 class="text-white font-black text-base leading-snug mb-2">
+                        年中購機優惠方案 <br>
+                        <span class="text-cy">指定車型專屬優惠</span>
+                    </h3>
+                    <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">
+                        待補充活動內容
+                    </p>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
+                        洽詢優惠 <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- 活動卡片 3：交車大吉 -->
+            <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
+                <div class="img-placeholder h-44 relative">
+                    <div class="img-placeholder-inner">
+                        <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
+                        <span class="text-gray-600 text-xs uppercase tracking-widest">活動圖片待上傳</span>
+                    </div>
+                    <span class="absolute top-3 left-3 z-10 bg-cy text-gray-900 font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
+                        <i class="fa-solid fa-tag mr-1"></i>交車大吉
+                    </span>
+                </div>
+
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
+                        <i class="fa-solid fa-calendar-days text-cy"></i>
+                        <span>活動期間：待補充</span>
+                    </div>
+                    <h3 class="text-white font-black text-base leading-snug mb-2">
+                        xxxxx <br>
+                        <span class="text-cy">xxxxxx</span>
+                    </h3>
+                    <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">
+                        待補充活動內容
+                    </p>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
+                        交車紀錄 <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </article>
+
+        </div><!-- /活動卡片列表 -->
+
+        <!-- 查看更多 -->
+        <div class="text-center mt-12 fade-in">
+            <a href="#contact" class="inline-flex items-center gap-3 border-2 border-gray-700 text-gray-400 font-bold text-sm px-8 py-3.5 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors">
+                <i class="fa-solid fa-envelope"></i>
+                詢問更多活動資訊
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ====【 關於我們 / 為何選擇我們 About 】====
+     內容：四項核心優勢說明（授權、選型、透明報價、噸位完整）
+     修改：更換優勢項目請直接改 <h3> 標題與 <p> 說明文字；圖示替換請改 <i class="fa-solid fa-...">
+==== -->
 <section id="about" class="relative py-20 md:py-28 metal-bg overflow-hidden">
     <div class="absolute top-0 inset-x-0 h-14" style="background:#0b0f17;clip-path:polygon(0 0,100% 0,100% 100%,0 0)"></div>
     <div class="absolute bottom-0 inset-x-0 h-14" style="background:#0b0f17;clip-path:polygon(0 100%,100% 0,100% 100%,0 100%)"></div>
@@ -776,7 +927,7 @@
                 <div class="h-px w-10 bg-cy"></div>
             </div>
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-4">為何選擇我們</h2>
-            <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto">SANY 三一起重機台灣授權銷售，從諮詢、選型到交車，提供全程專業服務。</p>
+            <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto">SANY 三一起重機臺灣授權銷售，從諮詢、選型到交車，提供全程專業服務。</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 fade-in">
@@ -785,7 +936,7 @@
                     <i class="fa-solid fa-certificate text-gray-900 text-xl"></i>
                 </div>
                 <div>
-                    <h3 class="text-white font-black text-sm uppercase tracking-wide mb-2">SANY 台灣授權經銷</h3>
+                    <h3 class="text-white font-black text-sm uppercase tracking-wide mb-2">SANY 臺灣授權經銷</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">直接對接 SANY 原廠，提供原廠保固、零件供應與技術支援，確保購車後的完整售後保障。</p>
                 </div>
             </div>
@@ -821,9 +972,10 @@
 </section>
 
 
-<!-- ══════════════════════════════════════════════════════════════
-     CONTACT
-══════════════════════════════════════════════════════════════ -->
+<!-- ====【 聯絡業務 Contact 】====
+     內容：業務名片（李霸崧）、聯絡資訊、購車詢問表單
+     修改：聯絡人資料請找「業務聯絡資訊」區塊；傳真與地址填入「待補充」的位置
+==== -->
 <section id="contact" class="py-20 md:py-28 bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -849,7 +1001,7 @@
                     <div>
                         <div class="text-gray-400 text-xs uppercase tracking-widest mb-0.5">業務經理</div>
                         <div class="text-white font-black text-xl">李霸崧</div>
-                        <div class="text-gray-500 text-xs mt-0.5">SANY 三一起重機 台灣銷售</div>
+                        <div class="text-gray-500 text-xs mt-0.5">SANY 三一起重機 臺灣銷售</div>
                     </div>
                 </div>
 
@@ -929,7 +1081,7 @@
                                 <option>STC1200T6 — 汽車式起重機 1200噸</option>
                                 <option>SAC1400T7 — 全地面起重機 1400噸</option>
                                 <option>SAC2500E — 全地面起重機 2500噸</option>
-                                <option>SAC2500T — 全地面起重機 2500噸（台灣規格）</option>
+                                <option>SAC2500T — 全地面起重機 2500噸（臺灣規格）</option>
                                 <option>SAC6000T — 全地面起重機 6000噸</option>
                                 <option>尚未確定，需要業務協助選型</option>
                             </select>
@@ -951,9 +1103,10 @@
 </section>
 
 
-<!-- ══════════════════════════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════════════════════════ -->
+<!-- ====【 頁尾 Footer 】====
+     內容：SANY Logo 與公司說明、快速導覽連結、業務直聯電話、版權宣告
+     修改：社群連結請替換 <a href="#"> 的 "#" 為實際網址
+==== -->
 <footer class="border-t border-gray-800" style="background:#0b0f17">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
@@ -965,11 +1118,11 @@
                     </div>
                     <div class="leading-none">
                         <div class="font-black text-base tracking-wide"><span class="text-sr">SANY</span> 三一集團</div>
-                        <div class="text-gray-600 text-[10px] tracking-wider mt-0.5">台灣授權 · xx起重 · yy起重 · zz起重</div>
+                        <div class="text-gray-600 text-[10px] tracking-wider mt-0.5">臺灣授權 · 1起重公司 · 2起重公司 · 3起重公司</div>
                     </div>
                 </a>
                 <p class="text-gray-500 text-sm leading-relaxed mb-6">
-                    SANY 三一起重機台灣授權銷售，代理全系列起重機，160 噸至 6,000 噸。
+                    SANY 三一起重機臺灣授權銷售，代理全系列起重機，160 噸至 6,000 噸。
                 </p>
                 <div class="flex gap-3">
                     <a href="#" aria-label="Facebook" class="w-9 h-9 bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-500 hover:text-cy hover:border-cy transition-colors">
@@ -990,6 +1143,7 @@
                     <li><a href="#home"    class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>首頁</a></li>
                     <li><a href="#brand"   class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>SANY 品牌介紹</a></li>
                     <li><a href="#fleet"   class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>現售車型總覽</a></li>
+                    <li><a href="#events"  class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>活動特輯</a></li>
                     <li><a href="#about"   class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>關於我們</a></li>
                     <li><a href="#contact" class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>聯絡業務</a></li>
                 </ul>
@@ -1022,7 +1176,7 @@
         <div class="h-px yellow-stripe opacity-20 mb-8"></div>
 
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-600 text-xs">
-            <div>© 2024 SANY 三一集團 台灣授權經銷商. All rights reserved.</div>
+            <div>© 2024 SANY 三一集團 臺灣授權經銷商. All rights reserved.</div>
             <div class="flex gap-4">
                 <a href="#" class="hover:text-cy transition-colors">隱私權政策</a>
                 <span>|</span>
@@ -1033,9 +1187,15 @@
 </footer>
 
 
-<!-- ══════════════════════════════════════════════════════════════
-     JAVASCRIPT
-══════════════════════════════════════════════════════════════ -->
+<!-- ====【 JavaScript 互動邏輯 】====
+     內容：
+       ① FLEET{} 物件 ── 各車型規格資料，修改規格請直接在此更新
+       ② openModal / closeModal ── 彈窗開關邏輯
+       ③ 漢堡選單 toggle
+       ④ 滾動淡入動畫（IntersectionObserver）
+       ⑤ 平滑滾動（smooth scroll）
+     修改：新增車型規格請在 FLEET{} 物件內加一個 key-value 區塊
+==== -->
 <script>
 // ── Vehicle data ─────────────────────────────────────────────
 // 請直接在此更新各車型的規格與說明
@@ -1176,11 +1336,11 @@ const FLEET = {
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
     },
     'SAC2500T': {
-        type: '全地面起重機（台灣規格）', typeColor: '#60a5fa',
+        type: '全地面起重機（臺灣規格）', typeColor: '#60a5fa',
         capacity: '2,500 噸',
         specs: [
             ['最大起重量',   '2,500 噸'],
-            ['規格說明',     '符合台灣道路交通法規'],
+            ['規格說明',     '符合臺灣道路交通法規'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
             ['引擎型號',     '待補充'],
@@ -1188,7 +1348,7 @@ const FLEET = {
             ['整車重量',     '待補充'],
             ['軸數',         '待補充'],
         ],
-        desc: '待補充：台灣規格說明、與標準版差異、適用工況等。'
+        desc: '待補充：臺灣規格說明、與標準版差異、適用工況等。'
     },
     'SAC6000T': {
         type: '全地面起重機', typeColor: '#60a5fa',
