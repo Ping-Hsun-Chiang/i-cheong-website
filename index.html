@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宜宗重機械有限公司 | 專業吊車租售首選</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cy': '#FDB813',
+                        'cdark': '#111827',
+                        'cmid': '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Roboto', sans-serif; }
+
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(17,24,39,0.93) 0%, rgba(17,24,39,0.55) 100%);
+        }
+        .yellow-stripe {
+            background: repeating-linear-gradient(
+                -45deg, #FDB813, #FDB813 10px, #1F2937 10px, #1F2937 20px
+            );
+        }
+        .card-hover { transition: transform .3s ease, box-shadow .3s ease; }
+        .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(253,184,19,.15); }
+
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -2px; left: 0;
+            width: 0; height: 2px; background: #FDB813; transition: width .3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        .fade-in { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .metal-bg {
+            background-color: #1F2937;
+            background-image:
+                repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,.015) 60px, rgba(255,255,255,.015) 61px),
+                repeating-linear-gradient(0deg,   transparent, transparent 60px, rgba(255,255,255,.015) 60px, rgba(255,255,255,.015) 61px);
+        }
+
+        #mobile-menu { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+        #mobile-menu.open { max-height: 420px; }
+
+        .form-field {
+            width: 100%; background: #111827; border: 1px solid #374151;
+            color: #fff; font-size: .875rem; padding: .75rem 1rem;
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .form-field::placeholder { color: #6B7280; }
+        .form-field:focus { outline: none; border-color: #FDB813; box-shadow: 0 0 0 2px rgba(253,184,19,.25); }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+<!-- ══════════════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 inset-x-0 z-50 bg-gray-900/95 backdrop-blur border-b border-gray-800 transition-shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 md:h-20">
+
+            <!-- Logo -->
+            <a href="#home" class="flex items-center gap-2 flex-shrink-0">
+                <div class="w-8 h-8 bg-cy flex items-center justify-center">
+                    <i class="fa-solid fa-industry text-gray-900 text-sm"></i>
+                </div>
+                <span class="font-black text-base sm:text-lg tracking-wide leading-none">
+                    <span class="text-cy">宜宗</span>重機械有限公司
+                </span>
+            </a>
+
+            <!-- Desktop nav -->
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="#home"    class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">首頁</a>
+                <a href="#about"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">關於我們</a>
+                <a href="#fleet"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">車隊型錄</a>
+                <a href="#services" class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">服務項目</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">聯絡我們</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 bg-cy text-gray-900 font-black text-xs px-5 py-2.5 uppercase tracking-widest hover:bg-yellow-400 transition-colors">
+                    <i class="fa-solid fa-phone-volume"></i>立即詢價
+                </a>
+                <button id="hamburger" class="lg:hidden p-2 text-white" aria-label="選單">
+                    <i id="hbIcon" class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="lg:hidden bg-gray-800 border-t border-gray-700">
+        <div class="px-4 py-3 flex flex-col gap-1">
+            <a href="#home"    class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">首頁</a>
+            <a href="#about"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">關於我們</a>
+            <a href="#fleet"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">車隊型錄</a>
+            <a href="#services" class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">服務項目</a>
+            <a href="#contact" class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">聯絡我們</a>
+            <a href="#contact" class="mob-link mt-2 bg-cy text-gray-900 font-black text-sm px-4 py-3 uppercase tracking-widest text-center hover:bg-yellow-400 transition-colors">
+                <i class="fa-solid fa-phone-volume mr-2"></i>立即詢價
+            </a>
+        </div>
+    </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════════ -->
+<section id="home" class="relative min-h-screen flex items-center overflow-hidden pt-16">
+    <!-- BG image -->
+    <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80"
+             alt="重機械施工現場" class="w-full h-full object-cover" loading="eager">
+        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="absolute bottom-0 inset-x-0 h-1 bg-cy"></div>
+    </div>
+    <!-- Left yellow stripe -->
+    <div class="absolute left-0 top-0 w-2 md:w-3 h-full yellow-stripe opacity-70 z-10"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-8 sm:px-10 lg:px-14 py-24 md:py-36 w-full">
+        <div class="max-w-3xl">
+            <!-- Label -->
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px w-10 bg-cy"></div>
+                <span class="text-cy font-bold text-xs tracking-[.3em] uppercase">Professional Heavy Equipment</span>
+            </div>
+
+            <!-- Headline -->
+            <h1 class="font-black leading-none mb-6">
+                <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tight">驅動重工</span>
+                <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-cy uppercase tracking-tight">舉起未來</span>
+                <span class="block text-lg sm:text-2xl md:text-3xl font-bold text-gray-300 mt-3 tracking-wide normal-case">專業吊車租售首選</span>
+            </h1>
+
+            <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-10 max-w-xl">
+                提供全方位、多噸數重型吊車設備，無論工地起重、橋樑架設、廠房吊裝，我們的專業車隊滿足您所有工程需求。
+            </p>
+
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#fleet" class="inline-flex items-center justify-center gap-2 bg-cy text-gray-900 font-black text-sm px-8 py-4 uppercase tracking-widest hover:bg-yellow-400 transition-colors group">
+                    <i class="fa-solid fa-truck-moving group-hover:translate-x-1 transition-transform"></i>
+                    查看我們的車隊
+                </a>
+                <a href="#contact" class="inline-flex items-center justify-center gap-2 border-2 border-gray-500 text-white font-bold text-sm px-8 py-4 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors">
+                    <i class="fa-solid fa-file-contract"></i>
+                    申請報價
+                </a>
+            </div>
+
+            <!-- Hero stats -->
+            <div class="flex flex-wrap gap-8 sm:gap-12 mt-14 pt-10 border-t border-gray-700">
+                <div>
+                    <div class="text-cy font-black text-3xl sm:text-4xl">20+</div>
+                    <div class="text-gray-400 text-xs uppercase tracking-wide mt-1">年業界經驗</div>
+                </div>
+                <div>
+                    <div class="text-cy font-black text-3xl sm:text-4xl">100+</div>
+                    <div class="text-gray-400 text-xs uppercase tracking-wide mt-1">台現役車隊</div>
+                </div>
+                <div>
+                    <div class="text-cy font-black text-3xl sm:text-4xl">500+</div>
+                    <div class="text-gray-400 text-xs uppercase tracking-wide mt-1">成功工程案例</div>
+                </div>
+                <div>
+                    <div class="text-cy font-black text-3xl sm:text-4xl">24H</div>
+                    <div class="text-gray-400 text-xs uppercase tracking-wide mt-1">全天候支援</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1 text-gray-500 animate-bounce">
+        <span class="text-[10px] uppercase tracking-widest">Scroll</span>
+        <i class="fa-solid fa-chevron-down text-xs"></i>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     FLEET CATALOG
+══════════════════════════════════════════════════════════════ -->
+<section id="fleet" class="py-20 md:py-28 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Header -->
+        <div class="text-center mb-16 fade-in">
+            <div class="inline-flex items-center gap-3 mb-4">
+                <div class="h-px w-10 bg-cy"></div>
+                <span class="text-cy font-bold text-xs tracking-[.25em] uppercase">Fleet Inventory</span>
+                <div class="h-px w-10 bg-cy"></div>
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-4">車隊型錄</h2>
+            <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
+                涵蓋各式噸數與機型，從輕型汽車吊到超重型履帶起重機，一站式滿足各類工程需求。
+            </p>
+            <div class="flex items-center justify-center gap-4 mt-8">
+                <div class="h-px flex-1 max-w-xs bg-gray-800"></div>
+                <div class="w-3 h-3 bg-cy rotate-45"></div>
+                <div class="h-px flex-1 max-w-xs bg-gray-800"></div>
+            </div>
+        </div>
+
+        <!-- Cards grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+
+            <!-- ── Card template (repeated 6×) ── -->
+
+            <!-- 1. 全路面吊車 100T -->
+            <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
+                <div class="relative overflow-hidden h-52 sm:h-56">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+                         alt="全路面吊車 100噸" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                    <div class="absolute top-3 left-3 flex flex-wrap gap-2">
+                        <span class="bg-cy text-gray-900 font-black text-[11px] px-2.5 py-1 uppercase tracking-wide">可租賃</span>
+                        <span class="bg-gray-900/90 text-white font-bold text-[11px] px-2.5 py-1 uppercase tracking-wide border border-gray-600">可購買</span>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-white font-black text-xl uppercase tracking-tight mb-1">全路面吊車</h3>
+                    <p class="text-cy font-bold mb-4">100 噸</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-weight-hanging text-cy text-[10px]"></i>最大起重：100T</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-ruler-vertical text-cy text-[10px]"></i>主臂長：60m</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-bolt text-cy text-[10px]"></i>引擎：550HP</span>
+                    </div>
+                    <button class="w-full border border-cy text-cy font-bold text-xs py-2.5 uppercase tracking-widest hover:bg-cy hover:text-gray-900 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>查看詳細規格
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. 全路面吊車 50T -->
+            <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
+                <div class="relative overflow-hidden h-52 sm:h-56">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80"
+                         alt="全路面吊車 50噸" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                    <div class="absolute top-3 left-3">
+                        <span class="bg-cy text-gray-900 font-black text-[11px] px-2.5 py-1 uppercase tracking-wide">可租賃</span>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-white font-black text-xl uppercase tracking-tight mb-1">全路面吊車</h3>
+                    <p class="text-cy font-bold mb-4">50 噸</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-weight-hanging text-cy text-[10px]"></i>最大起重：50T</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-ruler-vertical text-cy text-[10px]"></i>主臂長：40m</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-bolt text-cy text-[10px]"></i>引擎：380HP</span>
+                    </div>
+                    <button class="w-full border border-cy text-cy font-bold text-xs py-2.5 uppercase tracking-widest hover:bg-cy hover:text-gray-900 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>查看詳細規格
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. 履帶式起重機 300T -->
+            <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
+                <div class="relative overflow-hidden h-52 sm:h-56">
+                    <img src="https://images.unsplash.com/photo-1590496793929-36417d3117de?w=600&q=80"
+                         alt="履帶式起重機 300噸" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                    <div class="absolute top-3 left-3 flex flex-wrap gap-2">
+                        <span class="bg-gray-900/90 text-white font-bold text-[11px] px-2.5 py-1 uppercase tracking-wide border border-gray-600">可購買</span>
+                    </div>
+                    <div class="absolute top-3 right-3">
+                        <span class="bg-red-600 text-white font-black text-[11px] px-2.5 py-1 uppercase tracking-wide">旗艦</span>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-white font-black text-xl uppercase tracking-tight mb-1">履帶式起重機</h3>
+                    <p class="text-cy font-bold mb-4">300 噸</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-weight-hanging text-cy text-[10px]"></i>最大起重：300T</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-ruler-vertical text-cy text-[10px]"></i>主臂長：108m</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-bolt text-cy text-[10px]"></i>引擎：800HP</span>
+                    </div>
+                    <button class="w-full border border-cy text-cy font-bold text-xs py-2.5 uppercase tracking-widest hover:bg-cy hover:text-gray-900 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>查看詳細規格
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4. 汽車吊車 25T -->
+            <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
+                <div class="relative overflow-hidden h-52 sm:h-56">
+                    <img src="https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?w=600&q=80"
+                         alt="汽車吊車 25噸" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                    <div class="absolute top-3 left-3">
+                        <span class="bg-cy text-gray-900 font-black text-[11px] px-2.5 py-1 uppercase tracking-wide">可租賃</span>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-white font-black text-xl uppercase tracking-tight mb-1">汽車吊車</h3>
+                    <p class="text-cy font-bold mb-4">25 噸</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-weight-hanging text-cy text-[10px]"></i>最大起重：25T</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-ruler-vertical text-cy text-[10px]"></i>主臂長：31m</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-bolt text-cy text-[10px]"></i>引擎：220HP</span>
+                    </div>
+                    <button class="w-full border border-cy text-cy font-bold text-xs py-2.5 uppercase tracking-widest hover:bg-cy hover:text-gray-900 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>查看詳細規格
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5. 塔式起重機 T7 -->
+            <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
+                <div class="relative overflow-hidden h-52 sm:h-56">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80"
+                         alt="塔式起重機 T7" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                    <div class="absolute top-3 left-3">
+                        <span class="bg-cy text-gray-900 font-black text-[11px] px-2.5 py-1 uppercase tracking-wide">可租賃</span>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-white font-black text-xl uppercase tracking-tight mb-1">塔式起重機</h3>
+                    <p class="text-cy font-bold mb-4">T7 型</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-weight-hanging text-cy text-[10px]"></i>最大起重：12T</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-ruler-vertical text-cy text-[10px]"></i>臂展：70m</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-bolt text-cy text-[10px]"></i>最高：180m</span>
+                    </div>
+                    <button class="w-full border border-cy text-cy font-bold text-xs py-2.5 uppercase tracking-widest hover:bg-cy hover:text-gray-900 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>查看詳細規格
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6. 橋式行車 20T -->
+            <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
+                <div class="relative overflow-hidden h-52 sm:h-56">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80"
+                         alt="橋式行車 20噸" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+                    <div class="absolute top-3 left-3">
+                        <span class="bg-gray-900/90 text-white font-bold text-[11px] px-2.5 py-1 uppercase tracking-wide border border-gray-600">可購買</span>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-white font-black text-xl uppercase tracking-tight mb-1">橋式行車</h3>
+                    <p class="text-cy font-bold mb-4">20 噸</p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-weight-hanging text-cy text-[10px]"></i>最大起重：20T</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-ruler-vertical text-cy text-[10px]"></i>跨度：30m</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-300 bg-gray-700 px-3 py-1.5 border-l-2 border-cy"><i class="fa-solid fa-bolt text-cy text-[10px]"></i>提升高：12m</span>
+                    </div>
+                    <button class="w-full border border-cy text-cy font-bold text-xs py-2.5 uppercase tracking-widest hover:bg-cy hover:text-gray-900 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>查看詳細規格
+                    </button>
+                </div>
+            </div>
+
+        </div><!-- /grid -->
+
+        <!-- View all -->
+        <div class="text-center mt-12 fade-in">
+            <a href="#contact" class="inline-flex items-center gap-3 border-2 border-gray-700 text-gray-400 font-bold text-sm px-8 py-3.5 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors">
+                <i class="fa-solid fa-list"></i>
+                查看完整車隊清單 (100+ 台)
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     ABOUT / WHY CHOOSE US
+══════════════════════════════════════════════════════════════ -->
+<section id="about" class="relative py-20 md:py-28 metal-bg overflow-hidden">
+    <!-- diagonal top/bottom transitions -->
+    <div class="absolute top-0 inset-x-0 h-14 bg-gray-900" style="clip-path:polygon(0 0,100% 0,100% 100%,0 0)"></div>
+    <div class="absolute bottom-0 inset-x-0 h-14 bg-gray-900" style="clip-path:polygon(0 100%,100% 0,100% 100%,0 100%)"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-10">
+
+        <!-- Header -->
+        <div class="text-center mb-16 fade-in">
+            <div class="inline-flex items-center gap-3 mb-4">
+                <div class="h-px w-10 bg-cy"></div>
+                <span class="text-cy font-bold text-xs tracking-[.25em] uppercase">Why Choose Us</span>
+                <div class="h-px w-10 bg-cy"></div>
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-4">為何選擇我們</h2>
+            <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto">二十年深耕重機產業，以嚴格品質與專業服務贏得客戶信賴。</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-14">
+            <div class="fade-in text-center p-6 sm:p-8 bg-gray-900/80 border border-gray-700 border-l-4 border-l-cy">
+                <div class="text-cy font-black text-4xl sm:text-5xl mb-2">20+</div>
+                <div class="text-white font-bold text-xs sm:text-sm uppercase tracking-wide mb-2">年業界經驗</div>
+                <div class="text-gray-500 text-xs">深耕重機產業，累積豐富工程實績</div>
+            </div>
+            <div class="fade-in text-center p-6 sm:p-8 bg-gray-900/80 border border-gray-700 border-l-4 border-l-cy">
+                <div class="text-cy font-black text-4xl sm:text-5xl mb-2">100+</div>
+                <div class="text-white font-bold text-xs sm:text-sm uppercase tracking-wide mb-2">台現役車隊</div>
+                <div class="text-gray-500 text-xs">涵蓋各型噸數，滿足多元工程需求</div>
+            </div>
+            <div class="fade-in text-center p-6 sm:p-8 bg-gray-900/80 border border-gray-700 border-l-4 border-l-cy">
+                <div class="text-cy font-black text-4xl sm:text-5xl mb-2">500+</div>
+                <div class="text-white font-bold text-xs sm:text-sm uppercase tracking-wide mb-2">完工案例</div>
+                <div class="text-gray-500 text-xs">跨越建築、橋樑、廠房、能源工程</div>
+            </div>
+            <div class="fade-in text-center p-6 sm:p-8 bg-gray-900/80 border border-gray-700 border-l-4 border-l-cy">
+                <div class="text-cy font-black text-4xl sm:text-5xl mb-2">0</div>
+                <div class="text-white font-bold text-xs sm:text-sm uppercase tracking-wide mb-2">重大安全事故</div>
+                <div class="text-gray-500 text-xs">安全第一，嚴格落實作業規範</div>
+            </div>
+        </div>
+
+        <!-- Feature cards -->
+        <div id="services" class="grid grid-cols-1 md:grid-cols-2 gap-5 fade-in">
+
+            <div class="flex gap-4 p-6 bg-gray-900/80 border border-gray-700 hover:border-cy transition-colors group">
+                <div class="flex-shrink-0 w-12 h-12 bg-cy flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-shield-halved text-gray-900 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-white font-black text-sm uppercase tracking-wide mb-2">定期嚴格安全檢測</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">所有車輛依法規進行年度檢驗，並執行每月內部安全保養，確保設備在最佳狀態投入作業。</p>
+                </div>
+            </div>
+
+            <div class="flex gap-4 p-6 bg-gray-900/80 border border-gray-700 hover:border-cy transition-colors group">
+                <div class="flex-shrink-0 w-12 h-12 bg-cy flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-user-tie text-gray-900 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-white font-black text-sm uppercase tracking-wide mb-2">專業持證操作團隊</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">所有操作員均持有政府核發之吊車操作執照，並定期接受技術訓練，確保每次作業安全精確。</p>
+                </div>
+            </div>
+
+            <div class="flex gap-4 p-6 bg-gray-900/80 border border-gray-700 hover:border-cy transition-colors group">
+                <div class="flex-shrink-0 w-12 h-12 bg-cy flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-clock text-gray-900 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-white font-black text-sm uppercase tracking-wide mb-2">24 小時全天候待命</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">緊急工程需求無需等待，我們的調度中心全天候運作，確保您的工程時程不受耽誤。</p>
+                </div>
+            </div>
+
+            <div class="flex gap-4 p-6 bg-gray-900/80 border border-gray-700 hover:border-cy transition-colors group">
+                <div class="flex-shrink-0 w-12 h-12 bg-cy flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-file-invoice-dollar text-gray-900 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-white font-black text-sm uppercase tracking-wide mb-2">透明報價無隱藏費用</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">提供詳細書面報價，費用明確透明。日租、月租、工程承包均可客製化，靈活配合您的預算。</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════════════════════════ -->
+<section id="contact" class="py-20 md:py-28 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Header -->
+        <div class="text-center mb-16 fade-in">
+            <div class="inline-flex items-center gap-3 mb-4">
+                <div class="h-px w-10 bg-cy"></div>
+                <span class="text-cy font-bold text-xs tracking-[.25em] uppercase">Contact Us</span>
+                <div class="h-px w-10 bg-cy"></div>
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-4">聯絡我們</h2>
+            <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto">填寫詢價單，業務專員將於一個工作日內與您聯繫確認需求。</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
+
+            <!-- Left: info -->
+            <div class="lg:col-span-2 fade-in">
+                <h3 class="text-cy font-black text-base uppercase tracking-widest mb-8 pb-4 border-b border-gray-800">公司資訊</h3>
+
+                <div class="space-y-7">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 bg-gray-800 border border-gray-700 flex items-center justify-center">
+                            <i class="fa-solid fa-phone text-cy text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="text-white font-bold text-xs uppercase tracking-widest mb-1">服務電話</div>
+                            <a href="tel:+886212345678" class="text-gray-300 hover:text-cy transition-colors text-sm">(02) 1234-5678</a>
+                            <div class="text-gray-500 text-xs mt-1">緊急調度：0800-888-888</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 bg-gray-800 border border-gray-700 flex items-center justify-center">
+                            <i class="fa-solid fa-location-dot text-cy text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="text-white font-bold text-xs uppercase tracking-widest mb-1">公司地址</div>
+                            <div class="text-gray-300 text-sm leading-relaxed">台灣省台北市中山區<br>重工大道 100 號 5 樓</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 bg-gray-800 border border-gray-700 flex items-center justify-center">
+                            <i class="fa-solid fa-envelope text-cy text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="text-white font-bold text-xs uppercase tracking-widest mb-1">Email</div>
+                            <a href="mailto:info@yizong.com.tw" class="text-gray-300 hover:text-cy transition-colors text-sm">info@yizong.com.tw</a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 bg-gray-800 border border-gray-700 flex items-center justify-center">
+                            <i class="fa-solid fa-clock text-cy text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="text-white font-bold text-xs uppercase tracking-widest mb-1">營業時間</div>
+                            <div class="text-gray-300 text-sm leading-relaxed">
+                                週一至週五：08:00 - 18:00<br>
+                                週六：09:00 - 15:00<br>
+                                <span class="text-cy text-xs font-bold">緊急調度 24H 全年待命</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 h-2 yellow-stripe opacity-40 rounded-sm"></div>
+            </div>
+
+            <!-- Right: form -->
+            <div class="lg:col-span-3 fade-in">
+                <div class="bg-gray-800 border border-gray-700 p-6 sm:p-8">
+                    <h3 class="text-cy font-black text-base uppercase tracking-widest mb-8 pb-4 border-b border-gray-700">
+                        <i class="fa-solid fa-file-contract mr-2"></i>填寫詢價單
+                    </h3>
+
+                    <form class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-gray-400 text-[11px] font-bold uppercase tracking-widest mb-2">姓名 *</label>
+                                <input type="text" placeholder="請輸入您的姓名" class="form-field">
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 text-[11px] font-bold uppercase tracking-widest mb-2">聯絡電話 *</label>
+                                <input type="tel" placeholder="請輸入聯絡電話" class="form-field">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-400 text-[11px] font-bold uppercase tracking-widest mb-2">公司名稱</label>
+                            <input type="text" placeholder="請輸入公司名稱（選填）" class="form-field">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-gray-400 text-[11px] font-bold uppercase tracking-widest mb-2">需求車型 *</label>
+                                <select class="form-field cursor-pointer">
+                                    <option value="">請選擇車型</option>
+                                    <option>全路面吊車 100噸</option>
+                                    <option>全路面吊車 50噸</option>
+                                    <option>履帶式起重機 300噸</option>
+                                    <option>汽車吊車 25噸</option>
+                                    <option>塔式起重機 T7</option>
+                                    <option>橋式行車 20噸</option>
+                                    <option>其他（請於備註說明）</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 text-[11px] font-bold uppercase tracking-widest mb-2">服務類型 *</label>
+                                <div class="flex flex-wrap gap-4 mt-2">
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="radio" name="svc" value="rent" class="accent-yellow-400 w-4 h-4">
+                                        <span class="text-gray-300 text-sm font-semibold group-hover:text-cy transition-colors">租賃</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="radio" name="svc" value="buy" class="accent-yellow-400 w-4 h-4">
+                                        <span class="text-gray-300 text-sm font-semibold group-hover:text-cy transition-colors">購買</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="radio" name="svc" value="both" class="accent-yellow-400 w-4 h-4">
+                                        <span class="text-gray-300 text-sm font-semibold group-hover:text-cy transition-colors">皆有興趣</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-400 text-[11px] font-bold uppercase tracking-widest mb-2">工程需求說明</label>
+                            <textarea rows="4" placeholder="請描述工程類型、作業地點、需求時間等，讓我們提供更精確的報價..." class="form-field resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-cy text-gray-900 font-black text-sm py-4 uppercase tracking-widest hover:bg-yellow-400 transition-colors flex items-center justify-center gap-3 group">
+                            <i class="fa-solid fa-paper-plane group-hover:translate-x-1 transition-transform"></i>
+                            送出詢價單
+                        </button>
+
+                        <p class="text-gray-600 text-xs text-center">送出後，業務人員將於一個工作日內與您聯繫確認需求。</p>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════════ -->
+<footer class="bg-gray-950 border-t border-gray-800" style="background:#0b0f17">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
+
+            <!-- Brand -->
+            <div>
+                <a href="#home" class="inline-flex items-center gap-2 mb-5">
+                    <div class="w-8 h-8 bg-cy flex items-center justify-center">
+                        <i class="fa-solid fa-industry text-gray-900 text-sm"></i>
+                    </div>
+                    <span class="font-black text-lg tracking-wide">宜宗<span class="text-cy">重機械</span>有限公司</span>
+                </a>
+                <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                    二十年深耕重機產業，提供全方位吊車租售服務。以安全、專業、可靠為核心，成為您最值得信賴的重機夥伴。
+                </p>
+                <div class="flex gap-3">
+                    <a href="#" aria-label="Facebook" class="w-9 h-9 bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-500 hover:text-cy hover:border-cy transition-colors">
+                        <i class="fa-brands fa-facebook-f text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="LINE" class="w-9 h-9 bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-500 hover:text-cy hover:border-cy transition-colors">
+                        <i class="fa-brands fa-line text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="YouTube" class="w-9 h-9 bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-500 hover:text-cy hover:border-cy transition-colors">
+                        <i class="fa-brands fa-youtube text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="Instagram" class="w-9 h-9 bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-500 hover:text-cy hover:border-cy transition-colors">
+                        <i class="fa-brands fa-instagram text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick links -->
+            <div>
+                <h4 class="text-white font-black text-xs uppercase tracking-widest mb-6 pb-3 border-b border-gray-800">快速導覽</h4>
+                <ul class="space-y-3">
+                    <li><a href="#home"    class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>首頁</a></li>
+                    <li><a href="#about"   class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>關於我們</a></li>
+                    <li><a href="#fleet"   class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>車隊型錄</a></li>
+                    <li><a href="#services" class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>服務項目</a></li>
+                    <li><a href="#contact" class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>聯絡我們</a></li>
+                    <li><a href="#"        class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>隱私權政策</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick contact -->
+            <div>
+                <h4 class="text-white font-black text-xs uppercase tracking-widest mb-6 pb-3 border-b border-gray-800">即時聯繫</h4>
+                <div class="space-y-4 mb-6">
+                    <a href="tel:+886212345678" class="flex items-center gap-3 group">
+                        <div class="w-8 h-8 bg-gray-800 border border-gray-700 group-hover:border-cy flex items-center justify-center transition-colors flex-shrink-0">
+                            <i class="fa-solid fa-phone text-cy text-xs"></i>
+                        </div>
+                        <span class="text-gray-400 text-sm group-hover:text-cy transition-colors">(02) 1234-5678</span>
+                    </a>
+                    <a href="mailto:info@yizong.com.tw" class="flex items-center gap-3 group">
+                        <div class="w-8 h-8 bg-gray-800 border border-gray-700 group-hover:border-cy flex items-center justify-center transition-colors flex-shrink-0">
+                            <i class="fa-solid fa-envelope text-cy text-xs"></i>
+                        </div>
+                        <span class="text-gray-400 text-sm group-hover:text-cy transition-colors">info@yizong.com.tw</span>
+                    </a>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-gray-800 border border-gray-700 flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-location-dot text-cy text-xs"></i>
+                        </div>
+                        <span class="text-gray-400 text-sm">台北市中山區重工大道 100 號</span>
+                    </div>
+                </div>
+                <a href="tel:0800888888" class="flex items-center justify-center gap-2 bg-cy text-gray-900 font-black text-xs py-3 uppercase tracking-widest hover:bg-yellow-400 transition-colors">
+                    <i class="fa-solid fa-phone-volume"></i>緊急調度 0800-888-888
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Stripe separator -->
+        <div class="h-px yellow-stripe opacity-20 mb-8"></div>
+
+        <!-- Bottom -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-600 text-xs">
+            <div>© 2024 宜宗重機械有限公司. All rights reserved.</div>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-cy transition-colors">隱私權政策</a>
+                <span>|</span>
+                <a href="#" class="hover:text-cy transition-colors">服務條款</a>
+                <span>|</span>
+                <a href="#" class="hover:text-cy transition-colors">Cookie 政策</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════════════ -->
+<script>
+    // Hamburger toggle
+    const hb   = document.getElementById('hamburger');
+    const menu = document.getElementById('mobile-menu');
+    const icon = document.getElementById('hbIcon');
+
+    hb.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        icon.className = open ? 'fa-solid fa-xmark text-xl text-cy' : 'fa-solid fa-bars text-xl';
+    });
+
+    document.querySelectorAll('.mob-link').forEach(l =>
+        l.addEventListener('click', () => {
+            menu.classList.remove('open');
+            icon.className = 'fa-solid fa-bars text-xl';
+        })
+    );
+
+    // Navbar shadow on scroll
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('shadow-xl', window.scrollY > 40);
+        nav.classList.toggle('shadow-black/60', window.scrollY > 40);
+    }, { passive: true });
+
+    // Scroll fade-in
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach((el, i) => {
+        el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+        io.observe(el);
+    });
+
+    // Smooth scroll with navbar offset
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const id = a.getAttribute('href');
+            if (id === '#') return;
+            const target = document.querySelector(id);
+            if (!target) return;
+            e.preventDefault();
+            const top = target.getBoundingClientRect().top + window.scrollY - 76;
+            window.scrollTo({ top, behavior: 'smooth' });
+        });
+    });
+</script>
+
+</body>
+</html>
