@@ -12,10 +12,7 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        'cy': '#FDB813',
-                        'sr': '#CC0000',
-                    }
+                    colors: { 'cy': '#FDB813', 'sr': '#CC0000' }
                 }
             }
         }
@@ -23,113 +20,78 @@
     <style>
         html { scroll-behavior: smooth; }
         body { font-family: 'Roboto', sans-serif; }
-
-        .hero-overlay {
-            background: linear-gradient(135deg, rgba(17,24,39,0.93) 0%, rgba(17,24,39,0.55) 100%);
-        }
-        .yellow-stripe {
-            background: repeating-linear-gradient(
-                -45deg, #FDB813, #FDB813 10px, #1F2937 10px, #1F2937 20px
-            );
-        }
+        .hero-overlay { background: linear-gradient(135deg, rgba(17,24,39,0.93) 0%, rgba(17,24,39,0.55) 100%); }
+        .yellow-stripe { background: repeating-linear-gradient(-45deg, #FDB813, #FDB813 10px, #1F2937 10px, #1F2937 20px); }
         .card-hover { transition: transform .3s ease, box-shadow .3s ease; }
         .card-hover:hover { transform: translateY(-5px); box-shadow: 0 16px 36px rgba(253,184,19,.12); }
-
         .nav-link { position: relative; }
-        .nav-link::after {
-            content: ''; position: absolute; bottom: -2px; left: 0;
-            width: 0; height: 2px; background: #FDB813; transition: width .3s;
-        }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #FDB813; transition: width .3s; }
         .nav-link:hover::after { width: 100%; }
-
         .fade-in { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
-
         .metal-bg {
             background-color: #1F2937;
             background-image:
                 repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,.015) 60px, rgba(255,255,255,.015) 61px),
                 repeating-linear-gradient(0deg,   transparent, transparent 60px, rgba(255,255,255,.015) 60px, rgba(255,255,255,.015) 61px);
         }
-
         #mobile-menu { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
         #mobile-menu.open { max-height: 480px; }
-
-        .form-field {
-            width: 100%; background: #111827; border: 1px solid #374151;
-            color: #fff; font-size: .875rem; padding: .75rem 1rem;
-            transition: border-color .2s, box-shadow .2s;
-        }
-        .form-field::placeholder { color: #6B7280; }
-        .form-field:focus { outline: none; border-color: #FDB813; box-shadow: 0 0 0 2px rgba(253,184,19,.25); }
-
-        /* Image placeholder */
-        .img-placeholder {
-            background: #1a2130;
-            border-bottom: 1px solid #374151;
-        }
+        .img-placeholder { background: #1a2130; border-bottom: 1px solid #374151; }
         .img-placeholder-inner {
-            border: 2px dashed #374151;
-            margin: 12px;
-            height: calc(100% - 24px);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 8px;
-            transition: border-color .2s;
+            border: 2px dashed #374151; margin: 12px; height: calc(100% - 24px);
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; transition: border-color .2s;
         }
         .card-hover:hover .img-placeholder-inner { border-color: #FDB813; }
 
-        /* Modal */
+        /* Fleet Modal */
         #modal-overlay {
-            display: none;
-            position: fixed; inset: 0; z-index: 200;
-            background: rgba(0,0,0,.85);
-            backdrop-filter: blur(4px);
-            align-items: center; justify-content: center;
-            padding: 1rem;
+            display: none; position: fixed; inset: 0; z-index: 200;
+            background: rgba(0,0,0,.85); backdrop-filter: blur(4px);
+            align-items: center; justify-content: center; padding: 1rem;
         }
         #modal-overlay.open { display: flex; }
-        #modal-box {
-            background: #1F2937;
-            border: 1px solid #374151;
-            width: 100%; max-width: 640px;
-            max-height: 92vh;
-            overflow-y: auto;
-            position: relative;
-        }
+        #modal-box { background: #1F2937; border: 1px solid #374151; width: 100%; max-width: 640px; max-height: 92vh; overflow-y: auto; position: relative; }
         #modal-box::-webkit-scrollbar { width: 4px; }
         #modal-box::-webkit-scrollbar-thumb { background: #FDB813; }
         #modal-box::-webkit-scrollbar-track { background: #111827; }
+
+        /* Sales Modal */
+        #sales-overlay {
+            display: none; position: fixed; inset: 0; z-index: 300;
+            background: rgba(0,0,0,.88); backdrop-filter: blur(6px);
+            align-items: center; justify-content: center; padding: 1rem;
+        }
+        #sales-overlay.open { display: flex; }
+
+        /* Gallery Modal */
+        #gallery-overlay {
+            display: none; position: fixed; inset: 0; z-index: 400;
+            background: rgba(0,0,0,.96); flex-direction: column;
+        }
+        #gallery-overlay.open { display: flex; }
+        .gallery-thumb { cursor: pointer; border: 2px solid transparent; transition: border-color .2s, opacity .2s; opacity: .45; }
+        .gallery-thumb.active { border-color: #FDB813; opacity: 1; }
+        .gallery-thumb:hover { opacity: .8; }
     </style>
 </head>
 <body class="bg-gray-900 text-white">
 
-<!-- ====【 導覽列 Navbar 】====
-     內容：Logo、桌機導覽連結、手機漢堡選單
-     修改：更換公司名稱請找 Logo 區塊；新增導覽項目請在桌機 nav 與 mobile-menu 各加一行
-==== -->
-
+<!-- ====【 導覽列 Navbar 】==== -->
 <nav id="navbar" class="fixed top-0 inset-x-0 z-50 bg-gray-900/95 backdrop-blur border-b border-gray-800 transition-shadow">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16 md:h-20">
-
-            <!-- Logo -->
             <a href="#home" class="flex items-center gap-2.5 flex-shrink-0">
-                <div class="w-8 h-8 bg-sr flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-industry text-white text-sm"></i>
-                </div>
+                <img src="fig/SANY_LOGO.jpg" alt="SANY Logo" class="h-8 sm:h-11 w-auto object-contain">
                 <div class="leading-none">
-                    <!-- Primary: SANY brand -->
                     <div class="font-black text-base sm:text-lg tracking-wide leading-tight">
-                        <span class="text-sr">SANY</span><span class="text-white"> 三一集團 臺灣經銷商</span>
+                        <span class="text-sr">SANY</span><span class="text-white"> 三一重工 臺灣經銷商</span>
                     </div>
-                    <!-- Sub: Taiwan entities -->
-                    <div class="text-gray-500 text-[12px] tracking-wider mt-0.5 hidden sm:block">
+                    <div class="text-gray-500 text-[12px] tracking-wider mt-0.5">
                         1起重公司 &nbsp;·&nbsp; 2起重公司 &nbsp;·&nbsp; 3起重公司
                     </div>
                 </div>
             </a>
-
-            <!-- Desktop nav -->
             <div class="hidden lg:flex items-center gap-8">
                 <a href="#home"    class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">首頁</a>
                 <a href="#brand"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">品牌介紹</a>
@@ -138,22 +100,18 @@
                 <a href="#about"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">關於我們</a>
                 <a href="#contact" class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">聯絡業務</a>
             </div>
-
             <div class="flex items-center gap-3">
-                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 bg-cy text-gray-900 font-black text-xs px-5 py-2.5 uppercase tracking-widest hover:bg-yellow-400 transition-colors">
+                <button onclick="openSalesModal()" class="hidden sm:inline-flex items-center gap-2 bg-cy text-gray-900 font-black text-xs px-5 py-2.5 uppercase tracking-widest hover:bg-yellow-400 transition-colors">
                     <i class="fa-solid fa-phone-volume"></i>聯絡業務
-                </a>
+                </button>
                 <button id="hamburger" class="lg:hidden p-2 text-white" aria-label="選單">
                     <i id="hbIcon" class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
     </div>
-
-    <!-- Mobile menu -->
     <div id="mobile-menu" class="lg:hidden bg-gray-800 border-t border-gray-700">
         <div class="px-4 py-3 flex flex-col gap-1">
-            <!-- Mobile sub label -->
             <div class="px-4 py-2 text-gray-600 text-[12px] tracking-widest border-b border-gray-700 mb-1">
                 臺灣授權 · 1起重公司 · 2起重公司 · 3起重公司
             </div>
@@ -163,18 +121,16 @@
             <a href="#events"  class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">活動特輯</a>
             <a href="#about"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">關於我們</a>
             <a href="#contact" class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">聯絡業務</a>
-            <a href="#contact" class="mob-link mt-2 bg-cy text-gray-900 font-black text-sm px-4 py-3 uppercase tracking-widest text-center hover:bg-yellow-400 transition-colors">
+            <button onclick="openSalesModal(); document.getElementById('mobile-menu').classList.remove('open'); document.getElementById('hbIcon').className='fa-solid fa-bars text-xl';"
+                    class="mob-link mt-2 bg-cy text-gray-900 font-black text-sm px-4 py-3 uppercase tracking-widest text-center hover:bg-yellow-400 transition-colors">
                 <i class="fa-solid fa-phone-volume mr-2"></i>聯絡業務
-            </a>
+            </button>
         </div>
     </div>
 </nav>
 
 
-<!-- ====【 首頁主視覺 Hero 】====
-     內容：背景大圖、主標題、副標題、統計數字、CTA 按鈕
-     修改：標題文字直接改 h1 內文；背景圖替換 <img src="...">
-==== -->
+<!-- ====【 首頁主視覺 Hero 】==== -->
 <section id="home" class="relative min-h-screen flex items-center overflow-hidden pt-16">
     <div class="absolute inset-0">
         <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80"
@@ -183,7 +139,6 @@
         <div class="absolute bottom-0 inset-x-0 h-1 bg-cy"></div>
     </div>
     <div class="absolute left-0 top-0 w-2 md:w-3 h-full yellow-stripe opacity-70 z-10"></div>
-
     <div class="relative z-10 max-w-7xl mx-auto px-8 sm:px-10 lg:px-14 py-24 md:py-36 w-full">
         <div class="max-w-3xl">
             <div class="flex items-center gap-3 mb-5">
@@ -191,51 +146,40 @@
                 <span class="bg-sr text-white font-black text-xs px-3 py-1 uppercase tracking-widest">SANY 三一起重機</span>
                 <span class="text-gray-400 font-bold text-xs tracking-widest uppercase">臺灣授權銷售</span>
             </div>
-
             <h1 class="font-black leading-none mb-6">
-                <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tight">全球頂尖</span>
-                <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-cy uppercase tracking-tight">吊裝實力</span>
-                <span class="block text-lg sm:text-2xl md:text-3xl font-bold text-gray-300 mt-3 tracking-wide normal-case">
-                    SANY 三一起重機 &nbsp;·&nbsp; 臺灣授權經銷
-                </span>
+                <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tight">用品質</span>
+                <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-cy uppercase tracking-tight">改變世界</span>
+                <span class="block text-lg sm:text-2xl md:text-3xl font-bold text-gray-300 mt-3 tracking-wide normal-case">極高品質的產品和服務</span>
             </h1>
-
             <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-10 max-w-xl">
-                代理銷售 SANY 全系列起重機，噸位涵蓋 160 噸至 6,000 噸。無論建築、橋樑、風電、石化、港口，找到最適合您工程規模的吊裝解決方案。
+                代理銷售 SANY 全系列起重機，噸位涵蓋 16 噸至 600 噸。無論建築、橋樑、風電、石化、港口，找到最適合您工程規模的吊裝解決方案。
             </p>
-
             <div class="flex flex-col sm:flex-row gap-4">
                 <a href="#fleet" class="inline-flex items-center justify-center gap-2 bg-cy text-gray-900 font-black text-sm px-8 py-4 uppercase tracking-widest hover:bg-yellow-400 transition-colors group">
                     <i class="fa-solid fa-truck-moving group-hover:translate-x-1 transition-transform"></i>
                     查看全系列車型
                 </a>
-                <a href="#contact" class="inline-flex items-center justify-center gap-2 border-2 border-gray-500 text-white font-bold text-sm px-8 py-4 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors">
+                <button onclick="openSalesModal()" class="inline-flex items-center justify-center gap-2 border-2 border-gray-500 text-white font-bold text-sm px-8 py-4 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors">
                     <i class="fa-solid fa-phone"></i>
                     聯絡業務專員
-                </a>
+                </button>
             </div>
-
             <div class="flex flex-wrap gap-8 sm:gap-12 mt-14 pt-10 border-t border-gray-700">
                 <div>
-                    <div class="text-cy font-black text-3xl sm:text-4xl">11</div>
+                    <div class="text-cy font-black text-3xl sm:text-4xl">11款</div>
                     <div class="text-gray-400 text-xs uppercase tracking-wide mt-1">現售車型</div>
                 </div>
                 <div>
-                    <div class="text-cy font-black text-3xl sm:text-4xl">160T</div>
+                    <div class="text-cy font-black text-3xl sm:text-4xl">16T</div>
                     <div class="text-gray-400 text-xs uppercase tracking-wide mt-1">起始噸位</div>
                 </div>
                 <div>
-                    <div class="text-cy font-black text-3xl sm:text-4xl">6000T</div>
+                    <div class="text-cy font-black text-3xl sm:text-4xl">600T</div>
                     <div class="text-gray-400 text-xs uppercase tracking-wide mt-1">最大噸位</div>
-                </div>
-                <div>
-                    <div class="text-cy font-black text-3xl sm:text-4xl">SANY</div>
-                    <div class="text-gray-400 text-xs uppercase tracking-wide mt-1">全球銷量第一</div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1 text-gray-500 animate-bounce">
         <span class="text-[10px] uppercase tracking-widest">Scroll</span>
         <i class="fa-solid fa-chevron-down text-xs"></i>
@@ -243,13 +187,9 @@
 </section>
 
 
-<!-- ====【 品牌介紹 Brand 】====
-     內容：SANY 三一品牌說明段落、應用領域格、四項品牌優勢
-     修改：說明文字直接改段落內文；應用領域新增請複製 <div class="flex items-center..."> 區塊
-==== -->
+<!-- ====【 品牌介紹 Brand 】==== -->
 <section id="brand" class="py-20 md:py-28 bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
         <div class="text-center mb-16 fade-in">
             <div class="inline-flex items-center gap-3 mb-4">
                 <div class="h-px w-10 bg-cy"></div>
@@ -261,22 +201,20 @@
             </h2>
             <p class="text-gray-500 text-sm uppercase tracking-widest">全球工程機械領導品牌</p>
         </div>
-
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-16">
             <div class="fade-in">
                 <div class="border-l-4 border-cy pl-6 mb-8">
                     <p class="text-gray-300 text-base leading-relaxed">
-                        SANY 三一起重機是全球知名的工程機械品牌，產品涵蓋<strong class="text-white">汽車式起重機、全地面起重機、履帶式起重機、隨車吊</strong>與各類大型吊裝設備。
+                        「人類因夢想而偉大！」自1989年創立，三一集團以「品質改變世界」為使命走向全球。作為工程機械領軍者，三一的起重機不僅是力量的代名詞，更將為您穩穩撐起每個非凡的建設夢想，成為您最堅實的後盾！
                     </p>
                 </div>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                    SANY 起重機以<strong class="text-cy">高性能、穩定性、安全性</strong>與智慧化操作為核心，廣泛應用於建築工程、科技廠房、橋樑建設、風電工程、石化廠區、港口碼頭與大型設備吊裝作業。
+                    三一堅持「一切為了客戶，一切源於創新」的理念，以「創建一流企業、造就一流人才、做出一流貢獻」為願景。在研發上我們「疾慢如仇，追求卓越」，並深植「先做人，後做事」與公正信實的核心價值，將創新與誠信完美結合。
                 </p>
                 <p class="text-gray-400 text-sm leading-relaxed">
-                    對臺灣吊裝市場而言，SANY 起重機具備<strong class="text-white">車型選擇多、噸位完整、維修支援便利、性能表現穩定</strong>等優勢，適合起重工程公司、設備安裝工程、科技廠吊裝與大型工程承包商使用。
+                    身為三一起重機代理商，我們承襲「自強不息，產業報國」的精神。深知「金錢只有誘惑力，事業才有凝聚力」，我們致力為您引進世界級的起重設備。承諾提供強悍的產品與專業支援，依托三一卓越品質，與您攜手共創輝煌！
                 </p>
             </div>
-
             <div class="fade-in">
                 <h3 class="text-white font-black text-sm uppercase tracking-widest mb-6 pb-3 border-b border-gray-800">廣泛應用領域</h3>
                 <div class="grid grid-cols-2 gap-3">
@@ -311,41 +249,13 @@
                 </div>
             </div>
         </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 fade-in">
-            <div class="text-center p-5 bg-gray-800 border border-gray-700 border-t-2 border-t-cy">
-                <i class="fa-solid fa-earth-asia text-cy text-2xl mb-3"></i>
-                <div class="text-white font-black text-sm uppercase tracking-wide">全球銷量第一</div>
-                <div class="text-gray-500 text-xs mt-1">工程起重機械品牌</div>
-            </div>
-            <div class="text-center p-5 bg-gray-800 border border-gray-700 border-t-2 border-t-cy">
-                <i class="fa-solid fa-list-ol text-cy text-2xl mb-3"></i>
-                <div class="text-white font-black text-sm uppercase tracking-wide">噸位完整</div>
-                <div class="text-gray-500 text-xs mt-1">160T — 6,000T 全系列</div>
-            </div>
-            <div class="text-center p-5 bg-gray-800 border border-gray-700 border-t-2 border-t-cy">
-                <i class="fa-solid fa-brain text-cy text-2xl mb-3"></i>
-                <div class="text-white font-black text-sm uppercase tracking-wide">智慧化操控</div>
-                <div class="text-gray-500 text-xs mt-1">主動安全 + 數位監控</div>
-            </div>
-            <div class="text-center p-5 bg-gray-800 border border-gray-700 border-t-2 border-t-cy">
-                <i class="fa-solid fa-wrench text-cy text-2xl mb-3"></i>
-                <div class="text-white font-black text-sm uppercase tracking-wide">維修便利</div>
-                <div class="text-gray-500 text-xs mt-1">臺灣在地支援</div>
-            </div>
-        </div>
     </div>
 </section>
 
 
-<!-- ====【 車型總覽 Fleet 】====
-     內容：11 款 SANY 起重機卡片，點擊「車型說明」開啟 Modal 彈窗
-     修改：新增車型請複製一整個 <div class="card-hover..."> 區塊，並在下方 FLEET{} 物件補上對應資料
-     注意：圖片佔位區為 <div class="img-placeholder...">，待有圖後改為 <img src="...">
-==== -->
+<!-- ====【 車型總覽 Fleet 】==== -->
 <section id="fleet" class="py-20 md:py-28" style="background:#0b0f17">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
         <div class="text-center mb-16 fade-in">
             <div class="inline-flex items-center gap-3 mb-4">
                 <div class="h-px w-10 bg-cy"></div>
@@ -356,17 +266,6 @@
             <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
                 點擊「車型說明」可查看各型號的詳細規格資訊。如需報價請直接聯絡業務專員。
             </p>
-            <div class="flex flex-wrap justify-center gap-4 mt-8">
-                <span class="flex items-center gap-2 text-xs text-gray-400 bg-gray-800 px-3 py-1.5 border border-gray-700">
-                    <span class="w-2 h-2 bg-cy rounded-full"></span>STC — 汽車式起重機
-                </span>
-                <span class="flex items-center gap-2 text-xs text-gray-400 bg-gray-800 px-3 py-1.5 border border-gray-700">
-                    <span class="w-2 h-2 bg-blue-400 rounded-full"></span>SAC — 全地面起重機
-                </span>
-                <span class="flex items-center gap-2 text-xs text-gray-400 bg-gray-800 px-3 py-1.5 border border-gray-700">
-                    <span class="w-2 h-2 bg-orange-400 rounded-full"></span>SRC — 履帶式起重機
-                </span>
-            </div>
             <div class="flex items-center justify-center gap-4 mt-8">
                 <div class="h-px flex-1 max-w-xs bg-gray-800"></div>
                 <div class="w-3 h-3 bg-cy rotate-45"></div>
@@ -374,31 +273,23 @@
             </div>
         </div>
 
-        <!-- Cards grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
 
-            <!-- Macro: each card uses data-id to trigger the modal -->
-
-            <!-- STC160T -->
+            <!-- STC160T — 16T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
                 <div class="img-placeholder h-48 sm:h-52 relative">
                     <div class="img-placeholder-inner">
                         <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
                         <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
                     </div>
-                    <div class="absolute top-3 left-3 z-10">
-                        <span class="flex items-center gap-1.5 bg-gray-900/90 text-xs font-bold px-2.5 py-1 border border-gray-600">
-                            <span class="w-1.5 h-1.5 bg-cy rounded-full"></span>汽車式起重機
-                        </span>
-                    </div>
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
                         <h3 class="text-white font-black text-2xl tracking-tight">STC160T</h3>
-                        <span class="text-cy font-bold text-sm">160 噸</span>
+                        <span class="text-cy font-bold text-sm">16 噸</span>
                     </div>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：160T</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：16T</span>
                         <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">規格待補充</span>
                     </div>
                     <button onclick="openModal('STC160T')"
@@ -408,26 +299,21 @@
                 </div>
             </div>
 
-            <!-- STC500T -->
+            <!-- STC500T — 50T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
                 <div class="img-placeholder h-48 sm:h-52 relative">
                     <div class="img-placeholder-inner">
                         <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
                         <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
                     </div>
-                    <div class="absolute top-3 left-3 z-10">
-                        <span class="flex items-center gap-1.5 bg-gray-900/90 text-xs font-bold px-2.5 py-1 border border-gray-600">
-                            <span class="w-1.5 h-1.5 bg-cy rounded-full"></span>汽車式起重機
-                        </span>
-                    </div>
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
                         <h3 class="text-white font-black text-2xl tracking-tight">STC500T</h3>
-                        <span class="text-cy font-bold text-sm">500 噸</span>
+                        <span class="text-cy font-bold text-sm">50 噸</span>
                     </div>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：500T</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：50T</span>
                         <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">規格待補充</span>
                     </div>
                     <button onclick="openModal('STC500T')"
@@ -437,56 +323,22 @@
                 </div>
             </div>
 
-            <!-- SAC600E -->
+            <!-- SRC500T — 50T (履帶) -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
                 <div class="img-placeholder h-48 sm:h-52 relative">
                     <div class="img-placeholder-inner">
                         <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
                         <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
-                    </div>
-                    <div class="absolute top-3 left-3 z-10">
-                        <span class="flex items-center gap-1.5 bg-gray-900/90 text-xs font-bold px-2.5 py-1 border border-gray-600">
-                            <span class="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>全地面起重機
-                        </span>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="flex items-end justify-between mb-3">
-                        <h3 class="text-white font-black text-2xl tracking-tight">SAC600E</h3>
-                        <span class="text-cy font-bold text-sm">600 噸</span>
-                    </div>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-blue-400">最大起重：600T</span>
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-blue-400">規格待補充</span>
-                    </div>
-                    <button onclick="openModal('SAC600E')"
-                        class="w-full border border-gray-600 text-gray-300 font-bold text-xs py-2.5 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-file-lines"></i>車型說明
-                    </button>
-                </div>
-            </div>
-
-            <!-- SRC500T -->
-            <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="img-placeholder h-48 sm:h-52 relative">
-                    <div class="img-placeholder-inner">
-                        <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
-                        <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
-                    </div>
-                    <div class="absolute top-3 left-3 z-10">
-                        <span class="flex items-center gap-1.5 bg-gray-900/90 text-xs font-bold px-2.5 py-1 border border-gray-600">
-                            <span class="w-1.5 h-1.5 bg-orange-400 rounded-full"></span>履帶式起重機
-                        </span>
                     </div>
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
                         <h3 class="text-white font-black text-2xl tracking-tight">SRC500T</h3>
-                        <span class="text-cy font-bold text-sm">500 噸</span>
+                        <span class="text-cy font-bold text-sm">50 噸</span>
                     </div>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-orange-400">最大起重：500T</span>
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-orange-400">規格待補充</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：50T</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">規格待補充</span>
                     </div>
                     <button onclick="openModal('SRC500T')"
                         class="w-full border border-gray-600 text-gray-300 font-bold text-xs py-2.5 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors flex items-center justify-center gap-2">
@@ -495,26 +347,45 @@
                 </div>
             </div>
 
-            <!-- STC700T -->
+            <!-- SAC600E — 60T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
                 <div class="img-placeholder h-48 sm:h-52 relative">
                     <div class="img-placeholder-inner">
                         <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
                         <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
                     </div>
-                    <div class="absolute top-3 left-3 z-10">
-                        <span class="flex items-center gap-1.5 bg-gray-900/90 text-xs font-bold px-2.5 py-1 border border-gray-600">
-                            <span class="w-1.5 h-1.5 bg-cy rounded-full"></span>汽車式起重機
-                        </span>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-end justify-between mb-3">
+                        <h3 class="text-white font-black text-2xl tracking-tight">SAC600E</h3>
+                        <span class="text-cy font-bold text-sm">60 噸</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：60T</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">規格待補充</span>
+                    </div>
+                    <button onclick="openModal('SAC600E')"
+                        class="w-full border border-gray-600 text-gray-300 font-bold text-xs py-2.5 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-file-lines"></i>車型說明
+                    </button>
+                </div>
+            </div>
+
+            <!-- STC700T — 70T -->
+            <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
+                <div class="img-placeholder h-48 sm:h-52 relative">
+                    <div class="img-placeholder-inner">
+                        <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
+                        <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
                     </div>
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
                         <h3 class="text-white font-black text-2xl tracking-tight">STC700T</h3>
-                        <span class="text-cy font-bold text-sm">700 噸</span>
+                        <span class="text-cy font-bold text-sm">70 噸</span>
                     </div>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：700T</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：70T</span>
                         <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">規格待補充</span>
                     </div>
                     <button onclick="openModal('STC700T')"
@@ -524,26 +395,21 @@
                 </div>
             </div>
 
-            <!-- STC1000T5 -->
+            <!-- STC1000T5 — 100T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
                 <div class="img-placeholder h-48 sm:h-52 relative">
                     <div class="img-placeholder-inner">
                         <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
                         <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
                     </div>
-                    <div class="absolute top-3 left-3 z-10">
-                        <span class="flex items-center gap-1.5 bg-gray-900/90 text-xs font-bold px-2.5 py-1 border border-gray-600">
-                            <span class="w-1.5 h-1.5 bg-cy rounded-full"></span>汽車式起重機
-                        </span>
-                    </div>
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
                         <h3 class="text-white font-black text-2xl tracking-tight">STC1000T5</h3>
-                        <span class="text-cy font-bold text-sm">1,000 噸</span>
+                        <span class="text-cy font-bold text-sm">100 噸</span>
                     </div>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：1000T</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：100T</span>
                         <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">規格待補充</span>
                     </div>
                     <button onclick="openModal('STC1000T5')"
@@ -553,26 +419,21 @@
                 </div>
             </div>
 
-            <!-- STC1200T6 -->
+            <!-- STC1200T6 — 120T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
                 <div class="img-placeholder h-48 sm:h-52 relative">
                     <div class="img-placeholder-inner">
                         <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
                         <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
                     </div>
-                    <div class="absolute top-3 left-3 z-10">
-                        <span class="flex items-center gap-1.5 bg-gray-900/90 text-xs font-bold px-2.5 py-1 border border-gray-600">
-                            <span class="w-1.5 h-1.5 bg-cy rounded-full"></span>汽車式起重機
-                        </span>
-                    </div>
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
                         <h3 class="text-white font-black text-2xl tracking-tight">STC1200T6</h3>
-                        <span class="text-cy font-bold text-sm">1,200 噸</span>
+                        <span class="text-cy font-bold text-sm">120 噸</span>
                     </div>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：1200T</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：120T</span>
                         <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">規格待補充</span>
                     </div>
                     <button onclick="openModal('STC1200T6')"
@@ -582,27 +443,22 @@
                 </div>
             </div>
 
-            <!-- SAC1400T7 -->
+            <!-- SAC1400T7 — 140T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
                 <div class="img-placeholder h-48 sm:h-52 relative">
                     <div class="img-placeholder-inner">
                         <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
                         <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
                     </div>
-                    <div class="absolute top-3 left-3 z-10">
-                        <span class="flex items-center gap-1.5 bg-gray-900/90 text-xs font-bold px-2.5 py-1 border border-gray-600">
-                            <span class="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>全地面起重機
-                        </span>
-                    </div>
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
                         <h3 class="text-white font-black text-2xl tracking-tight">SAC1400T7</h3>
-                        <span class="text-cy font-bold text-sm">1,400 噸</span>
+                        <span class="text-cy font-bold text-sm">140 噸</span>
                     </div>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-blue-400">最大起重：1400T</span>
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-blue-400">規格待補充</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：140T</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">規格待補充</span>
                     </div>
                     <button onclick="openModal('SAC1400T7')"
                         class="w-full border border-gray-600 text-gray-300 font-bold text-xs py-2.5 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors flex items-center justify-center gap-2">
@@ -611,27 +467,22 @@
                 </div>
             </div>
 
-            <!-- SAC2500E -->
+            <!-- SAC2500E — 250T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
                 <div class="img-placeholder h-48 sm:h-52 relative">
                     <div class="img-placeholder-inner">
                         <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
                         <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
                     </div>
-                    <div class="absolute top-3 left-3 z-10">
-                        <span class="flex items-center gap-1.5 bg-gray-900/90 text-xs font-bold px-2.5 py-1 border border-gray-600">
-                            <span class="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>全地面起重機
-                        </span>
-                    </div>
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
                         <h3 class="text-white font-black text-2xl tracking-tight">SAC2500E</h3>
-                        <span class="text-cy font-bold text-sm">2,500 噸</span>
+                        <span class="text-cy font-bold text-sm">250 噸</span>
                     </div>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-blue-400">最大起重：2500T</span>
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-blue-400">規格待補充</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：250T</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">規格待補充</span>
                     </div>
                     <button onclick="openModal('SAC2500E')"
                         class="w-full border border-gray-600 text-gray-300 font-bold text-xs py-2.5 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors flex items-center justify-center gap-2">
@@ -640,28 +491,22 @@
                 </div>
             </div>
 
-            <!-- SAC2500T 臺灣規格 -->
+            <!-- SAC2500T 臺灣規格 — 250T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
                 <div class="img-placeholder h-48 sm:h-52 relative">
                     <div class="img-placeholder-inner">
                         <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
                         <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
                     </div>
-                    <div class="absolute top-3 left-3 z-10 flex flex-wrap gap-1.5">
-                        <span class="flex items-center gap-1.5 bg-gray-900/90 text-xs font-bold px-2.5 py-1 border border-gray-600">
-                            <span class="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>全地面起重機
-                        </span>
-                        <span class="bg-cy text-gray-900 font-black text-[10px] px-2 py-1">臺灣規格</span>
-                    </div>
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
                         <h3 class="text-white font-black text-2xl tracking-tight">SAC2500T</h3>
-                        <span class="text-cy font-bold text-sm">2,500 噸</span>
+                        <span class="text-cy font-bold text-sm">250 噸</span>
                     </div>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-blue-400">最大起重：2500T</span>
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-blue-400">臺灣道路規格</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：250T</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">臺灣道路規格</span>
                     </div>
                     <button onclick="openModal('SAC2500T')"
                         class="w-full border border-gray-600 text-gray-300 font-bold text-xs py-2.5 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors flex items-center justify-center gap-2">
@@ -670,28 +515,22 @@
                 </div>
             </div>
 
-            <!-- SAC6000T 旗艦 -->
+            <!-- SAC6000T 旗艦 — 600T -->
             <div class="card-hover bg-gray-800 border border-gray-700 sm:col-span-2 xl:col-span-1 overflow-hidden fade-in">
                 <div class="img-placeholder h-48 sm:h-52 relative">
                     <div class="img-placeholder-inner">
                         <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
                         <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
                     </div>
-                    <div class="absolute top-3 left-3 z-10 flex flex-wrap gap-1.5">
-                        <span class="flex items-center gap-1.5 bg-gray-900/90 text-xs font-bold px-2.5 py-1 border border-gray-600">
-                            <span class="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>全地面起重機
-                        </span>
-                        <span class="bg-red-600 text-white font-black text-[10px] px-2.5 py-1">旗艦機型</span>
-                    </div>
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
                         <h3 class="text-white font-black text-2xl tracking-tight">SAC6000T</h3>
-                        <span class="text-cy font-bold text-sm">6,000 噸</span>
+                        <span class="text-cy font-bold text-sm">600 噸</span>
                     </div>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-blue-400">最大起重：6000T</span>
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-blue-400">規格待補充</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：600T</span>
+                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">規格待補充</span>
                     </div>
                     <button onclick="openModal('SAC6000T')"
                         class="w-full border border-gray-600 text-gray-300 font-bold text-xs py-2.5 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors flex items-center justify-center gap-2">
@@ -701,22 +540,13 @@
             </div>
 
         </div>
-
-        <p class="text-center text-gray-600 text-xs mt-10 fade-in">
-            * 規格數據以原廠技術文件為準，詳情請洽業務專員索取完整型錄。
-        </p>
     </div>
 </section>
 
 
-<!-- ====【 車型詳情彈窗 Modal 】====
-     內容：點擊「車型說明」後顯示的彈出視窗，規格表 + 說明文字
-     修改：此處為 HTML 結構，車型內容資料請至下方 JavaScript 的 FLEET{} 物件更新
-     操作：按 Esc 或點擊背景遮罩可關閉彈窗
-==== -->
+<!-- ====【 車型詳情彈窗 Modal 】==== -->
 <div id="modal-overlay" onclick="handleOverlayClick(event)">
     <div id="modal-box">
-        <!-- Modal Header -->
         <div class="flex items-start justify-between p-5 border-b border-gray-700 bg-gray-900 sticky top-0 z-10">
             <div>
                 <div id="modal-type-badge" class="inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 border border-gray-600 mb-2 bg-gray-800">
@@ -730,18 +560,13 @@
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
         </div>
-
-        <!-- Modal Body -->
         <div class="p-5 space-y-6">
-            <!-- Image placeholder (larger) -->
             <div class="img-placeholder h-56 sm:h-72 rounded-sm">
                 <div class="img-placeholder-inner rounded-sm">
                     <i class="fa-solid fa-camera text-gray-600 text-4xl"></i>
                     <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
                 </div>
             </div>
-
-            <!-- Specs table -->
             <div>
                 <h4 class="text-white font-black text-xs uppercase tracking-widest mb-3 pb-2 border-b border-gray-700">
                     <i class="fa-solid fa-table-list text-cy mr-2"></i>技術規格
@@ -750,8 +575,6 @@
                     <tbody id="modal-specs-body"></tbody>
                 </table>
             </div>
-
-            <!-- Description -->
             <div>
                 <h4 class="text-white font-black text-xs uppercase tracking-widest mb-3 pb-2 border-b border-gray-700">
                     <i class="fa-solid fa-circle-info text-cy mr-2"></i>車型說明
@@ -759,36 +582,118 @@
                 <p id="modal-desc" class="text-gray-400 text-sm leading-relaxed"></p>
             </div>
         </div>
-
-        <!-- Modal Footer -->
         <div class="p-5 border-t border-gray-700 bg-gray-900/50 sticky bottom-0">
-            <a href="#contact" onclick="closeModal()"
-               class="w-full bg-cy text-gray-900 font-black text-xs py-3 uppercase tracking-widest hover:bg-yellow-400 transition-colors flex items-center justify-center gap-2">
-                <i class="fa-solid fa-phone-volume"></i>聯絡業務，洽詢報價
-            </a>
+            <div class="flex gap-3">
+                <a href="#"
+                   class="flex-1 border border-gray-600 text-gray-400 font-black text-xs py-3 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-pdf"></i>官方完整規格書
+                </a>
+                <button onclick="closeModal(); openSalesModal()"
+                        class="flex-1 bg-cy text-gray-900 font-black text-xs py-3 uppercase tracking-widest hover:bg-yellow-400 transition-colors flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-phone-volume"></i>聯絡業務洽詢報價
+                </button>
+            </div>
         </div>
     </div>
 </div>
 
 
-<!-- ====【 活動特輯 Events 】====
-     內容：展覽資訊、促銷方案、教育訓練等活動卡片
-     修改：更換活動請直接修改各卡片內的日期、標題、描述文字；新增活動請複製整個卡片 <article> 區塊
-     注意：category badge 顏色 ── 展覽=藍、促銷=黃、培訓=綠，可依需求自行調整
-==== -->
+<!-- ====【 業務聯絡 Sales Modal 】==== -->
+<div id="sales-overlay" onclick="handleSalesOverlayClick(event)">
+    <div id="sales-box" class="bg-gray-900 border border-gray-700 w-full max-w-sm relative" style="border-top: 3px solid #FDB813">
+        <div class="flex items-center justify-between px-6 pt-5 pb-4 border-b border-gray-800">
+            <div>
+                <div class="text-cy font-bold text-[10px] tracking-[.2em] uppercase mb-1">Sales Contact</div>
+                <h2 class="text-white font-black text-xl">業務聯絡資訊</h2>
+            </div>
+            <button onclick="closeSalesModal()" class="w-9 h-9 flex items-center justify-center text-gray-500 hover:text-white hover:bg-gray-800 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+        <div class="p-6 space-y-4">
+            <div class="flex items-center gap-4 p-4 bg-gray-800 border-l-4 border-l-cy">
+                <div class="w-11 h-11 bg-cy flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-user-tie text-gray-900 text-lg"></i>
+                </div>
+                <div>
+                    <div class="text-gray-500 text-[10px] uppercase tracking-widest mb-0.5">業務經理</div>
+                    <div class="text-white font-black text-xl">李霸崧</div>
+                    <div class="text-gray-500 text-xs mt-0.5">SANY 三一起重機 臺灣銷售</div>
+                </div>
+            </div>
+            <a href="tel:0903387999" class="flex items-center gap-4 p-4 bg-gray-800 border border-gray-700 hover:border-cy group transition-colors">
+                <div class="w-10 h-10 bg-gray-700 group-hover:bg-cy flex items-center justify-center flex-shrink-0 transition-colors">
+                    <i class="fa-solid fa-phone text-cy group-hover:text-gray-900 text-sm transition-colors"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="text-gray-500 text-[10px] uppercase tracking-widest mb-0.5">點擊撥打電話</div>
+                    <div class="text-white font-black text-base group-hover:text-cy transition-colors">0903-387-999</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-cy transition-colors"></i>
+            </a>
+            <a href="https://line.me/ti/p/xvTbTuruwP" target="_blank" rel="noopener"
+               class="flex items-center gap-4 p-4 bg-gray-800 border border-gray-700 hover:border-green-500 group transition-colors">
+                <div class="w-10 h-10 bg-gray-700 group-hover:bg-green-500 flex items-center justify-center flex-shrink-0 transition-colors">
+                    <i class="fa-brands fa-line text-green-400 group-hover:text-white text-xl transition-colors"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="text-gray-500 text-[10px] uppercase tracking-widest mb-0.5">點擊加 LINE 好友</div>
+                    <div class="text-white font-black text-base group-hover:text-green-400 transition-colors">加我的 LINE</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-green-400 transition-colors"></i>
+            </a>
+        </div>
+        <div class="px-6 pb-6">
+            <p class="text-gray-600 text-xs text-center">業務專員將盡快與您聯繫，確認需求與報價細節。</p>
+        </div>
+    </div>
+</div>
+
+
+<!-- ====【 相簿燈箱 Gallery Modal 】==== -->
+<div id="gallery-overlay">
+    <div class="w-full flex items-center justify-between px-5 py-4 flex-shrink-0" style="background:rgba(0,0,0,.7)">
+        <div>
+            <div id="gallery-title" class="text-white font-black text-base"></div>
+            <div id="gallery-date" class="text-gray-500 text-xs mt-0.5"></div>
+        </div>
+        <div class="flex items-center gap-4">
+            <div id="gallery-counter" class="text-gray-400 text-sm font-bold tabular-nums"></div>
+            <button onclick="closeGallery()" class="w-9 h-9 border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-cy transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+    </div>
+    <div class="flex-1 flex items-center justify-center w-full relative min-h-0 px-14 md:px-20">
+        <button onclick="galleryPrev()" id="gallery-prev"
+                class="absolute left-3 md:left-5 z-10 w-11 h-11 border border-gray-700 bg-black/60 flex items-center justify-center text-gray-400 hover:border-cy hover:text-cy transition-colors">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div id="gallery-photo" class="w-full h-full flex items-center justify-center"></div>
+        <button onclick="galleryNext()" id="gallery-next"
+                class="absolute right-3 md:right-5 z-10 w-11 h-11 border border-gray-700 bg-black/60 flex items-center justify-center text-gray-400 hover:border-cy hover:text-cy transition-colors">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+    <div class="w-full flex-shrink-0 py-4 px-5" style="background:rgba(0,0,0,.7)">
+        <div id="gallery-thumbs" class="flex gap-2 justify-center overflow-x-auto py-1"></div>
+    </div>
+</div>
+
+
+<!-- ====【 活動特輯 Events 】==== -->
 <section id="events" class="py-20 md:py-28 bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <!-- 區塊標題 -->
         <div class="text-center mb-16 fade-in">
             <div class="inline-flex items-center gap-3 mb-4">
                 <div class="h-px w-10 bg-cy"></div>
-                <span class="text-cy font-bold text-xs tracking-[.25em] uppercase">Events &amp; Promotions</span>
+                <span class="text-cy font-bold text-xs tracking-[.25em] uppercase">Events &amp; Gallery</span>
                 <div class="h-px w-10 bg-cy"></div>
             </div>
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-4">活動特輯</h2>
             <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto">
-                最新展覽、購機優惠與原廠培訓資訊，掌握第一手 SANY 動態。
+                最新展覽資訊與交車照片，掌握第一手 SANY 動態。
             </p>
             <div class="flex items-center justify-center gap-4 mt-8">
                 <div class="h-px flex-1 max-w-xs bg-gray-800"></div>
@@ -797,128 +702,166 @@
             </div>
         </div>
 
-        <!-- 活動卡片列表 -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-
-            <!-- 活動卡片 1：展覽資訊 -->
-            <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
-                <!-- 活動圖片佔位 -->
-                <div class="img-placeholder h-44 relative">
-                    <div class="img-placeholder-inner">
-                        <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
-                        <span class="text-gray-600 text-xs uppercase tracking-widest">活動圖片待上傳</span>
-                    </div>
-                    <!-- 分類標籤 -->
-                    <span class="absolute top-3 left-3 z-10 bg-blue-600 text-white font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
-                        <i class="fa-solid fa-flag mr-1"></i>展覽資訊
-                    </span>
+        <!-- 子區塊 (i)：展覽資訊 -->
+        <div class="mb-16">
+            <div class="flex items-center gap-4 mb-8 fade-in">
+                <div class="flex-shrink-0 w-10 h-10 bg-blue-600 flex items-center justify-center">
+                    <i class="fa-solid fa-flag text-white text-sm"></i>
                 </div>
-
-                <div class="p-5 flex flex-col flex-1">
-                    <!-- 日期 -->
-                    <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
-                        <i class="fa-solid fa-calendar-days text-cy"></i>
-                        <span>2025 / 00 / 00 &nbsp;—&nbsp; 2025 / 00 / 00</span>
-                    </div>
-                    <!-- 標題 -->
-                    <h3 class="text-white font-black text-base leading-snug mb-2">
-                        2025 國際工程機械展 <br>
-                        <span class="text-cy">SANY 三一參展資訊</span>
-                    </h3>
-                    <!-- 說明 -->
-                    <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">
-                        待補充活動內容
-                    </p>
-                    <!-- CTA -->
-                    <a href="#contact" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
-                        了解更多 <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </a>
+                <div>
+                    <h3 class="text-white font-black text-lg uppercase tracking-widest leading-none">展覽資訊</h3>
+                    <p class="text-gray-600 text-[11px] tracking-widest uppercase mt-0.5">Exhibition &amp; Events</p>
                 </div>
-            </article>
+                <div class="flex-1 h-px bg-gray-800"></div>
+            </div>
 
-            <!-- 活動卡片 2：促銷方案 -->
-            <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
-                <div class="img-placeholder h-44 relative">
-                    <div class="img-placeholder-inner">
-                        <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
-                        <span class="text-gray-600 text-xs uppercase tracking-widest">活動圖片待上傳</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+                <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
+                    <div class="img-placeholder h-44 relative cursor-pointer" onclick="openGallery('exhibition-1')">
+                        <div class="img-placeholder-inner">
+                            <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
+                            <span class="text-gray-600 text-xs uppercase tracking-widest">點擊瀏覽照片</span>
+                        </div>
+                        <span class="absolute top-3 left-3 z-10 bg-blue-600 text-white font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
+                            <i class="fa-solid fa-flag mr-1"></i>展覽資訊
+                        </span>
+                        <span class="absolute top-3 right-3 z-10 bg-black/60 text-gray-300 font-bold text-[10px] px-2 py-1 flex items-center gap-1">
+                            <i class="fa-solid fa-images text-cy text-xs"></i> 照片集
+                        </span>
                     </div>
-                    <span class="absolute top-3 left-3 z-10 bg-cy text-gray-900 font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
-                        <i class="fa-solid fa-tag mr-1"></i>限時優惠
-                    </span>
-                </div>
-
-                <div class="p-5 flex flex-col flex-1">
-                    <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
-                        <i class="fa-solid fa-calendar-days text-cy"></i>
-                        <span>活動期間：待補充</span>
+                    <div class="p-5 flex flex-col flex-1">
+                        <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
+                            <i class="fa-solid fa-calendar-days text-cy"></i>
+                            <span>2025 / 00 / 00 &nbsp;—&nbsp; 2025 / 00 / 00</span>
+                        </div>
+                        <h3 class="text-white font-black text-base leading-snug mb-2">
+                            2025 國際工程機械展 <br>
+                            <span class="text-cy">SANY 三一參展資訊</span>
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">待補充活動內容</p>
+                        <button onclick="openGallery('exhibition-1')" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
+                            <i class="fa-solid fa-images"></i>瀏覽展覽照片
+                        </button>
                     </div>
-                    <h3 class="text-white font-black text-base leading-snug mb-2">
-                        年中購機優惠方案 <br>
-                        <span class="text-cy">指定車型專屬優惠</span>
-                    </h3>
-                    <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">
-                        待補充活動內容
-                    </p>
-                    <a href="#contact" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
-                        洽詢優惠 <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </a>
-                </div>
-            </article>
+                </article>
 
-            <!-- 活動卡片 3：交車大吉 -->
-            <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
-                <div class="img-placeholder h-44 relative">
-                    <div class="img-placeholder-inner">
-                        <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
-                        <span class="text-gray-600 text-xs uppercase tracking-widest">活動圖片待上傳</span>
+                <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
+                    <div class="img-placeholder h-44 relative cursor-pointer" onclick="openGallery('promotion-1')">
+                        <div class="img-placeholder-inner">
+                            <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
+                            <span class="text-gray-600 text-xs uppercase tracking-widest">點擊瀏覽照片</span>
+                        </div>
+                        <span class="absolute top-3 left-3 z-10 bg-cy text-gray-900 font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
+                            <i class="fa-solid fa-tag mr-1"></i>限時優惠
+                        </span>
+                        <span class="absolute top-3 right-3 z-10 bg-black/60 text-gray-300 font-bold text-[10px] px-2 py-1 flex items-center gap-1">
+                            <i class="fa-solid fa-images text-cy text-xs"></i> 照片集
+                        </span>
                     </div>
-                    <span class="absolute top-3 left-3 z-10 bg-cy text-gray-900 font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
-                        <i class="fa-solid fa-tag mr-1"></i>交車大吉
-                    </span>
-                </div>
-
-                <div class="p-5 flex flex-col flex-1">
-                    <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
-                        <i class="fa-solid fa-calendar-days text-cy"></i>
-                        <span>活動期間：待補充</span>
+                    <div class="p-5 flex flex-col flex-1">
+                        <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
+                            <i class="fa-solid fa-calendar-days text-cy"></i>
+                            <span>活動期間：待補充</span>
+                        </div>
+                        <h3 class="text-white font-black text-base leading-snug mb-2">
+                            年中購機優惠方案 <br>
+                            <span class="text-cy">指定車型專屬優惠</span>
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">待補充活動內容</p>
+                        <button onclick="openGallery('promotion-1')" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
+                            <i class="fa-solid fa-images"></i>瀏覽活動照片
+                        </button>
                     </div>
-                    <h3 class="text-white font-black text-base leading-snug mb-2">
-                        xxxxx <br>
-                        <span class="text-cy">xxxxxx</span>
-                    </h3>
-                    <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">
-                        待補充活動內容
-                    </p>
-                    <a href="#contact" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
-                        交車紀錄 <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </a>
+                </article>
+
+            </div>
+        </div>
+
+        <!-- 子區塊 (ii)：交車照片 -->
+        <div>
+            <div class="flex items-center gap-4 mb-8 fade-in">
+                <div class="flex-shrink-0 w-10 h-10 bg-green-700 flex items-center justify-center">
+                    <i class="fa-solid fa-camera text-white text-sm"></i>
                 </div>
-            </article>
+                <div>
+                    <h3 class="text-white font-black text-lg uppercase tracking-widest leading-none">交車照片</h3>
+                    <p class="text-gray-600 text-[11px] tracking-widest uppercase mt-0.5">Delivery Gallery</p>
+                </div>
+                <div class="flex-1 h-px bg-gray-800"></div>
+            </div>
 
-        </div><!-- /活動卡片列表 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
-        <!-- 查看更多 -->
-        <div class="text-center mt-12 fade-in">
-            <a href="#contact" class="inline-flex items-center gap-3 border-2 border-gray-700 text-gray-400 font-bold text-sm px-8 py-3.5 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors">
-                <i class="fa-solid fa-envelope"></i>
-                詢問更多活動資訊
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
+                <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
+                    <div class="img-placeholder h-44 relative cursor-pointer" onclick="openGallery('delivery-1')">
+                        <div class="img-placeholder-inner">
+                            <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
+                            <span class="text-gray-600 text-xs uppercase tracking-widest">點擊瀏覽照片</span>
+                        </div>
+                        <span class="absolute top-3 left-3 z-10 bg-green-700 text-white font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
+                            <i class="fa-solid fa-truck-ramp-box mr-1"></i>交車紀錄
+                        </span>
+                        <span class="absolute top-3 right-3 z-10 bg-black/60 text-gray-300 font-bold text-[10px] px-2 py-1 flex items-center gap-1">
+                            <i class="fa-solid fa-images text-cy text-xs"></i> 照片集
+                        </span>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
+                            <i class="fa-solid fa-calendar-days text-cy"></i>
+                            <span>交車日期：待補充</span>
+                        </div>
+                        <h3 class="text-white font-black text-base leading-snug mb-2">
+                            交車大吉 <br>
+                            <span class="text-cy">客戶交車紀念照</span>
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">待補充交車說明</p>
+                        <button onclick="openGallery('delivery-1')" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
+                            <i class="fa-solid fa-images"></i>瀏覽交車照片
+                        </button>
+                    </div>
+                </article>
+
+                <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
+                    <div class="img-placeholder h-44 relative cursor-pointer" onclick="openGallery('delivery-2')">
+                        <div class="img-placeholder-inner">
+                            <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
+                            <span class="text-gray-600 text-xs uppercase tracking-widest">點擊瀏覽照片</span>
+                        </div>
+                        <span class="absolute top-3 left-3 z-10 bg-green-700 text-white font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
+                            <i class="fa-solid fa-truck-ramp-box mr-1"></i>交車紀錄
+                        </span>
+                        <span class="absolute top-3 right-3 z-10 bg-black/60 text-gray-300 font-bold text-[10px] px-2 py-1 flex items-center gap-1">
+                            <i class="fa-solid fa-images text-cy text-xs"></i> 照片集
+                        </span>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
+                            <i class="fa-solid fa-calendar-days text-cy"></i>
+                            <span>交車日期：待補充</span>
+                        </div>
+                        <h3 class="text-white font-black text-base leading-snug mb-2">
+                            交車大吉 <br>
+                            <span class="text-cy">客戶交車紀念照</span>
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">待補充交車說明</p>
+                        <button onclick="openGallery('delivery-2')" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
+                            <i class="fa-solid fa-images"></i>瀏覽交車照片
+                        </button>
+                    </div>
+                </article>
+
+            </div>
         </div>
 
     </div>
 </section>
 
 
-<!-- ====【 關於我們 / 為何選擇我們 About 】====
-     內容：四項核心優勢說明（授權、選型、透明報價、噸位完整）
-     修改：更換優勢項目請直接改 <h3> 標題與 <p> 說明文字；圖示替換請改 <i class="fa-solid fa-...">
-==== -->
+<!-- ====【 關於我們 About 】==== -->
 <section id="about" class="relative py-20 md:py-28 metal-bg overflow-hidden">
     <div class="absolute top-0 inset-x-0 h-14" style="background:#0b0f17;clip-path:polygon(0 0,100% 0,100% 100%,0 0)"></div>
     <div class="absolute bottom-0 inset-x-0 h-14" style="background:#0b0f17;clip-path:polygon(0 100%,100% 0,100% 100%,0 100%)"></div>
-
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-10">
         <div class="text-center mb-16 fade-in">
             <div class="inline-flex items-center gap-3 mb-4">
@@ -929,7 +872,6 @@
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-4">為何選擇我們</h2>
             <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto">SANY 三一起重機臺灣授權銷售，從諮詢、選型到交車，提供全程專業服務。</p>
         </div>
-
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 fade-in">
             <div class="flex gap-4 p-6 bg-gray-900/80 border border-gray-700 hover:border-cy transition-colors group">
                 <div class="flex-shrink-0 w-12 h-12 bg-cy flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -972,10 +914,7 @@
 </section>
 
 
-<!-- ====【 聯絡業務 Contact 】====
-     內容：業務名片（李霸崧）、聯絡資訊、購車詢問表單
-     修改：聯絡人資料請找「業務聯絡資訊」區塊；傳真與地址填入「待補充」的位置
-==== -->
+<!-- ====【 聯絡業務 Contact 】==== -->
 <section id="contact" class="py-20 md:py-28 bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -986,15 +925,16 @@
                 <div class="h-px w-10 bg-cy"></div>
             </div>
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-4">聯絡業務</h2>
-            <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto">歡迎來電、來信或填寫表單，業務專員將盡快回覆您的選購需求。</p>
+            <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto">歡迎來電或加 LINE，業務專員將盡快回覆您的選購需求。</p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
 
-            <div class="lg:col-span-2 fade-in">
+            <!-- 左欄：業務聯絡資訊 -->
+            <div class="fade-in">
                 <h3 class="text-cy font-black text-base uppercase tracking-widest mb-8 pb-4 border-b border-gray-800">業務聯絡資訊</h3>
 
-                <div class="flex items-center gap-4 mb-8 p-4 bg-gray-800 border border-gray-700 border-l-4 border-l-cy">
+                <div class="flex items-center gap-4 mb-6 p-4 bg-gray-800 border border-gray-700 border-l-4 border-l-cy">
                     <div class="w-12 h-12 bg-cy flex items-center justify-center flex-shrink-0">
                         <i class="fa-solid fa-user-tie text-gray-900 text-xl"></i>
                     </div>
@@ -1005,112 +945,166 @@
                     </div>
                 </div>
 
-                <div class="space-y-6">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 w-10 h-10 bg-gray-800 border border-gray-700 flex items-center justify-center">
-                            <i class="fa-solid fa-phone text-cy text-sm"></i>
+                <div class="space-y-3 mb-6">
+                    <a href="tel:0903387999" class="flex items-center gap-4 p-4 bg-gray-800 border border-gray-700 hover:border-cy group transition-colors">
+                        <div class="flex-shrink-0 w-10 h-10 bg-gray-700 group-hover:bg-cy flex items-center justify-center transition-colors">
+                            <i class="fa-solid fa-phone text-cy group-hover:text-gray-900 text-sm transition-colors"></i>
                         </div>
                         <div>
-                            <div class="text-white font-bold text-xs uppercase tracking-widest mb-1">服務電話</div>
-                            <a href="tel:0903387999" class="text-gray-300 hover:text-cy transition-colors text-base font-bold">0903-387-999</a>
+                            <div class="text-white font-bold text-xs uppercase tracking-widest mb-0.5">服務電話</div>
+                            <div class="text-gray-300 group-hover:text-cy transition-colors font-black">0903-387-999</div>
                         </div>
-                    </div>
-                    <div class="flex items-start gap-4">
+                    </a>
+                    <a href="https://line.me/ti/p/xvTbTuruwP" target="_blank" rel="noopener"
+                       class="flex items-center gap-4 p-4 bg-gray-800 border border-gray-700 hover:border-green-500 group transition-colors">
+                        <div class="flex-shrink-0 w-10 h-10 bg-gray-700 group-hover:bg-green-500 flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-line text-green-400 group-hover:text-white text-xl transition-colors"></i>
+                        </div>
+                        <div>
+                            <div class="text-white font-bold text-xs uppercase tracking-widest mb-0.5">LINE</div>
+                            <div class="text-gray-300 group-hover:text-green-400 transition-colors font-black">加我的 LINE</div>
+                        </div>
+                    </a>
+                    <a href="mailto:katokato250@yahoo.com.tw" class="flex items-center gap-4 p-4 bg-gray-800 border border-gray-700 hover:border-cy group transition-colors">
                         <div class="flex-shrink-0 w-10 h-10 bg-gray-800 border border-gray-700 flex items-center justify-center">
                             <i class="fa-solid fa-envelope text-cy text-sm"></i>
                         </div>
                         <div>
-                            <div class="text-white font-bold text-xs uppercase tracking-widest mb-1">Email</div>
-                            <a href="mailto:katokato250@yahoo.com.tw" class="text-gray-300 hover:text-cy transition-colors text-sm break-all">katokato250@yahoo.com.tw</a>
+                            <div class="text-white font-bold text-xs uppercase tracking-widest mb-0.5">Email</div>
+                            <div class="text-gray-300 group-hover:text-cy transition-colors text-sm break-all">katokato250@yahoo.com.tw</div>
                         </div>
-                    </div>
-                    <div class="flex items-start gap-4">
+                    </a>
+                    <div class="flex items-center gap-4 p-4 bg-gray-800 border border-gray-700">
                         <div class="flex-shrink-0 w-10 h-10 bg-gray-800 border border-gray-700 flex items-center justify-center">
                             <i class="fa-solid fa-fax text-cy text-sm"></i>
                         </div>
                         <div>
-                            <div class="text-white font-bold text-xs uppercase tracking-widest mb-1">傳真</div>
+                            <div class="text-white font-bold text-xs uppercase tracking-widest mb-0.5">傳真</div>
                             <div class="text-gray-500 text-sm">（待補充）</div>
                         </div>
                     </div>
-                    <div class="flex items-start gap-4">
+                </div>
+
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
                         <div class="flex-shrink-0 w-10 h-10 bg-gray-800 border border-gray-700 flex items-center justify-center">
                             <i class="fa-solid fa-location-dot text-cy text-sm"></i>
                         </div>
                         <div>
-                            <div class="text-white font-bold text-xs uppercase tracking-widest mb-1">賞車地點</div>
-                            <div class="text-gray-500 text-sm">（待補充）</div>
+                            <div class="text-white font-bold text-xs uppercase tracking-widest mb-0.5">賞車地點</div>
+                            <div class="text-gray-300 text-sm">臺中市后里區三線路7-1號</div>
                         </div>
+                    </div>
+                    <div class="border border-gray-700 overflow-hidden">
+                        <iframe
+                            src="https://maps.google.com/maps?q=%E8%87%BA%E4%B8%AD%E5%B8%82%E5%BE%8C%E9%87%8C%E5%8D%80%E4%B8%89%E7%B7%9A%E8%B7%AF7-1%E8%99%9F&output=embed&hl=zh-TW"
+                            width="100%" height="260" style="border:0;display:block" allowfullscreen loading="lazy"
+                            title="賞車地點地圖">
+                        </iframe>
                     </div>
                 </div>
 
                 <div class="mt-8 h-2 yellow-stripe opacity-40 rounded-sm"></div>
             </div>
 
-            <div class="lg:col-span-3 fade-in">
-                <div class="bg-gray-800 border border-gray-700 p-6 sm:p-8">
-                    <h3 class="text-cy font-black text-base uppercase tracking-widest mb-8 pb-4 border-b border-gray-700">
-                        <i class="fa-solid fa-file-contract mr-2"></i>填寫購車詢問單
-                    </h3>
+            <!-- 右欄：合作公司資料 -->
+            <div class="fade-in">
+                <h3 class="text-cy font-black text-base uppercase tracking-widest mb-8 pb-4 border-b border-gray-800">合作公司</h3>
 
-                    <form class="space-y-5">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                            <div>
-                                <label class="block text-gray-400 text-[11px] font-bold uppercase tracking-widest mb-2">姓名 *</label>
-                                <input type="text" placeholder="請輸入您的姓名" class="form-field">
+                <div class="space-y-5">
+
+                    <!-- 公司 1 -->
+                    <div class="bg-gray-800 border border-gray-700 border-l-4 border-l-cy overflow-hidden">
+                        <div class="flex items-center justify-between px-5 py-3 border-b border-gray-700 bg-gray-900/40">
+                            <div class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-building text-cy text-sm"></i>
+                                <span class="text-white font-black text-base tracking-wide">XX 起重股份有限公司</span>
                             </div>
-                            <div>
-                                <label class="block text-gray-400 text-[11px] font-bold uppercase tracking-widest mb-2">聯絡電話 *</label>
-                                <input type="tel" placeholder="請輸入聯絡電話" class="form-field">
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-user text-cy text-xs mt-1 w-4 text-center flex-shrink-0"></i>
+                                <div>
+                                    <span class="text-gray-500 text-xs uppercase tracking-widest">負責人</span>
+                                    <div class="text-gray-200 text-sm font-bold mt-0.5">王〇〇</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-phone text-cy text-xs mt-1 w-4 text-center flex-shrink-0"></i>
+                                <div>
+                                    <span class="text-gray-500 text-xs uppercase tracking-widest">聯絡電話</span>
+                                    <a href="tel:04-00000000" class="block text-gray-200 text-sm font-bold mt-0.5 hover:text-cy transition-colors">04-0000-0000</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-location-dot text-cy text-xs mt-1 w-4 text-center flex-shrink-0"></i>
+                                <div>
+                                    <span class="text-gray-500 text-xs uppercase tracking-widest">公司地址</span>
+                                    <div class="text-gray-200 text-sm mt-0.5">（待補充）</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-envelope text-cy text-xs mt-1 w-4 text-center flex-shrink-0"></i>
+                                <div>
+                                    <span class="text-gray-500 text-xs uppercase tracking-widest">Email</span>
+                                    <div class="text-gray-200 text-sm mt-0.5">（待補充）</div>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <label class="block text-gray-400 text-[11px] font-bold uppercase tracking-widest mb-2">公司名稱</label>
-                            <input type="text" placeholder="請輸入公司名稱（選填）" class="form-field">
+                    </div>
+
+                    <!-- 公司 1 -->
+                    <div class="bg-gray-800 border border-gray-700 border-l-4 border-l-cy overflow-hidden">
+                        <div class="flex items-center justify-between px-5 py-3 border-b border-gray-700 bg-gray-900/40">
+                            <div class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-building text-cy text-sm"></i>
+                                <span class="text-white font-black text-base tracking-wide">XX 起重股份有限公司</span>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-gray-400 text-[11px] font-bold uppercase tracking-widest mb-2">有興趣的車型</label>
-                            <select class="form-field cursor-pointer">
-                                <option value="">請選擇車型</option>
-                                <option>STC160T — 汽車式起重機 160噸</option>
-                                <option>STC500T — 汽車式起重機 500噸</option>
-                                <option>SAC600E — 全地面起重機 600噸</option>
-                                <option>SRC500T — 履帶式起重機 500噸</option>
-                                <option>STC700T — 汽車式起重機 700噸</option>
-                                <option>STC1000T5 — 汽車式起重機 1000噸</option>
-                                <option>STC1200T6 — 汽車式起重機 1200噸</option>
-                                <option>SAC1400T7 — 全地面起重機 1400噸</option>
-                                <option>SAC2500E — 全地面起重機 2500噸</option>
-                                <option>SAC2500T — 全地面起重機 2500噸（臺灣規格）</option>
-                                <option>SAC6000T — 全地面起重機 6000噸</option>
-                                <option>尚未確定，需要業務協助選型</option>
-                            </select>
+                        <div class="p-5 space-y-3">
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-user text-cy text-xs mt-1 w-4 text-center flex-shrink-0"></i>
+                                <div>
+                                    <span class="text-gray-500 text-xs uppercase tracking-widest">負責人</span>
+                                    <div class="text-gray-200 text-sm font-bold mt-0.5">王〇〇</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-phone text-cy text-xs mt-1 w-4 text-center flex-shrink-0"></i>
+                                <div>
+                                    <span class="text-gray-500 text-xs uppercase tracking-widest">聯絡電話</span>
+                                    <a href="tel:04-00000000" class="block text-gray-200 text-sm font-bold mt-0.5 hover:text-cy transition-colors">04-0000-0000</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-location-dot text-cy text-xs mt-1 w-4 text-center flex-shrink-0"></i>
+                                <div>
+                                    <span class="text-gray-500 text-xs uppercase tracking-widest">公司地址</span>
+                                    <div class="text-gray-200 text-sm mt-0.5">（待補充）</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-envelope text-cy text-xs mt-1 w-4 text-center flex-shrink-0"></i>
+                                <div>
+                                    <span class="text-gray-500 text-xs uppercase tracking-widest">Email</span>
+                                    <div class="text-gray-200 text-sm mt-0.5">（待補充）</div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-gray-400 text-[11px] font-bold uppercase tracking-widest mb-2">工程需求說明</label>
-                            <textarea rows="4" placeholder="請描述工程類型、作業環境、預算範圍等，讓業務為您提供最適合的選型建議..." class="form-field resize-none"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-cy text-gray-900 font-black text-sm py-4 uppercase tracking-widest hover:bg-yellow-400 transition-colors flex items-center justify-center gap-3 group">
-                            <i class="fa-solid fa-paper-plane group-hover:translate-x-1 transition-transform"></i>
-                            送出詢問單
-                        </button>
-                        <p class="text-gray-600 text-xs text-center">業務專員將盡快與您聯繫，確認需求與報價細節。</p>
-                    </form>
+                    </div>
+
                 </div>
             </div>
+
         </div>
     </div>
 </section>
 
 
-<!-- ====【 頁尾 Footer 】====
-     內容：SANY Logo 與公司說明、快速導覽連結、業務直聯電話、版權宣告
-     修改：社群連結請替換 <a href="#"> 的 "#" 為實際網址
-==== -->
+<!-- ====【 頁尾 Footer 】==== -->
 <footer class="border-t border-gray-800" style="background:#0b0f17">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
-
             <div>
                 <a href="#home" class="inline-flex items-center gap-2.5 mb-5">
                     <div class="w-8 h-8 bg-sr flex items-center justify-center">
@@ -1128,7 +1122,7 @@
                     <a href="#" aria-label="Facebook" class="w-9 h-9 bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-500 hover:text-cy hover:border-cy transition-colors">
                         <i class="fa-brands fa-facebook-f text-sm"></i>
                     </a>
-                    <a href="#" aria-label="LINE" class="w-9 h-9 bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-500 hover:text-cy hover:border-cy transition-colors">
+                    <a href="https://line.me/ti/p/xvTbTuruwP" target="_blank" rel="noopener" aria-label="LINE" class="w-9 h-9 bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-500 hover:text-cy hover:border-cy transition-colors">
                         <i class="fa-brands fa-line text-sm"></i>
                     </a>
                     <a href="#" aria-label="YouTube" class="w-9 h-9 bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-500 hover:text-cy hover:border-cy transition-colors">
@@ -1136,7 +1130,6 @@
                     </a>
                 </div>
             </div>
-
             <div>
                 <h4 class="text-white font-black text-xs uppercase tracking-widest mb-6 pb-3 border-b border-gray-800">快速導覽</h4>
                 <ul class="space-y-3">
@@ -1148,7 +1141,6 @@
                     <li><a href="#contact" class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>聯絡業務</a></li>
                 </ul>
             </div>
-
             <div>
                 <h4 class="text-white font-black text-xs uppercase tracking-widest mb-6 pb-3 border-b border-gray-800">業務直聯</h4>
                 <div class="space-y-4 mb-6">
@@ -1158,6 +1150,12 @@
                             <i class="fa-solid fa-phone text-cy text-xs"></i>
                         </div>
                         <span class="text-gray-400 text-sm group-hover:text-cy transition-colors font-bold">0903-387-999</span>
+                    </a>
+                    <a href="https://line.me/ti/p/xvTbTuruwP" target="_blank" rel="noopener" class="flex items-center gap-3 group">
+                        <div class="w-8 h-8 bg-gray-800 border border-gray-700 group-hover:border-green-500 flex items-center justify-center transition-colors flex-shrink-0">
+                            <i class="fa-brands fa-line text-green-400 text-sm"></i>
+                        </div>
+                        <span class="text-gray-400 text-sm group-hover:text-green-400 transition-colors font-bold">加我的 LINE</span>
                     </a>
                     <a href="mailto:katokato250@yahoo.com.tw" class="flex items-center gap-3 group">
                         <div class="w-8 h-8 bg-gray-800 border border-gray-700 group-hover:border-cy flex items-center justify-center transition-colors flex-shrink-0">
@@ -1170,11 +1168,8 @@
                     <i class="fa-solid fa-phone-volume"></i>立即來電洽詢
                 </a>
             </div>
-
         </div>
-
         <div class="h-px yellow-stripe opacity-20 mb-8"></div>
-
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-600 text-xs">
             <div>© 2024 SANY 三一集團 臺灣授權經銷商. All rights reserved.</div>
             <div class="flex gap-4">
@@ -1187,24 +1182,15 @@
 </footer>
 
 
-<!-- ====【 JavaScript 互動邏輯 】====
-     內容：
-       ① FLEET{} 物件 ── 各車型規格資料，修改規格請直接在此更新
-       ② openModal / closeModal ── 彈窗開關邏輯
-       ③ 漢堡選單 toggle
-       ④ 滾動淡入動畫（IntersectionObserver）
-       ⑤ 平滑滾動（smooth scroll）
-     修改：新增車型規格請在 FLEET{} 物件內加一個 key-value 區塊
-==== -->
+<!-- ====【 JavaScript 】==== -->
 <script>
-// ── Vehicle data ─────────────────────────────────────────────
-// 請直接在此更新各車型的規格與說明
+// ── Vehicle data ──────────────────────────────────────────────────────────────
 const FLEET = {
     'STC160T': {
         type: '汽車式起重機', typeColor: '#FDB813',
-        capacity: '160 噸',
+        capacity: '16 噸',
         specs: [
-            ['最大起重量',   '160 噸'],
+            ['最大起重量',   '16 噸'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
             ['引擎型號',     '待補充'],
@@ -1217,24 +1203,9 @@ const FLEET = {
     },
     'STC500T': {
         type: '汽車式起重機', typeColor: '#FDB813',
-        capacity: '500 噸',
+        capacity: '50 噸',
         specs: [
-            ['最大起重量',   '500 噸'],
-            ['主臂長度',     '待補充'],
-            ['副臂長度',     '待補充'],
-            ['引擎型號',     '待補充'],
-            ['引擎馬力',     '待補充'],
-            ['整車重量',     '待補充'],
-            ['軸數',         '待補充'],
-            ['最大行駛速度', '待補充'],
-        ],
-        desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
-    },
-    'SAC600E': {
-        type: '全地面起重機', typeColor: '#60a5fa',
-        capacity: '600 噸',
-        specs: [
-            ['最大起重量',   '600 噸'],
+            ['最大起重量',   '50 噸'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
             ['引擎型號',     '待補充'],
@@ -1246,10 +1217,10 @@ const FLEET = {
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
     },
     'SRC500T': {
-        type: '履帶式起重機', typeColor: '#fb923c',
-        capacity: '500 噸',
+        type: '履帶式起重機', typeColor: '#FDB813',
+        capacity: '50 噸',
         specs: [
-            ['最大起重量',   '500 噸'],
+            ['最大起重量',   '50 噸'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
             ['引擎型號',     '待補充'],
@@ -1260,11 +1231,26 @@ const FLEET = {
         ],
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
     },
+    'SAC600E': {
+        type: '全地面起重機', typeColor: '#FDB813',
+        capacity: '60 噸',
+        specs: [
+            ['最大起重量',   '60 噸'],
+            ['主臂長度',     '待補充'],
+            ['副臂長度',     '待補充'],
+            ['引擎型號',     '待補充'],
+            ['引擎馬力',     '待補充'],
+            ['整車重量',     '待補充'],
+            ['軸數',         '待補充'],
+            ['最大行駛速度', '待補充'],
+        ],
+        desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
+    },
     'STC700T': {
         type: '汽車式起重機', typeColor: '#FDB813',
-        capacity: '700 噸',
+        capacity: '70 噸',
         specs: [
-            ['最大起重量',   '700 噸'],
+            ['最大起重量',   '70 噸'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
             ['引擎型號',     '待補充'],
@@ -1277,9 +1263,9 @@ const FLEET = {
     },
     'STC1000T5': {
         type: '汽車式起重機', typeColor: '#FDB813',
-        capacity: '1,000 噸',
+        capacity: '100 噸',
         specs: [
-            ['最大起重量',   '1,000 噸'],
+            ['最大起重量',   '100 噸'],
             ['主臂節數',     '5 節'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
@@ -1292,9 +1278,9 @@ const FLEET = {
     },
     'STC1200T6': {
         type: '汽車式起重機', typeColor: '#FDB813',
-        capacity: '1,200 噸',
+        capacity: '120 噸',
         specs: [
-            ['最大起重量',   '1,200 噸'],
+            ['最大起重量',   '120 噸'],
             ['主臂節數',     '6 節'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
@@ -1306,10 +1292,10 @@ const FLEET = {
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
     },
     'SAC1400T7': {
-        type: '全地面起重機', typeColor: '#60a5fa',
-        capacity: '1,400 噸',
+        type: '全地面起重機', typeColor: '#FDB813',
+        capacity: '140 噸',
         specs: [
-            ['最大起重量',   '1,400 噸'],
+            ['最大起重量',   '140 噸'],
             ['主臂節數',     '7 節'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
@@ -1321,10 +1307,10 @@ const FLEET = {
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
     },
     'SAC2500E': {
-        type: '全地面起重機', typeColor: '#60a5fa',
-        capacity: '2,500 噸',
+        type: '全地面起重機', typeColor: '#FDB813',
+        capacity: '250 噸',
         specs: [
-            ['最大起重量',   '2,500 噸'],
+            ['最大起重量',   '250 噸'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
             ['引擎型號',     '待補充'],
@@ -1336,10 +1322,10 @@ const FLEET = {
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
     },
     'SAC2500T': {
-        type: '全地面起重機（臺灣規格）', typeColor: '#60a5fa',
-        capacity: '2,500 噸',
+        type: '全地面起重機（臺灣規格）', typeColor: '#FDB813',
+        capacity: '250 噸',
         specs: [
-            ['最大起重量',   '2,500 噸'],
+            ['最大起重量',   '250 噸'],
             ['規格說明',     '符合臺灣道路交通法規'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
@@ -1351,10 +1337,10 @@ const FLEET = {
         desc: '待補充：臺灣規格說明、與標準版差異、適用工況等。'
     },
     'SAC6000T': {
-        type: '全地面起重機', typeColor: '#60a5fa',
-        capacity: '6,000 噸',
+        type: '全地面起重機', typeColor: '#FDB813',
+        capacity: '600 噸',
         specs: [
-            ['最大起重量',   '6,000 噸'],
+            ['最大起重量',   '600 噸'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
             ['引擎型號',     '待補充'],
@@ -1367,16 +1353,115 @@ const FLEET = {
     },
 };
 
-// ── Modal logic ───────────────────────────────────────────────
+// ── Gallery data ───────────────────────────────────────────────────────────────
+// photos: [] = 顯示佔位圖；有圖後填入 URL 字串即可
+const GALLERIES = {
+    'exhibition-1': {
+        title: '2025 SANY 三一國際工程機械展',
+        date: '2025 / 00 / 00 — 2025 / 00 / 00',
+        photos: []
+    },
+    'promotion-1': {
+        title: '年中購機優惠方案',
+        date: '活動期間：待補充',
+        photos: []
+    },
+    'delivery-1': {
+        title: '交車紀錄 #1',
+        date: '交車日期：待補充',
+        photos: []
+    },
+    'delivery-2': {
+        title: '交車紀錄 #2',
+        date: '交車日期：待補充',
+        photos: []
+    },
+};
+const GALLERY_PLACEHOLDER_COUNT = 4;
+
+let currentGalleryId = null;
+let currentPhotoIndex = 0;
+
+function getSlides(g) {
+    return (g.photos && g.photos.length > 0)
+        ? g.photos
+        : Array(GALLERY_PLACEHOLDER_COUNT).fill(null);
+}
+
+function openGallery(id) {
+    const g = GALLERIES[id];
+    if (!g) return;
+    currentGalleryId = id;
+    currentPhotoIndex = 0;
+    document.getElementById('gallery-title').textContent = g.title;
+    document.getElementById('gallery-date').textContent  = g.date;
+    renderGallery();
+    document.getElementById('gallery-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeGallery() {
+    document.getElementById('gallery-overlay').classList.remove('open');
+    if (!document.getElementById('modal-overlay').classList.contains('open') &&
+        !document.getElementById('sales-overlay').classList.contains('open')) {
+        document.body.style.overflow = '';
+    }
+}
+
+function renderGallery() {
+    const slides = getSlides(GALLERIES[currentGalleryId]);
+    const total  = slides.length;
+    const idx    = currentPhotoIndex;
+
+    document.getElementById('gallery-counter').textContent = `${idx + 1} / ${total}`;
+    document.getElementById('gallery-prev').style.opacity  = idx > 0          ? '1' : '0.25';
+    document.getElementById('gallery-next').style.opacity  = idx < total - 1  ? '1' : '0.25';
+
+    const photoEl = document.getElementById('gallery-photo');
+    const src = slides[idx];
+    if (src) {
+        photoEl.innerHTML = `<img src="${src}" class="object-contain" style="max-height:65vh;max-width:100%">`;
+    } else {
+        photoEl.innerHTML = `
+            <div class="flex flex-col items-center justify-center gap-4 text-gray-600 w-full" style="height:65vh">
+                <div class="border-2 border-dashed border-gray-700 flex flex-col items-center justify-center gap-3 w-full h-full max-w-lg mx-auto">
+                    <i class="fa-solid fa-image text-5xl"></i>
+                    <span class="text-sm uppercase tracking-widest">照片 ${idx + 1} 待上傳</span>
+                </div>
+            </div>`;
+    }
+
+    document.getElementById('gallery-thumbs').innerHTML = slides.map((s, i) => {
+        const active = i === idx ? 'active' : '';
+        if (s) {
+            return `<div class="gallery-thumb flex-shrink-0 w-16 h-12 overflow-hidden ${active}" onclick="galleryGoTo(${i})">
+                        <img src="${s}" class="w-full h-full object-cover">
+                    </div>`;
+        }
+        return `<div class="gallery-thumb flex-shrink-0 w-16 h-12 bg-gray-800 flex items-center justify-center ${active}" onclick="galleryGoTo(${i})">
+                    <span class="text-gray-600 text-xs">${i + 1}</span>
+                </div>`;
+    }).join('');
+}
+
+function galleryGoTo(i) {
+    const slides = getSlides(GALLERIES[currentGalleryId]);
+    if (i < 0 || i >= slides.length) return;
+    currentPhotoIndex = i;
+    renderGallery();
+}
+function galleryPrev() { galleryGoTo(currentPhotoIndex - 1); }
+function galleryNext() { galleryGoTo(currentPhotoIndex + 1); }
+
+// ── Fleet Modal ────────────────────────────────────────────────────────────────
 function openModal(modelId) {
     const v = FLEET[modelId];
     if (!v) return;
-
-    document.getElementById('modal-title').textContent    = modelId;
-    document.getElementById('modal-capacity').textContent = '最大起重量：' + v.capacity;
+    document.getElementById('modal-title').textContent     = modelId;
+    document.getElementById('modal-capacity').textContent  = '最大起重量：' + v.capacity;
     document.getElementById('modal-type-text').textContent = v.type;
     document.getElementById('modal-type-dot').style.background = v.typeColor;
-    document.getElementById('modal-desc').textContent     = v.desc;
+    document.getElementById('modal-desc').textContent      = v.desc;
 
     const tbody = document.getElementById('modal-specs-body');
     tbody.innerHTML = v.specs.map(([k, val], i) => `
@@ -1386,25 +1471,53 @@ function openModal(modelId) {
         </tr>
     `).join('');
 
-    const overlay = document.getElementById('modal-overlay');
-    overlay.classList.add('open');
+    document.getElementById('modal-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
-    // Reset scroll position of modal box
     document.getElementById('modal-box').scrollTop = 0;
 }
 
 function closeModal() {
     document.getElementById('modal-overlay').classList.remove('open');
-    document.body.style.overflow = '';
+    if (!document.getElementById('sales-overlay').classList.contains('open') &&
+        !document.getElementById('gallery-overlay').classList.contains('open')) {
+        document.body.style.overflow = '';
+    }
 }
 
 function handleOverlayClick(e) {
     if (e.target === document.getElementById('modal-overlay')) closeModal();
 }
 
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+// ── Sales Modal ────────────────────────────────────────────────────────────────
+function openSalesModal() {
+    document.getElementById('sales-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
 
-// ── Hamburger ─────────────────────────────────────────────────
+function closeSalesModal() {
+    document.getElementById('sales-overlay').classList.remove('open');
+    if (!document.getElementById('modal-overlay').classList.contains('open') &&
+        !document.getElementById('gallery-overlay').classList.contains('open')) {
+        document.body.style.overflow = '';
+    }
+}
+
+function handleSalesOverlayClick(e) {
+    if (e.target === document.getElementById('sales-overlay')) closeSalesModal();
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal(); closeSalesModal(); closeGallery(); }
+});
+
+// Gallery keyboard navigation
+document.addEventListener('keydown', e => {
+    if (!document.getElementById('gallery-overlay').classList.contains('open')) return;
+    if (e.key === 'ArrowLeft')  galleryPrev();
+    if (e.key === 'ArrowRight') galleryNext();
+});
+
+// ── Hamburger ──────────────────────────────────────────────────────────────────
 const hb   = document.getElementById('hamburger');
 const menu = document.getElementById('mobile-menu');
 const icon = document.getElementById('hbIcon');
@@ -1420,13 +1533,13 @@ document.querySelectorAll('.mob-link').forEach(l =>
     })
 );
 
-// ── Navbar shadow ─────────────────────────────────────────────
+// ── Navbar shadow ──────────────────────────────────────────────────────────────
 const nav = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
     nav.classList.toggle('shadow-xl', window.scrollY > 40);
 }, { passive: true });
 
-// ── Scroll fade-in ────────────────────────────────────────────
+// ── Scroll fade-in ─────────────────────────────────────────────────────────────
 const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
@@ -1436,7 +1549,7 @@ document.querySelectorAll('.fade-in').forEach((el, i) => {
     io.observe(el);
 });
 
-// ── Smooth scroll ─────────────────────────────────────────────
+// ── Smooth scroll ──────────────────────────────────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
         const id = a.getAttribute('href');
