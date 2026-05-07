@@ -277,8 +277,8 @@
 
             <!-- STC160T — 16T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="h-48 sm:h-52 overflow-hidden">
-                    <img src="fig/STC160T.jpg" alt="STC160T" class="w-full h-full object-cover">
+                <div class="aspect-video overflow-hidden bg-gray-900">
+                    <img src="fig/STC160T.jpg" alt="STC160T" class="w-full h-full object-contain">
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
@@ -294,8 +294,8 @@
 
             <!-- STC500T — 50T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="h-48 sm:h-52 overflow-hidden">
-                    <img src="fig/STC500T.jpg" alt="STC500T" class="w-full h-full object-cover">
+                <div class="aspect-video overflow-hidden bg-gray-900">
+                    <img src="fig/STC500T.jpg" alt="STC500T" class="w-full h-full object-contain">
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
@@ -311,8 +311,8 @@
 
             <!-- SRC500T — 50T (履帶) -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="h-48 sm:h-52 overflow-hidden">
-                    <img src="fig/SRC500T.jpg" alt="SRC500T" class="w-full h-full object-cover">
+                <div class="aspect-video overflow-hidden bg-gray-900">
+                    <img src="fig/SRC500T.jpg" alt="SRC500T" class="w-full h-full object-contain">
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
@@ -328,8 +328,8 @@
 
             <!-- SAC600E — 60T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="h-48 sm:h-52 overflow-hidden">
-                    <img src="fig/SAC600E.jpg" alt="SAC600E" class="w-full h-full object-cover">
+                <div class="aspect-video overflow-hidden bg-gray-900">
+                    <img src="fig/SAC600E.jpg" alt="SAC600E" class="w-full h-full object-contain">
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
@@ -345,8 +345,8 @@
 
             <!-- STC700T — 70T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="h-48 sm:h-52 overflow-hidden">
-                    <img src="fig/STC700T.jpg" alt="STC700T" class="w-full h-full object-cover">
+                <div class="aspect-video overflow-hidden bg-gray-900">
+                    <img src="fig/STC700T.jpg" alt="STC700T" class="w-full h-full object-contain">
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
@@ -422,8 +422,8 @@
 
             <!-- SAC2500E — 250T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="h-48 sm:h-52 overflow-hidden">
-                    <img src="fig/SAC2500E.jpg" alt="SAC2500E" class="w-full h-full object-cover">
+                <div class="aspect-video overflow-hidden bg-gray-900">
+                    <img src="fig/SAC2500E.jpg" alt="SAC2500E" class="w-full h-full object-contain">
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
@@ -1177,7 +1177,7 @@ function renderGallery() {
         const active = i === idx ? 'active' : '';
         if (s) {
             return `<div class="gallery-thumb flex-shrink-0 w-16 h-12 overflow-hidden ${active}" onclick="galleryGoTo(${i})">
-                        <img src="${s}" class="w-full h-full object-cover">
+                        <img src="${s}" class="w-full h-full object-contain">
                     </div>`;
         }
         return `<div class="gallery-thumb flex-shrink-0 w-16 h-12 bg-gray-800 flex items-center justify-center ${active}" onclick="galleryGoTo(${i})">
@@ -1213,10 +1213,10 @@ function openModal(modelId) {
 
     const imgArea = document.getElementById('modal-img-area');
     if (v.imgUrl) {
-        imgArea.className = 'h-56 sm:h-72 rounded-sm overflow-hidden';
-        imgArea.innerHTML = `<img src="${v.imgUrl}" alt="${modelId}" class="w-full h-full object-cover">`;
+        imgArea.className = 'aspect-video rounded-sm overflow-hidden bg-gray-900';
+        imgArea.innerHTML = `<img src="${v.imgUrl}" alt="${modelId}" class="w-full h-full object-contain">`;
     } else {
-        imgArea.className = 'img-placeholder h-56 sm:h-72 rounded-sm';
+        imgArea.className = 'img-placeholder aspect-video rounded-sm';
         imgArea.innerHTML = `<div class="img-placeholder-inner rounded-sm"><i class="fa-solid fa-camera text-gray-600 text-4xl"></i><span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span></div>`;
     }
 
