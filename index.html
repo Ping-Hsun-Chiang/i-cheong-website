@@ -277,20 +277,13 @@
 
             <!-- STC160T — 16T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="img-placeholder h-48 sm:h-52 relative">
-                    <div class="img-placeholder-inner">
-                        <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
-                        <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
-                    </div>
+                <div class="h-48 sm:h-52 overflow-hidden">
+                    <img src="fig/STC160T.jpg" alt="STC160T" class="w-full h-full object-cover">
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
                         <h3 class="text-white font-black text-2xl tracking-tight">STC160T</h3>
                         <span class="text-cy font-bold text-sm">16 噸</span>
-                    </div>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">最大起重：16T</span>
-                        <span class="text-xs text-gray-400 bg-gray-700/70 px-2.5 py-1 border-l-2 border-cy">規格待補充</span>
                     </div>
                     <button onclick="openModal('STC160T')"
                         class="w-full border border-gray-600 text-gray-300 font-bold text-xs py-2.5 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors flex items-center justify-center gap-2">
@@ -549,10 +542,6 @@
     <div id="modal-box">
         <div class="flex items-start justify-between p-5 border-b border-gray-700 bg-gray-900 sticky top-0 z-10">
             <div>
-                <div id="modal-type-badge" class="inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 border border-gray-600 mb-2 bg-gray-800">
-                    <span id="modal-type-dot" class="w-1.5 h-1.5 rounded-full bg-cy"></span>
-                    <span id="modal-type-text">汽車式起重機</span>
-                </div>
                 <h3 id="modal-title" class="text-white font-black text-3xl tracking-tight"></h3>
                 <p id="modal-capacity" class="text-cy font-bold text-sm mt-1"></p>
             </div>
@@ -561,12 +550,7 @@
             </button>
         </div>
         <div class="p-5 space-y-6">
-            <div class="img-placeholder h-56 sm:h-72 rounded-sm">
-                <div class="img-placeholder-inner rounded-sm">
-                    <i class="fa-solid fa-camera text-gray-600 text-4xl"></i>
-                    <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
-                </div>
-            </div>
+            <div id="modal-img-area"></div>
             <div>
                 <h4 class="text-white font-black text-xs uppercase tracking-widest mb-3 pb-2 border-b border-gray-700">
                     <i class="fa-solid fa-table-list text-cy mr-2"></i>技術規格
@@ -584,7 +568,7 @@
         </div>
         <div class="p-5 border-t border-gray-700 bg-gray-900/50 sticky bottom-0">
             <div class="flex gap-3">
-                <a href="#"
+                <a id="modal-pdf-btn" href="#" target="_blank" rel="noopener"
                    class="flex-1 border border-gray-600 text-gray-400 font-black text-xs py-3 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors flex items-center justify-center gap-2">
                     <i class="fa-solid fa-file-pdf"></i>官方完整規格書
                 </a>
@@ -1092,7 +1076,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -1184,35 +1167,28 @@
 
 <!-- ====【 JavaScript 】==== -->
 <script>
-// ── Vehicle data ──────────────────────────────────────────────────────────────
 const FLEET = {
     'STC160T': {
         type: '汽車式起重機', typeColor: '#FDB813',
         capacity: '16 噸',
+        imgUrl: 'fig/STC160T.jpg',
+        pdfUrl: 'PDF/STC160T.pdf',
         specs: [
             ['最大起重量',   '16 噸'],
-            ['主臂長度',     '待補充'],
-            ['副臂長度',     '待補充'],
-            ['引擎型號',     '待補充'],
-            ['引擎馬力',     '待補充'],
-            ['整車重量',     '待補充'],
-            ['軸數',         '待補充'],
-            ['最大行駛速度', '待補充'],
+            ['本桿長度',     '33.5 米'],
+            ['副桿長度',     '36 米'],
+            ['排檔方式',     '手排'],
         ],
-        desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
+        desc: '三一 STC160T 採用超緊湊的越野G類底盤，擁有業界最小的7公尺轉彎半徑，是專為狹窄場地打造的機動吊裝神器。此外，它結合了創新的前置支腿設計與高效率先導液壓系統，不僅能輕鬆實現無死角的360度全方位作業，更提升了20%的作業效率並大幅減輕操作疲勞。'
     },
     'STC500T': {
         type: '汽車式起重機', typeColor: '#FDB813',
         capacity: '50 噸',
         specs: [
             ['最大起重量',   '50 噸'],
-            ['主臂長度',     '待補充'],
-            ['副臂長度',     '待補充'],
-            ['引擎型號',     '待補充'],
-            ['引擎馬力',     '待補充'],
-            ['整車重量',     '待補充'],
-            ['軸數',         '待補充'],
-            ['最大行駛速度', '待補充'],
+            ['本桿長度',     '待補充'],
+            ['副桿長度',     '待補充'],
+            ['排檔方式',     '待補充'],
         ],
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
     },
@@ -1223,11 +1199,7 @@ const FLEET = {
             ['最大起重量',   '50 噸'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
-            ['引擎型號',     '待補充'],
-            ['引擎馬力',     '待補充'],
-            ['整機重量',     '待補充'],
-            ['接地比壓',     '待補充'],
-            ['爬坡能力',     '待補充'],
+            ['行走方式',     '履帶式'],
         ],
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
     },
@@ -1238,11 +1210,7 @@ const FLEET = {
             ['最大起重量',   '60 噸'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
-            ['引擎型號',     '待補充'],
-            ['引擎馬力',     '待補充'],
-            ['整車重量',     '待補充'],
             ['軸數',         '待補充'],
-            ['最大行駛速度', '待補充'],
         ],
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
     },
@@ -1251,13 +1219,9 @@ const FLEET = {
         capacity: '70 噸',
         specs: [
             ['最大起重量',   '70 噸'],
-            ['主臂長度',     '待補充'],
-            ['副臂長度',     '待補充'],
-            ['引擎型號',     '待補充'],
-            ['引擎馬力',     '待補充'],
-            ['整車重量',     '待補充'],
-            ['軸數',         '待補充'],
-            ['最大行駛速度', '待補充'],
+            ['本桿長度',     '待補充'],
+            ['副桿長度',     '待補充'],
+            ['排檔方式',     '待補充'],
         ],
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
     },
@@ -1266,13 +1230,9 @@ const FLEET = {
         capacity: '100 噸',
         specs: [
             ['最大起重量',   '100 噸'],
+            ['本桿長度',     '待補充'],
+            ['副桿長度',     '待補充'],
             ['主臂節數',     '5 節'],
-            ['主臂長度',     '待補充'],
-            ['副臂長度',     '待補充'],
-            ['引擎型號',     '待補充'],
-            ['引擎馬力',     '待補充'],
-            ['整車重量',     '待補充'],
-            ['軸數',         '待補充'],
         ],
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
     },
@@ -1281,13 +1241,9 @@ const FLEET = {
         capacity: '120 噸',
         specs: [
             ['最大起重量',   '120 噸'],
+            ['本桿長度',     '待補充'],
+            ['副桿長度',     '待補充'],
             ['主臂節數',     '6 節'],
-            ['主臂長度',     '待補充'],
-            ['副臂長度',     '待補充'],
-            ['引擎型號',     '待補充'],
-            ['引擎馬力',     '待補充'],
-            ['整車重量',     '待補充'],
-            ['軸數',         '待補充'],
         ],
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
     },
@@ -1296,12 +1252,8 @@ const FLEET = {
         capacity: '140 噸',
         specs: [
             ['最大起重量',   '140 噸'],
-            ['主臂節數',     '7 節'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
-            ['引擎型號',     '待補充'],
-            ['引擎馬力',     '待補充'],
-            ['整車重量',     '待補充'],
             ['軸數',         '待補充'],
         ],
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
@@ -1313,11 +1265,7 @@ const FLEET = {
             ['最大起重量',   '250 噸'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
-            ['引擎型號',     '待補充'],
-            ['引擎馬力',     '待補充'],
-            ['整車重量',     '待補充'],
             ['軸數',         '待補充'],
-            ['最大行駛速度', '待補充'],
         ],
         desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
     },
@@ -1326,12 +1274,8 @@ const FLEET = {
         capacity: '250 噸',
         specs: [
             ['最大起重量',   '250 噸'],
-            ['規格說明',     '符合臺灣道路交通法規'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
-            ['引擎型號',     '待補充'],
-            ['引擎馬力',     '待補充'],
-            ['整車重量',     '待補充'],
             ['軸數',         '待補充'],
         ],
         desc: '待補充：臺灣規格說明、與標準版差異、適用工況等。'
@@ -1343,11 +1287,7 @@ const FLEET = {
             ['最大起重量',   '600 噸'],
             ['主臂長度',     '待補充'],
             ['副臂長度',     '待補充'],
-            ['引擎型號',     '待補充'],
-            ['引擎馬力',     '待補充'],
-            ['整車重量',     '待補充'],
             ['軸數',         '待補充'],
-            ['最大行駛速度', '待補充'],
         ],
         desc: '待補充：SANY 旗艦機型介紹、超重型吊裝適用工況、主要優勢等。'
     },
@@ -1459,8 +1399,6 @@ function openModal(modelId) {
     if (!v) return;
     document.getElementById('modal-title').textContent     = modelId;
     document.getElementById('modal-capacity').textContent  = '最大起重量：' + v.capacity;
-    document.getElementById('modal-type-text').textContent = v.type;
-    document.getElementById('modal-type-dot').style.background = v.typeColor;
     document.getElementById('modal-desc').textContent      = v.desc;
 
     const tbody = document.getElementById('modal-specs-body');
@@ -1470,6 +1408,24 @@ function openModal(modelId) {
             <td class="text-gray-200 text-sm font-semibold py-2 px-3">${val}</td>
         </tr>
     `).join('');
+
+    const imgArea = document.getElementById('modal-img-area');
+    if (v.imgUrl) {
+        imgArea.className = 'h-56 sm:h-72 rounded-sm overflow-hidden';
+        imgArea.innerHTML = `<img src="${v.imgUrl}" alt="${modelId}" class="w-full h-full object-cover">`;
+    } else {
+        imgArea.className = 'img-placeholder h-56 sm:h-72 rounded-sm';
+        imgArea.innerHTML = `<div class="img-placeholder-inner rounded-sm"><i class="fa-solid fa-camera text-gray-600 text-4xl"></i><span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span></div>`;
+    }
+
+    const pdfBtn = document.getElementById('modal-pdf-btn');
+    if (v.pdfUrl) {
+        pdfBtn.href = v.pdfUrl;
+        pdfBtn.classList.remove('opacity-40', 'pointer-events-none');
+    } else {
+        pdfBtn.href = '#';
+        pdfBtn.classList.add('opacity-40', 'pointer-events-none');
+    }
 
     document.getElementById('modal-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
