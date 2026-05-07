@@ -294,11 +294,8 @@
 
             <!-- STC500T — 50T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="img-placeholder h-48 sm:h-52 relative">
-                    <div class="img-placeholder-inner">
-                        <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
-                        <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
-                    </div>
+                <div class="h-48 sm:h-52 overflow-hidden">
+                    <img src="fig/STC500T.jpg" alt="STC500T" class="w-full h-full object-cover">
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
@@ -318,11 +315,8 @@
 
             <!-- SRC500T — 50T (履帶) -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="img-placeholder h-48 sm:h-52 relative">
-                    <div class="img-placeholder-inner">
-                        <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
-                        <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
-                    </div>
+                <div class="h-48 sm:h-52 overflow-hidden">
+                    <img src="fig/SRC500T.jpg" alt="SRC500T" class="w-full h-full object-cover">
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
@@ -342,11 +336,8 @@
 
             <!-- SAC600E — 60T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="img-placeholder h-48 sm:h-52 relative">
-                    <div class="img-placeholder-inner">
-                        <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
-                        <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
-                    </div>
+                <div class="h-48 sm:h-52 overflow-hidden">
+                    <img src="fig/SAC600E.jpg" alt="SAC600E" class="w-full h-full object-cover">
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
@@ -366,11 +357,8 @@
 
             <!-- STC700T — 70T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="img-placeholder h-48 sm:h-52 relative">
-                    <div class="img-placeholder-inner">
-                        <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
-                        <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
-                    </div>
+                <div class="h-48 sm:h-52 overflow-hidden">
+                    <img src="fig/STC700T.jpg" alt="STC700T" class="w-full h-full object-cover">
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
@@ -462,11 +450,8 @@
 
             <!-- SAC2500E — 250T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="img-placeholder h-48 sm:h-52 relative">
-                    <div class="img-placeholder-inner">
-                        <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
-                        <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
-                    </div>
+                <div class="h-48 sm:h-52 overflow-hidden">
+                    <img src="fig/SAC2500E.jpg" alt="SAC2500E" class="w-full h-full object-cover">
                 </div>
                 <div class="p-5">
                     <div class="flex items-end justify-between mb-3">
@@ -996,7 +981,6 @@
                 <h3 class="text-cy font-black text-base uppercase tracking-widest mb-8 pb-4 border-b border-gray-800">合作公司</h3>
 
                 <div class="space-y-5">
-
                     <!-- 公司 1 -->
                     <div class="bg-gray-800 border border-gray-700 border-l-4 border-l-cy overflow-hidden">
                         <div class="flex items-center justify-between px-5 py-3 border-b border-gray-700 bg-gray-900/40">
@@ -1166,157 +1150,13 @@
 
 
 <!-- ====【 JavaScript 】==== -->
+<script src="fleet-data.js"></script>
+<script src="exhibition-data.js"></script>
+<script src="delivery-data.js"></script>
 <script>
-const FLEET = {
-    'STC160T': {
-        type: '汽車式起重機', typeColor: '#FDB813',
-        capacity: '16 噸',
-        imgUrl: 'fig/STC160T.jpg',
-        pdfUrl: 'PDF/STC160T.pdf',
-        specs: [
-            ['最大起重量',   '16 噸'],
-            ['本桿長度',     '33.5 米'],
-            ['副桿長度',     '36 米'],
-            ['排檔方式',     '手排'],
-        ],
-        desc: '三一 STC160T 採用超緊湊的越野G類底盤，擁有業界最小的7公尺轉彎半徑，是專為狹窄場地打造的機動吊裝神器。此外，它結合了創新的前置支腿設計與高效率先導液壓系統，不僅能輕鬆實現無死角的360度全方位作業，更提升了20%的作業效率並大幅減輕操作疲勞。'
-    },
-    'STC500T': {
-        type: '汽車式起重機', typeColor: '#FDB813',
-        capacity: '50 噸',
-        specs: [
-            ['最大起重量',   '50 噸'],
-            ['本桿長度',     '待補充'],
-            ['副桿長度',     '待補充'],
-            ['排檔方式',     '待補充'],
-        ],
-        desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
-    },
-    'SRC500T': {
-        type: '履帶式起重機', typeColor: '#FDB813',
-        capacity: '50 噸',
-        specs: [
-            ['最大起重量',   '50 噸'],
-            ['主臂長度',     '待補充'],
-            ['副臂長度',     '待補充'],
-            ['行走方式',     '履帶式'],
-        ],
-        desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
-    },
-    'SAC600E': {
-        type: '全地面起重機', typeColor: '#FDB813',
-        capacity: '60 噸',
-        specs: [
-            ['最大起重量',   '60 噸'],
-            ['主臂長度',     '待補充'],
-            ['副臂長度',     '待補充'],
-            ['軸數',         '待補充'],
-        ],
-        desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
-    },
-    'STC700T': {
-        type: '汽車式起重機', typeColor: '#FDB813',
-        capacity: '70 噸',
-        specs: [
-            ['最大起重量',   '70 噸'],
-            ['本桿長度',     '待補充'],
-            ['副桿長度',     '待補充'],
-            ['排檔方式',     '待補充'],
-        ],
-        desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
-    },
-    'STC1000T5': {
-        type: '汽車式起重機', typeColor: '#FDB813',
-        capacity: '100 噸',
-        specs: [
-            ['最大起重量',   '100 噸'],
-            ['本桿長度',     '待補充'],
-            ['副桿長度',     '待補充'],
-            ['主臂節數',     '5 節'],
-        ],
-        desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
-    },
-    'STC1200T6': {
-        type: '汽車式起重機', typeColor: '#FDB813',
-        capacity: '120 噸',
-        specs: [
-            ['最大起重量',   '120 噸'],
-            ['本桿長度',     '待補充'],
-            ['副桿長度',     '待補充'],
-            ['主臂節數',     '6 節'],
-        ],
-        desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
-    },
-    'SAC1400T7': {
-        type: '全地面起重機', typeColor: '#FDB813',
-        capacity: '140 噸',
-        specs: [
-            ['最大起重量',   '140 噸'],
-            ['主臂長度',     '待補充'],
-            ['副臂長度',     '待補充'],
-            ['軸數',         '待補充'],
-        ],
-        desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
-    },
-    'SAC2500E': {
-        type: '全地面起重機', typeColor: '#FDB813',
-        capacity: '250 噸',
-        specs: [
-            ['最大起重量',   '250 噸'],
-            ['主臂長度',     '待補充'],
-            ['副臂長度',     '待補充'],
-            ['軸數',         '待補充'],
-        ],
-        desc: '待補充：車輛特色介紹、適用工況說明、主要優勢等。'
-    },
-    'SAC2500T': {
-        type: '全地面起重機（臺灣規格）', typeColor: '#FDB813',
-        capacity: '250 噸',
-        specs: [
-            ['最大起重量',   '250 噸'],
-            ['主臂長度',     '待補充'],
-            ['副臂長度',     '待補充'],
-            ['軸數',         '待補充'],
-        ],
-        desc: '待補充：臺灣規格說明、與標準版差異、適用工況等。'
-    },
-    'SAC6000T': {
-        type: '全地面起重機', typeColor: '#FDB813',
-        capacity: '600 噸',
-        specs: [
-            ['最大起重量',   '600 噸'],
-            ['主臂長度',     '待補充'],
-            ['副臂長度',     '待補充'],
-            ['軸數',         '待補充'],
-        ],
-        desc: '待補充：SANY 旗艦機型介紹、超重型吊裝適用工況、主要優勢等。'
-    },
-};
 
-// ── Gallery data ───────────────────────────────────────────────────────────────
-// photos: [] = 顯示佔位圖；有圖後填入 URL 字串即可
-const GALLERIES = {
-    'exhibition-1': {
-        title: '2025 SANY 三一國際工程機械展',
-        date: '2025 / 00 / 00 — 2025 / 00 / 00',
-        photos: []
-    },
-    'promotion-1': {
-        title: '年中購機優惠方案',
-        date: '活動期間：待補充',
-        photos: []
-    },
-    'delivery-1': {
-        title: '交車紀錄 #1',
-        date: '交車日期：待補充',
-        photos: []
-    },
-    'delivery-2': {
-        title: '交車紀錄 #2',
-        date: '交車日期：待補充',
-        photos: []
-    },
-};
+// ── Gallery data（由 exhibition-data.js + delivery-data.js 合併）─────────────
+const GALLERIES = { ...EXHIBITION_DATA, ...DELIVERY_DATA };
 const GALLERY_PLACEHOLDER_COUNT = 4;
 
 let currentGalleryId = null;
