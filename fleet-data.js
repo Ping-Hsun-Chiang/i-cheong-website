@@ -50,6 +50,7 @@ const FLEET = {
 
     'STC1000T5': {
         capacity: '100 噸',
+        imgUrl: 'fig/STC1000T5.jpg',
         pdfUrl: 'PDF/STC1000T5.pdf',
         specs: [
             ['最大起重量',   '100 噸'],
@@ -62,6 +63,7 @@ const FLEET = {
 
     'STC1200T6': {
         capacity: '120 噸',
+        imgUrl: 'fig/STC1200T6.jpg',
         pdfUrl: 'PDF/STC1200T6.pdf',
         specs: [
             ['最大起重量',   '120 噸'],
@@ -99,6 +101,7 @@ const FLEET = {
 
     'SAC1400T7': {
         capacity: '140 噸',
+        imgUrl: 'fig/SAC1400T7.jpg',
         pdfUrl: 'PDF/SAC1400T7.pdf',
         specs: [
             ['最大起重量',   '140 噸'],
@@ -112,6 +115,7 @@ const FLEET = {
     'SAC2500E': {
         capacity: '250 噸',
         imgUrl: 'fig/SAC2500E.jpg',
+        pdfUrl: 'PDF/SAC2500E.pdf',
         specs: [
             ['最大起重量',   '250 噸'],
             ['主臂長度',     '待補充'],
@@ -132,9 +136,10 @@ const FLEET = {
         desc: '待補充：臺灣規格說明、與標準版差異、適用工況等。'
     },
 
-    'SAC6000T': {
+    'SAC6000T8-8': {
         capacity: '600 噸',
-        pdfUrl: 'PDF/SAC6000T.pdf',
+        imgUrl: 'fig/SAC6000T8-8.jpg',
+        pdfUrl: 'PDF/SAC6000T8-8.pdf',
         specs: [
             ['最大起重量',   '600 噸'],
             ['主臂長度',     '95米'],
