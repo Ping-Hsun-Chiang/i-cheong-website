@@ -430,7 +430,7 @@
 
             <!-- SAC2500T 臺灣規格 — 250T -->
             <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
-                <div class="img-placeholder h-48 sm:h-52 relative">
+                <div class="img-placeholder aspect-video relative">
                     <div class="img-placeholder-inner">
                         <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
                         <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
@@ -1161,6 +1161,12 @@ function galleryPrev() { galleryGoTo(currentPhotoIndex - 1); }
 function galleryNext() { galleryGoTo(currentPhotoIndex + 1); }
 
 // ── Fleet Modal ────────────────────────────────────────────────────────────────
+function handleModalImgError(img) {
+    const area = img.parentElement;
+    area.className = 'img-placeholder aspect-video rounded-sm';
+    area.innerHTML = '<div class="img-placeholder-inner rounded-sm"><i class="fa-solid fa-camera text-gray-600 text-4xl"></i><span class="text-gray-600 text-xs uppercase tracking-widest">圖片載入失敗</span></div>';
+}
+
 function openModal(modelId) {
     const v = FLEET[modelId];
     if (!v) return;
@@ -1179,7 +1185,7 @@ function openModal(modelId) {
     const imgArea = document.getElementById('modal-img-area');
     if (v.imgUrl) {
         imgArea.className = 'aspect-video rounded-sm overflow-hidden bg-gray-900';
-        imgArea.innerHTML = `<img src="${v.imgUrl}" alt="${modelId}" class="w-full h-full object-contain">`;
+        imgArea.innerHTML = `<img src="${v.imgUrl}" alt="${modelId}" class="w-full h-full object-contain" onerror="handleModalImgError(this)">`;
     } else {
         imgArea.className = 'img-placeholder aspect-video rounded-sm';
         imgArea.innerHTML = `<div class="img-placeholder-inner rounded-sm"><i class="fa-solid fa-camera text-gray-600 text-4xl"></i><span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span></div>`;
