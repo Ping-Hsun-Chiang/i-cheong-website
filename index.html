@@ -95,8 +95,9 @@
             <div class="hidden lg:flex items-center gap-8">
                 <a href="#home"    class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">首頁</a>
                 <a href="#brand"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">品牌介紹</a>
-                <a href="#fleet"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">車型總覽</a>
-                <a href="#events"  class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">活動特輯</a>
+                <a href="#fleet"     class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">車型總覽</a>
+                <a href="#used-cars" class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">二手車</a>
+                <a href="#events"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">活動特輯</a>
                 <a href="#about"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">關於我們</a>
                 <a href="#contact" class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">聯絡業務</a>
             </div>
@@ -117,8 +118,9 @@
             </div>
             <a href="#home"    class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">首頁</a>
             <a href="#brand"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">品牌介紹</a>
-            <a href="#fleet"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">車型總覽</a>
-            <a href="#events"  class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">活動特輯</a>
+            <a href="#fleet"     class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">車型總覽</a>
+            <a href="#used-cars" class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">二手車</a>
+            <a href="#events"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">活動特輯</a>
             <a href="#about"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">關於我們</a>
             <a href="#contact" class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">聯絡業務</a>
             <button onclick="openSalesModal(); document.getElementById('mobile-menu').classList.remove('open'); document.getElementById('hbIcon').className='fa-solid fa-bars text-xl';"
@@ -466,6 +468,31 @@
             </div>
 
         </div>
+    </div>
+</section>
+
+
+<!-- ====【 二手車專區 】==== -->
+<section id="used-cars" class="py-20 md:py-28" style="background:#0d1117">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 fade-in">
+            <div class="inline-flex items-center gap-3 mb-4">
+                <div class="h-px w-10 bg-cy"></div>
+                <span class="text-cy font-bold text-xs tracking-[.25em] uppercase">Used Vehicles</span>
+                <div class="h-px w-10 bg-cy"></div>
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-4">二手車專區</h2>
+            <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
+                精選二手起重機，車況詳細說明。如需報價或參觀車輛請直接聯絡業務專員。
+            </p>
+            <div class="flex items-center justify-center gap-4 mt-8">
+                <div class="h-px flex-1 max-w-xs bg-gray-800"></div>
+                <div class="w-3 h-3 bg-cy rotate-45"></div>
+                <div class="h-px flex-1 max-w-xs bg-gray-800"></div>
+            </div>
+        </div>
+
+        <div id="used-cars-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8"></div>
     </div>
 </section>
 
@@ -1035,8 +1062,9 @@
                 <ul class="space-y-3">
                     <li><a href="#home"    class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>首頁</a></li>
                     <li><a href="#brand"   class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>SANY 品牌介紹</a></li>
-                    <li><a href="#fleet"   class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>現售車型總覽</a></li>
-                    <li><a href="#events"  class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>活動特輯</a></li>
+                    <li><a href="#fleet"     class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>現售車型總覽</a></li>
+                    <li><a href="#used-cars" class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>二手車專區</a></li>
+                    <li><a href="#events"   class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>活動特輯</a></li>
                     <li><a href="#about"   class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>關於我們</a></li>
                     <li><a href="#contact" class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>聯絡業務</a></li>
                 </ul>
@@ -1078,6 +1106,7 @@
 
 <!-- ====【 JavaScript 】==== -->
 <script src="fleet-data.js"></script>
+<script src="used-car-data.js"></script>
 <script src="exhibition-data.js"></script>
 <script src="delivery-data.js"></script>
 <script>
@@ -1217,6 +1246,86 @@ function handleOverlayClick(e) {
     if (e.target === document.getElementById('modal-overlay')) closeModal();
 }
 
+// ── Used Car Section ────────────────────────────────────────────────────────────
+function renderUsedCars() {
+    const grid    = document.getElementById('used-cars-grid');
+    const entries = Object.entries(USED_CAR);
+
+    if (entries.length === 0) {
+        grid.innerHTML = `
+            <div class="sm:col-span-2 xl:col-span-3 flex flex-col items-center justify-center py-16 text-center">
+                <i class="fa-solid fa-car-side text-gray-700 text-5xl mb-4"></i>
+                <p class="text-gray-500 text-sm uppercase tracking-widest">車輛資料整理中，敬請期待</p>
+            </div>`;
+        return;
+    }
+
+    grid.innerHTML = entries.map(([id, v]) => {
+        const imgHtml = v.imgUrl
+            ? `<div class="aspect-video overflow-hidden bg-gray-900">
+                   <img src="${v.imgUrl}" alt="${id}" class="w-full h-full object-contain">
+               </div>`
+            : `<div class="img-placeholder aspect-video relative">
+                   <div class="img-placeholder-inner">
+                       <i class="fa-solid fa-camera text-gray-600 text-3xl"></i>
+                       <span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span>
+                   </div>
+               </div>`;
+        return `
+            <div class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in">
+                ${imgHtml}
+                <div class="p-5">
+                    <div class="flex items-end justify-between mb-3">
+                        <h3 class="text-white font-black text-2xl tracking-tight">${id}</h3>
+                        <span class="text-cy font-bold text-sm">${v.capacity}</span>
+                    </div>
+                    <button onclick="openUsedCarModal('${id}')"
+                        class="w-full border border-gray-600 text-gray-300 font-bold text-xs py-2.5 uppercase tracking-widest hover:border-cy hover:text-cy transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-file-lines"></i>車型說明
+                    </button>
+                </div>
+            </div>`;
+    }).join('');
+}
+
+function openUsedCarModal(modelId) {
+    const v = USED_CAR[modelId];
+    if (!v) return;
+    document.getElementById('modal-title').textContent    = modelId;
+    document.getElementById('modal-capacity').textContent = '最大起重量：' + v.capacity;
+    document.getElementById('modal-desc').textContent     = v.desc;
+
+    const tbody = document.getElementById('modal-specs-body');
+    tbody.innerHTML = v.specs.map(([k, val], i) => `
+        <tr class="${i % 2 === 0 ? 'bg-gray-900/40' : ''}">
+            <td class="text-gray-500 text-xs py-2 px-3 w-2/5">${k}</td>
+            <td class="text-gray-200 text-sm font-semibold py-2 px-3">${val}</td>
+        </tr>
+    `).join('');
+
+    const imgArea = document.getElementById('modal-img-area');
+    if (v.imgUrl) {
+        imgArea.className = 'aspect-video rounded-sm overflow-hidden bg-gray-900';
+        imgArea.innerHTML = `<img src="${v.imgUrl}" alt="${modelId}" class="w-full h-full object-contain" onerror="handleModalImgError(this)">`;
+    } else {
+        imgArea.className = 'img-placeholder aspect-video rounded-sm';
+        imgArea.innerHTML = `<div class="img-placeholder-inner rounded-sm"><i class="fa-solid fa-camera text-gray-600 text-4xl"></i><span class="text-gray-600 text-xs uppercase tracking-widest">圖片待上傳</span></div>`;
+    }
+
+    const pdfBtn = document.getElementById('modal-pdf-btn');
+    if (v.pdfUrl) {
+        pdfBtn.href = v.pdfUrl;
+        pdfBtn.classList.remove('opacity-40', 'pointer-events-none');
+    } else {
+        pdfBtn.href = '#';
+        pdfBtn.classList.add('opacity-40', 'pointer-events-none');
+    }
+
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('modal-box').scrollTop = 0;
+}
+
 // ── Sales Modal ────────────────────────────────────────────────────────────────
 function openSalesModal() {
     document.getElementById('sales-overlay').classList.add('open');
@@ -1267,6 +1376,8 @@ const nav = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
     nav.classList.toggle('shadow-xl', window.scrollY > 40);
 }, { passive: true });
+
+renderUsedCars();
 
 // ── Scroll fade-in ─────────────────────────────────────────────────────────────
 const io = new IntersectionObserver((entries) => {
