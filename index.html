@@ -73,6 +73,37 @@
         .gallery-thumb { cursor: pointer; border: 2px solid transparent; transition: border-color .2s, opacity .2s; opacity: .45; }
         .gallery-thumb.active { border-color: #FDB813; opacity: 1; }
         .gallery-thumb:hover { opacity: .8; }
+
+        /* Photo Wall */
+        #delivery-wall { columns: 2; column-gap: 10px; }
+        @media (min-width: 640px)  { #delivery-wall { columns: 3; } }
+        @media (min-width: 1024px) { #delivery-wall { columns: 4; } }
+        .photo-wall-item {
+            break-inside: avoid; margin-bottom: 10px;
+            cursor: pointer; position: relative;
+            transition: transform .25s ease, box-shadow .25s ease, z-index 0s;
+        }
+        .photo-wall-item:hover {
+            transform: rotate(0deg) scale(1.05) !important;
+            box-shadow: 0 24px 48px rgba(0,0,0,.7);
+            z-index: 10;
+        }
+        .photo-wall-item img { display: block; width: 100%; box-shadow: 0 4px 16px rgba(0,0,0,.5); }
+
+        /* Photo Lightbox */
+        #photo-lightbox {
+            display: none; position: fixed; inset: 0; z-index: 500;
+            background: rgba(0,0,0,.97);
+            align-items: center; justify-content: center;
+        }
+        #photo-lightbox.open { display: flex; }
+        .lb-btn {
+            position: absolute; background: rgba(255,255,255,.08); border: none;
+            color: #fff; font-size: 1.75rem; width: 48px; height: 48px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: background .2s;
+        }
+        .lb-btn:hover { background: rgba(253,184,19,.25); }
     </style>
 </head>
 <body class="bg-gray-900 text-white">
@@ -724,7 +755,7 @@
             </div>
         </div>
 
-        <!-- 子區塊 (ii)：交車照片 -->
+        <!-- 子區塊 (ii)：交車照片牆 -->
         <div>
             <div class="flex items-center gap-4 mb-8 fade-in">
                 <div class="flex-shrink-0 w-10 h-10 bg-green-700 flex items-center justify-center">
@@ -737,71 +768,27 @@
                 <div class="flex-1 h-px bg-gray-800"></div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-
-                <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
-                    <div class="img-placeholder h-44 relative cursor-pointer" onclick="openGallery('delivery-1')">
-                        <div class="img-placeholder-inner">
-                            <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
-                            <span class="text-gray-600 text-xs uppercase tracking-widest">點擊瀏覽照片</span>
-                        </div>
-                        <span class="absolute top-3 left-3 z-10 bg-green-700 text-white font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
-                            <i class="fa-solid fa-truck-ramp-box mr-1"></i>交車紀錄
-                        </span>
-                        <span class="absolute top-3 right-3 z-10 bg-black/60 text-gray-300 font-bold text-[10px] px-2 py-1 flex items-center gap-1">
-                            <i class="fa-solid fa-images text-cy text-xs"></i> 照片集
-                        </span>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
-                            <i class="fa-solid fa-calendar-days text-cy"></i>
-                            <span>交車日期：待補充</span>
-                        </div>
-                        <h3 class="text-white font-black text-base leading-snug mb-2">
-                            交車大吉 <br>
-                            <span class="text-cy">客戶交車紀念照</span>
-                        </h3>
-                        <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">待補充交車說明</p>
-                        <button onclick="openGallery('delivery-1')" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
-                            <i class="fa-solid fa-images"></i>瀏覽交車照片
-                        </button>
-                    </div>
-                </article>
-
-                <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
-                    <div class="img-placeholder h-44 relative cursor-pointer" onclick="openGallery('delivery-2')">
-                        <div class="img-placeholder-inner">
-                            <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
-                            <span class="text-gray-600 text-xs uppercase tracking-widest">點擊瀏覽照片</span>
-                        </div>
-                        <span class="absolute top-3 left-3 z-10 bg-green-700 text-white font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
-                            <i class="fa-solid fa-truck-ramp-box mr-1"></i>交車紀錄
-                        </span>
-                        <span class="absolute top-3 right-3 z-10 bg-black/60 text-gray-300 font-bold text-[10px] px-2 py-1 flex items-center gap-1">
-                            <i class="fa-solid fa-images text-cy text-xs"></i> 照片集
-                        </span>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
-                            <i class="fa-solid fa-calendar-days text-cy"></i>
-                            <span>交車日期：待補充</span>
-                        </div>
-                        <h3 class="text-white font-black text-base leading-snug mb-2">
-                            交車大吉 <br>
-                            <span class="text-cy">客戶交車紀念照</span>
-                        </h3>
-                        <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">待補充交車說明</p>
-                        <button onclick="openGallery('delivery-2')" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
-                            <i class="fa-solid fa-images"></i>瀏覽交車照片
-                        </button>
-                    </div>
-                </article>
-
-            </div>
+            <div id="delivery-wall"></div>
         </div>
 
     </div>
 </section>
+
+
+<!-- ====【 交車照片 Lightbox 】==== -->
+<div id="photo-lightbox" onclick="handleLightboxBgClick(event)">
+    <button class="lb-btn" style="top:1rem;right:1rem" onclick="closePhotoLightbox()">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <button id="lb-prev" class="lb-btn" style="left:1rem;top:50%;transform:translateY(-50%)" onclick="lightboxPrev()">
+        <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button id="lb-next" class="lb-btn" style="right:1rem;top:50%;transform:translateY(-50%)" onclick="lightboxNext()">
+        <i class="fa-solid fa-chevron-right"></i>
+    </button>
+    <img id="lightbox-img" src="" alt="" style="max-height:90vh;max-width:90vw;object-fit:contain;display:block">
+    <div id="lightbox-counter" style="position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.75rem;letter-spacing:.15em"></div>
+</div>
 
 
 <!-- ====【 關於我們 About 】==== -->
@@ -1111,8 +1098,8 @@
 <script src="delivery-data.js"></script>
 <script>
 
-// ── Gallery data（由 exhibition-data.js + delivery-data.js 合併）─────────────
-const GALLERIES = { ...EXHIBITION_DATA, ...DELIVERY_DATA };
+// ── Gallery data（展覽相簿）─────────────────────────────────────────────────────
+const GALLERIES = { ...EXHIBITION_DATA };
 const GALLERY_PLACEHOLDER_COUNT = 4;
 
 let currentGalleryId = null;
@@ -1188,6 +1175,64 @@ function galleryGoTo(i) {
 }
 function galleryPrev() { galleryGoTo(currentPhotoIndex - 1); }
 function galleryNext() { galleryGoTo(currentPhotoIndex + 1); }
+
+// ── Delivery Photo Wall ────────────────────────────────────────────────────────
+let _deliveryShuffled = [];
+let _lightboxIdx = 0;
+
+function renderDeliveryWall() {
+    const wall = document.getElementById('delivery-wall');
+    if (!DELIVERY_PHOTOS || DELIVERY_PHOTOS.length === 0) {
+        wall.innerHTML = `
+            <div style="width:100%" class="flex flex-col items-center justify-center py-12 text-center">
+                <i class="fa-solid fa-images text-gray-700 text-5xl mb-4"></i>
+                <p class="text-gray-500 text-sm uppercase tracking-widest">照片上傳中，敬請期待</p>
+            </div>`;
+        return;
+    }
+    _deliveryShuffled = [...DELIVERY_PHOTOS].sort(() => Math.random() - 0.5);
+    wall.innerHTML = _deliveryShuffled.map((src, i) => {
+        const rot = (Math.random() * 4 - 2).toFixed(2);
+        return `<div class="photo-wall-item" style="transform:rotate(${rot}deg)" onclick="openPhotoLightbox(${i})">
+            <img src="${src}" loading="lazy" onerror="this.parentElement.remove()">
+        </div>`;
+    }).join('');
+}
+
+function openPhotoLightbox(idx) {
+    _lightboxIdx = idx;
+    _updateLightbox();
+    document.getElementById('photo-lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closePhotoLightbox() {
+    document.getElementById('photo-lightbox').classList.remove('open');
+    if (!document.getElementById('modal-overlay').classList.contains('open') &&
+        !document.getElementById('sales-overlay').classList.contains('open') &&
+        !document.getElementById('gallery-overlay').classList.contains('open')) {
+        document.body.style.overflow = '';
+    }
+}
+
+function _updateLightbox() {
+    document.getElementById('lightbox-img').src = _deliveryShuffled[_lightboxIdx];
+    document.getElementById('lightbox-counter').textContent = `${_lightboxIdx + 1} / ${_deliveryShuffled.length}`;
+    document.getElementById('lb-prev').style.opacity = _lightboxIdx > 0 ? '1' : '0.25';
+    document.getElementById('lb-next').style.opacity = _lightboxIdx < _deliveryShuffled.length - 1 ? '1' : '0.25';
+}
+
+function lightboxPrev() {
+    if (_lightboxIdx > 0) { _lightboxIdx--; _updateLightbox(); }
+}
+
+function lightboxNext() {
+    if (_lightboxIdx < _deliveryShuffled.length - 1) { _lightboxIdx++; _updateLightbox(); }
+}
+
+function handleLightboxBgClick(e) {
+    if (e.target === document.getElementById('photo-lightbox')) closePhotoLightbox();
+}
 
 // ── Fleet Modal ────────────────────────────────────────────────────────────────
 function handleModalImgError(img) {
@@ -1345,7 +1390,11 @@ function handleSalesOverlayClick(e) {
 }
 
 document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeModal(); closeSalesModal(); closeGallery(); }
+    if (e.key === 'Escape') { closeModal(); closeSalesModal(); closeGallery(); closePhotoLightbox(); }
+    if (document.getElementById('photo-lightbox').classList.contains('open')) {
+        if (e.key === 'ArrowLeft')  lightboxPrev();
+        if (e.key === 'ArrowRight') lightboxNext();
+    }
 });
 
 // Gallery keyboard navigation
@@ -1378,6 +1427,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 renderUsedCars();
+renderDeliveryWall();
 
 // ── Scroll fade-in ─────────────────────────────────────────────────────────────
 const io = new IntersectionObserver((entries) => {
