@@ -64,20 +64,10 @@
         }
         #sales-overlay.open { display: flex; }
 
-        /* Gallery Modal */
-        #gallery-overlay {
-            display: none; position: fixed; inset: 0; z-index: 400;
-            background: rgba(0,0,0,.96); flex-direction: column;
-        }
-        #gallery-overlay.open { display: flex; }
-        .gallery-thumb { cursor: pointer; border: 2px solid transparent; transition: border-color .2s, opacity .2s; opacity: .45; }
-        .gallery-thumb.active { border-color: #FDB813; opacity: 1; }
-        .gallery-thumb:hover { opacity: .8; }
-
         /* Photo Wall */
-        #delivery-wall { columns: 2; column-gap: 10px; }
-        @media (min-width: 640px)  { #delivery-wall { columns: 3; } }
-        @media (min-width: 1024px) { #delivery-wall { columns: 4; } }
+        #event-photo-wall { columns: 2; column-gap: 10px; }
+        @media (min-width: 640px)  { #event-photo-wall { columns: 3; } }
+        @media (min-width: 1024px) { #event-photo-wall { columns: 4; } }
         .photo-wall-item {
             break-inside: avoid; margin-bottom: 10px;
             cursor: pointer; position: relative;
@@ -118,9 +108,6 @@
                     <div class="font-black text-base sm:text-lg tracking-wide leading-tight">
                         <span class="text-sr">SANY</span><span class="text-white"> 三一重工 臺灣經銷商</span>
                     </div>
-                    <div class="text-gray-500 text-[12px] tracking-wider mt-0.5">
-                        1起重公司 &nbsp;·&nbsp; 2起重公司 &nbsp;·&nbsp; 3起重公司
-                    </div>
                 </div>
             </a>
             <div class="hidden lg:flex items-center gap-8">
@@ -128,7 +115,7 @@
                 <a href="#brand"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">品牌介紹</a>
                 <a href="#fleet"     class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">車型總覽</a>
                 <a href="#used-cars" class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">二手車</a>
-                <a href="#events"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">活動特輯</a>
+                <a href="#events"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">活動花絮</a>
                 <a href="#about"   class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">關於我們</a>
                 <a href="#contact" class="nav-link text-gray-300 hover:text-white text-xs font-bold tracking-widest uppercase transition-colors">聯絡業務</a>
             </div>
@@ -145,13 +132,13 @@
     <div id="mobile-menu" class="lg:hidden bg-gray-800 border-t border-gray-700">
         <div class="px-4 py-3 flex flex-col gap-1">
             <div class="px-4 py-2 text-gray-600 text-[12px] tracking-widest border-b border-gray-700 mb-1">
-                臺灣授權 · 1起重公司 · 2起重公司 · 3起重公司
+                臺灣授權經銷商
             </div>
             <a href="#home"    class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">首頁</a>
             <a href="#brand"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">品牌介紹</a>
             <a href="#fleet"     class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">車型總覽</a>
             <a href="#used-cars" class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">二手車</a>
-            <a href="#events"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">活動特輯</a>
+            <a href="#events"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">活動花絮</a>
             <a href="#about"   class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">關於我們</a>
             <a href="#contact" class="mob-link px-4 py-3 text-gray-300 hover:text-cy hover:bg-gray-700 text-sm font-bold tracking-widest uppercase transition-colors">聯絡業務</a>
             <button onclick="openSalesModal(); document.getElementById('mobile-menu').classList.remove('open'); document.getElementById('hbIcon').className='fa-solid fa-bars text-xl';"
@@ -627,50 +614,19 @@
 </div>
 
 
-<!-- ====【 相簿燈箱 Gallery Modal 】==== -->
-<div id="gallery-overlay">
-    <div class="w-full flex items-center justify-between px-5 py-4 flex-shrink-0" style="background:rgba(0,0,0,.7)">
-        <div>
-            <div id="gallery-title" class="text-white font-black text-base"></div>
-            <div id="gallery-date" class="text-gray-500 text-xs mt-0.5"></div>
-        </div>
-        <div class="flex items-center gap-4">
-            <div id="gallery-counter" class="text-gray-400 text-sm font-bold tabular-nums"></div>
-            <button onclick="closeGallery()" class="w-9 h-9 border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-cy transition-colors">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-        </div>
-    </div>
-    <div class="flex-1 flex items-center justify-center w-full relative min-h-0 px-14 md:px-20">
-        <button onclick="galleryPrev()" id="gallery-prev"
-                class="absolute left-3 md:left-5 z-10 w-11 h-11 border border-gray-700 bg-black/60 flex items-center justify-center text-gray-400 hover:border-cy hover:text-cy transition-colors">
-            <i class="fa-solid fa-chevron-left"></i>
-        </button>
-        <div id="gallery-photo" class="w-full h-full flex items-center justify-center"></div>
-        <button onclick="galleryNext()" id="gallery-next"
-                class="absolute right-3 md:right-5 z-10 w-11 h-11 border border-gray-700 bg-black/60 flex items-center justify-center text-gray-400 hover:border-cy hover:text-cy transition-colors">
-            <i class="fa-solid fa-chevron-right"></i>
-        </button>
-    </div>
-    <div class="w-full flex-shrink-0 py-4 px-5" style="background:rgba(0,0,0,.7)">
-        <div id="gallery-thumbs" class="flex gap-2 justify-center overflow-x-auto py-1"></div>
-    </div>
-</div>
-
-
-<!-- ====【 活動特輯 Events 】==== -->
+<!-- ====【 活動花絮 Event Photos 】==== -->
 <section id="events" class="py-20 md:py-28 bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="text-center mb-16 fade-in">
             <div class="inline-flex items-center gap-3 mb-4">
                 <div class="h-px w-10 bg-cy"></div>
-                <span class="text-cy font-bold text-xs tracking-[.25em] uppercase">Events &amp; Gallery</span>
+                <span class="text-cy font-bold text-xs tracking-[.25em] uppercase">Event Photos</span>
                 <div class="h-px w-10 bg-cy"></div>
             </div>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-4">活動特輯</h2>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-4">活動花絮</h2>
             <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto">
-                最新展覽資訊與交車照片，掌握第一手 SANY 動態。
+                展覽現場、交車實況第一手照片，每日自動同步更新。
             </p>
             <div class="flex items-center justify-center gap-4 mt-8">
                 <div class="h-px flex-1 max-w-xs bg-gray-800"></div>
@@ -679,97 +635,7 @@
             </div>
         </div>
 
-        <!-- 子區塊 (i)：展覽資訊 -->
-        <div class="mb-16">
-            <div class="flex items-center gap-4 mb-8 fade-in">
-                <div class="flex-shrink-0 w-10 h-10 bg-blue-600 flex items-center justify-center">
-                    <i class="fa-solid fa-flag text-white text-sm"></i>
-                </div>
-                <div>
-                    <h3 class="text-white font-black text-lg uppercase tracking-widest leading-none">展覽資訊</h3>
-                    <p class="text-gray-600 text-[11px] tracking-widest uppercase mt-0.5">Exhibition &amp; Events</p>
-                </div>
-                <div class="flex-1 h-px bg-gray-800"></div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-
-                <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
-                    <div class="img-placeholder h-44 relative cursor-pointer" onclick="openGallery('exhibition-1')">
-                        <div class="img-placeholder-inner">
-                            <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
-                            <span class="text-gray-600 text-xs uppercase tracking-widest">點擊瀏覽照片</span>
-                        </div>
-                        <span class="absolute top-3 left-3 z-10 bg-blue-600 text-white font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
-                            <i class="fa-solid fa-flag mr-1"></i>展覽資訊
-                        </span>
-                        <span class="absolute top-3 right-3 z-10 bg-black/60 text-gray-300 font-bold text-[10px] px-2 py-1 flex items-center gap-1">
-                            <i class="fa-solid fa-images text-cy text-xs"></i> 照片集
-                        </span>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
-                            <i class="fa-solid fa-calendar-days text-cy"></i>
-                            <span>2025 / 00 / 00 &nbsp;—&nbsp; 2025 / 00 / 00</span>
-                        </div>
-                        <h3 class="text-white font-black text-base leading-snug mb-2">
-                            2025 國際工程機械展 <br>
-                            <span class="text-cy">SANY 三一參展資訊</span>
-                        </h3>
-                        <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">待補充活動內容</p>
-                        <button onclick="openGallery('exhibition-1')" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
-                            <i class="fa-solid fa-images"></i>瀏覽展覽照片
-                        </button>
-                    </div>
-                </article>
-
-                <article class="card-hover bg-gray-800 border border-gray-700 overflow-hidden fade-in flex flex-col">
-                    <div class="img-placeholder h-44 relative cursor-pointer" onclick="openGallery('promotion-1')">
-                        <div class="img-placeholder-inner">
-                            <i class="fa-solid fa-camera text-gray-600 text-2xl"></i>
-                            <span class="text-gray-600 text-xs uppercase tracking-widest">點擊瀏覽照片</span>
-                        </div>
-                        <span class="absolute top-3 left-3 z-10 bg-cy text-gray-900 font-black text-[10px] px-2.5 py-1 uppercase tracking-wide">
-                            <i class="fa-solid fa-tag mr-1"></i>限時優惠
-                        </span>
-                        <span class="absolute top-3 right-3 z-10 bg-black/60 text-gray-300 font-bold text-[10px] px-2 py-1 flex items-center gap-1">
-                            <i class="fa-solid fa-images text-cy text-xs"></i> 照片集
-                        </span>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <div class="flex items-center gap-2 text-gray-500 text-xs mb-3">
-                            <i class="fa-solid fa-calendar-days text-cy"></i>
-                            <span>活動期間：待補充</span>
-                        </div>
-                        <h3 class="text-white font-black text-base leading-snug mb-2">
-                            年中購機優惠方案 <br>
-                            <span class="text-cy">指定車型專屬優惠</span>
-                        </h3>
-                        <p class="text-gray-400 text-sm leading-relaxed flex-1 mb-5">待補充活動內容</p>
-                        <button onclick="openGallery('promotion-1')" class="inline-flex items-center gap-2 text-cy font-bold text-xs uppercase tracking-widest hover:text-yellow-400 transition-colors">
-                            <i class="fa-solid fa-images"></i>瀏覽活動照片
-                        </button>
-                    </div>
-                </article>
-
-            </div>
-        </div>
-
-        <!-- 子區塊 (ii)：交車照片牆 -->
-        <div>
-            <div class="flex items-center gap-4 mb-8 fade-in">
-                <div class="flex-shrink-0 w-10 h-10 bg-green-700 flex items-center justify-center">
-                    <i class="fa-solid fa-camera text-white text-sm"></i>
-                </div>
-                <div>
-                    <h3 class="text-white font-black text-lg uppercase tracking-widest leading-none">交車照片</h3>
-                    <p class="text-gray-600 text-[11px] tracking-widest uppercase mt-0.5">Delivery Gallery</p>
-                </div>
-                <div class="flex-1 h-px bg-gray-800"></div>
-            </div>
-
-            <div id="delivery-wall"></div>
-        </div>
+        <div id="event-photo-wall"></div>
 
     </div>
 </section>
@@ -861,9 +727,8 @@
             <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto">歡迎來電或加 LINE，業務專員將盡快回覆您的選購需求。</p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+        <div class="max-w-2xl mx-auto">
 
-            <!-- 左欄：業務聯絡資訊 -->
             <div class="fade-in">
                 <h3 class="text-cy font-black text-base uppercase tracking-widest mb-8 pb-4 border-b border-gray-800">業務聯絡資訊</h3>
 
@@ -941,77 +806,6 @@
                 <div class="mt-8 h-2 yellow-stripe opacity-40 rounded-sm"></div>
             </div>
 
-            <!-- 右欄：合作公司資料 -->
-            <div class="fade-in">
-                <h3 class="text-cy font-black text-base uppercase tracking-widest mb-8 pb-4 border-b border-gray-800">合作公司</h3>
-
-                <div class="space-y-5">
-                    <!-- 公司 1 -->
-                    <div class="bg-gray-800 border border-gray-700 border-l-4 border-l-cy overflow-hidden">
-                        <div class="flex items-center justify-between px-5 py-3 border-b border-gray-700 bg-gray-900/40">
-                            <div class="flex items-center gap-2.5">
-                                <i class="fa-solid fa-building text-cy text-sm"></i>
-                                <span class="text-white font-black text-base tracking-wide">XX 起重股份有限公司</span>
-                            </div>
-                        </div>
-                        <div class="p-5 space-y-2.5">
-                            <div class="flex items-center gap-3 min-w-0">
-                                <i class="fa-solid fa-user text-cy text-xs w-4 text-center flex-shrink-0"></i>
-                                <span class="text-gray-500 text-xs w-16 flex-shrink-0">負責人</span>
-                                <span class="text-gray-200 text-sm font-bold truncate">王〇〇</span>
-                            </div>
-                            <div class="flex items-center gap-3 min-w-0">
-                                <i class="fa-solid fa-phone text-cy text-xs w-4 text-center flex-shrink-0"></i>
-                                <span class="text-gray-500 text-xs w-16 flex-shrink-0">聯絡電話</span>
-                                <a href="tel:04-00000000" class="text-gray-200 text-sm font-bold truncate hover:text-cy transition-colors">04-0000-0000</a>
-                            </div>
-                            <div class="flex items-center gap-3 min-w-0">
-                                <i class="fa-solid fa-location-dot text-cy text-xs w-4 text-center flex-shrink-0"></i>
-                                <span class="text-gray-500 text-xs w-16 flex-shrink-0">公司地址</span>
-                                <span class="text-gray-200 text-sm truncate">（待補充）</span>
-                            </div>
-                            <div class="flex items-center gap-3 min-w-0">
-                                <i class="fa-solid fa-envelope text-cy text-xs w-4 text-center flex-shrink-0"></i>
-                                <span class="text-gray-500 text-xs w-16 flex-shrink-0">Email</span>
-                                <span class="text-gray-200 text-sm truncate">（待補充）</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 公司 2 -->
-                    <div class="bg-gray-800 border border-gray-700 border-l-4 border-l-cy overflow-hidden">
-                        <div class="flex items-center justify-between px-5 py-3 border-b border-gray-700 bg-gray-900/40">
-                            <div class="flex items-center gap-2.5">
-                                <i class="fa-solid fa-building text-cy text-sm"></i>
-                                <span class="text-white font-black text-base tracking-wide">XX 工程有限公司</span>
-                            </div>
-                        </div>
-                        <div class="p-5 space-y-2.5">
-                            <div class="flex items-center gap-3 min-w-0">
-                                <i class="fa-solid fa-user text-cy text-xs w-4 text-center flex-shrink-0"></i>
-                                <span class="text-gray-500 text-xs w-16 flex-shrink-0">負責人</span>
-                                <span class="text-gray-200 text-sm font-bold truncate">王〇〇</span>
-                            </div>
-                            <div class="flex items-center gap-3 min-w-0">
-                                <i class="fa-solid fa-phone text-cy text-xs w-4 text-center flex-shrink-0"></i>
-                                <span class="text-gray-500 text-xs w-16 flex-shrink-0">聯絡電話</span>
-                                <a href="tel:04-00000000" class="text-gray-200 text-sm font-bold truncate hover:text-cy transition-colors">04-0000-0000</a>
-                            </div>
-                            <div class="flex items-center gap-3 min-w-0">
-                                <i class="fa-solid fa-location-dot text-cy text-xs w-4 text-center flex-shrink-0"></i>
-                                <span class="text-gray-500 text-xs w-16 flex-shrink-0">公司地址</span>
-                                <span class="text-gray-200 text-sm truncate">（待補充）</span>
-                            </div>
-                            <div class="flex items-center gap-3 min-w-0">
-                                <i class="fa-solid fa-envelope text-cy text-xs w-4 text-center flex-shrink-0"></i>
-                                <span class="text-gray-500 text-xs w-16 flex-shrink-0">Email</span>
-                                <span class="text-gray-200 text-sm truncate">（待補充）</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>
@@ -1026,7 +820,7 @@
                     <img src="fig/SANY_LOGO.jpg" alt="SANY Logo" class="h-8 w-auto object-contain">
                     <div class="leading-none">
                         <div class="font-black text-base tracking-wide"><span class="text-sr">SANY</span> 三一集團</div>
-                        <div class="text-gray-600 text-[10px] tracking-wider mt-0.5">臺灣授權 · 1起重公司 · 2起重公司 · 3起重公司</div>
+                        <div class="text-gray-600 text-[10px] tracking-wider mt-0.5">臺灣授權經銷商</div>
                     </div>
                 </a>
                 <p class="text-gray-500 text-sm leading-relaxed mb-6">
@@ -1051,7 +845,7 @@
                     <li><a href="#brand"   class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>SANY 品牌介紹</a></li>
                     <li><a href="#fleet"     class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>現售車型總覽</a></li>
                     <li><a href="#used-cars" class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>二手車專區</a></li>
-                    <li><a href="#events"   class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>活動特輯</a></li>
+                    <li><a href="#events"   class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>活動花絮</a></li>
                     <li><a href="#about"   class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>關於我們</a></li>
                     <li><a href="#contact" class="text-gray-500 hover:text-cy text-sm transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[9px] text-cy"></i>聯絡業務</a></li>
                 </ul>
@@ -1094,95 +888,16 @@
 <!-- ====【 JavaScript 】==== -->
 <script src="fleet-data.js"></script>
 <script src="used-car-data.js"></script>
-<script src="exhibition-data.js"></script>
-<script src="delivery-data.js"></script>
+<script src="event-photos-data.js"></script>
 <script>
 
-// ── Gallery data（展覽相簿）─────────────────────────────────────────────────────
-const GALLERIES = { ...EXHIBITION_DATA };
-const GALLERY_PLACEHOLDER_COUNT = 4;
-
-let currentGalleryId = null;
-let currentPhotoIndex = 0;
-
-function getSlides(g) {
-    return (g.photos && g.photos.length > 0)
-        ? g.photos
-        : Array(GALLERY_PLACEHOLDER_COUNT).fill(null);
-}
-
-function openGallery(id) {
-    const g = GALLERIES[id];
-    if (!g) return;
-    currentGalleryId = id;
-    currentPhotoIndex = 0;
-    document.getElementById('gallery-title').textContent = g.title;
-    document.getElementById('gallery-date').textContent  = g.date;
-    renderGallery();
-    document.getElementById('gallery-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeGallery() {
-    document.getElementById('gallery-overlay').classList.remove('open');
-    if (!document.getElementById('modal-overlay').classList.contains('open') &&
-        !document.getElementById('sales-overlay').classList.contains('open')) {
-        document.body.style.overflow = '';
-    }
-}
-
-function renderGallery() {
-    const slides = getSlides(GALLERIES[currentGalleryId]);
-    const total  = slides.length;
-    const idx    = currentPhotoIndex;
-
-    document.getElementById('gallery-counter').textContent = `${idx + 1} / ${total}`;
-    document.getElementById('gallery-prev').style.opacity  = idx > 0          ? '1' : '0.25';
-    document.getElementById('gallery-next').style.opacity  = idx < total - 1  ? '1' : '0.25';
-
-    const photoEl = document.getElementById('gallery-photo');
-    const src = slides[idx];
-    if (src) {
-        photoEl.innerHTML = `<img src="${src}" class="object-contain" style="max-height:65vh;max-width:100%">`;
-    } else {
-        photoEl.innerHTML = `
-            <div class="flex flex-col items-center justify-center gap-4 text-gray-600 w-full" style="height:65vh">
-                <div class="border-2 border-dashed border-gray-700 flex flex-col items-center justify-center gap-3 w-full h-full max-w-lg mx-auto">
-                    <i class="fa-solid fa-image text-5xl"></i>
-                    <span class="text-sm uppercase tracking-widest">照片 ${idx + 1} 待上傳</span>
-                </div>
-            </div>`;
-    }
-
-    document.getElementById('gallery-thumbs').innerHTML = slides.map((s, i) => {
-        const active = i === idx ? 'active' : '';
-        if (s) {
-            return `<div class="gallery-thumb flex-shrink-0 w-16 h-12 overflow-hidden ${active}" onclick="galleryGoTo(${i})">
-                        <img src="${s}" class="w-full h-full object-contain">
-                    </div>`;
-        }
-        return `<div class="gallery-thumb flex-shrink-0 w-16 h-12 bg-gray-800 flex items-center justify-center ${active}" onclick="galleryGoTo(${i})">
-                    <span class="text-gray-600 text-xs">${i + 1}</span>
-                </div>`;
-    }).join('');
-}
-
-function galleryGoTo(i) {
-    const slides = getSlides(GALLERIES[currentGalleryId]);
-    if (i < 0 || i >= slides.length) return;
-    currentPhotoIndex = i;
-    renderGallery();
-}
-function galleryPrev() { galleryGoTo(currentPhotoIndex - 1); }
-function galleryNext() { galleryGoTo(currentPhotoIndex + 1); }
-
-// ── Delivery Photo Wall ────────────────────────────────────────────────────────
-let _deliveryShuffled = [];
+// ── Event Photo Wall（Google Drive 同步）───────────────────────────────────────
+let _eventPhotosShuffled = [];
 let _lightboxIdx = 0;
 
-function renderDeliveryWall() {
-    const wall = document.getElementById('delivery-wall');
-    if (!DELIVERY_PHOTOS || DELIVERY_PHOTOS.length === 0) {
+function renderEventPhotoWall() {
+    const wall = document.getElementById('event-photo-wall');
+    if (!EVENT_PHOTOS || EVENT_PHOTOS.length === 0) {
         wall.innerHTML = `
             <div style="width:100%" class="flex flex-col items-center justify-center py-12 text-center">
                 <i class="fa-solid fa-images text-gray-700 text-5xl mb-4"></i>
@@ -1190,11 +905,11 @@ function renderDeliveryWall() {
             </div>`;
         return;
     }
-    _deliveryShuffled = [...DELIVERY_PHOTOS].sort(() => Math.random() - 0.5);
-    wall.innerHTML = _deliveryShuffled.map((src, i) => {
+    _eventPhotosShuffled = [...EVENT_PHOTOS].sort(() => Math.random() - 0.5);
+    wall.innerHTML = _eventPhotosShuffled.map((photo, i) => {
         const rot = (Math.random() * 4 - 2).toFixed(2);
         return `<div class="photo-wall-item" style="transform:rotate(${rot}deg)" onclick="openPhotoLightbox(${i})">
-            <img src="${src}" loading="lazy" onerror="this.parentElement.remove()">
+            <img src="${photo.thumb}" loading="lazy" onerror="this.parentElement.remove()">
         </div>`;
     }).join('');
 }
@@ -1209,17 +924,16 @@ function openPhotoLightbox(idx) {
 function closePhotoLightbox() {
     document.getElementById('photo-lightbox').classList.remove('open');
     if (!document.getElementById('modal-overlay').classList.contains('open') &&
-        !document.getElementById('sales-overlay').classList.contains('open') &&
-        !document.getElementById('gallery-overlay').classList.contains('open')) {
+        !document.getElementById('sales-overlay').classList.contains('open')) {
         document.body.style.overflow = '';
     }
 }
 
 function _updateLightbox() {
-    document.getElementById('lightbox-img').src = _deliveryShuffled[_lightboxIdx];
-    document.getElementById('lightbox-counter').textContent = `${_lightboxIdx + 1} / ${_deliveryShuffled.length}`;
+    document.getElementById('lightbox-img').src = _eventPhotosShuffled[_lightboxIdx].full;
+    document.getElementById('lightbox-counter').textContent = `${_lightboxIdx + 1} / ${_eventPhotosShuffled.length}`;
     document.getElementById('lb-prev').style.opacity = _lightboxIdx > 0 ? '1' : '0.25';
-    document.getElementById('lb-next').style.opacity = _lightboxIdx < _deliveryShuffled.length - 1 ? '1' : '0.25';
+    document.getElementById('lb-next').style.opacity = _lightboxIdx < _eventPhotosShuffled.length - 1 ? '1' : '0.25';
 }
 
 function lightboxPrev() {
@@ -1281,8 +995,7 @@ function openModal(modelId) {
 
 function closeModal() {
     document.getElementById('modal-overlay').classList.remove('open');
-    if (!document.getElementById('sales-overlay').classList.contains('open') &&
-        !document.getElementById('gallery-overlay').classList.contains('open')) {
+    if (!document.getElementById('sales-overlay').classList.contains('open')) {
         document.body.style.overflow = '';
     }
 }
@@ -1379,8 +1092,7 @@ function openSalesModal() {
 
 function closeSalesModal() {
     document.getElementById('sales-overlay').classList.remove('open');
-    if (!document.getElementById('modal-overlay').classList.contains('open') &&
-        !document.getElementById('gallery-overlay').classList.contains('open')) {
+    if (!document.getElementById('modal-overlay').classList.contains('open')) {
         document.body.style.overflow = '';
     }
 }
@@ -1390,18 +1102,11 @@ function handleSalesOverlayClick(e) {
 }
 
 document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeModal(); closeSalesModal(); closeGallery(); closePhotoLightbox(); }
+    if (e.key === 'Escape') { closeModal(); closeSalesModal(); closePhotoLightbox(); }
     if (document.getElementById('photo-lightbox').classList.contains('open')) {
         if (e.key === 'ArrowLeft')  lightboxPrev();
         if (e.key === 'ArrowRight') lightboxNext();
     }
-});
-
-// Gallery keyboard navigation
-document.addEventListener('keydown', e => {
-    if (!document.getElementById('gallery-overlay').classList.contains('open')) return;
-    if (e.key === 'ArrowLeft')  galleryPrev();
-    if (e.key === 'ArrowRight') galleryNext();
 });
 
 // ── Hamburger ──────────────────────────────────────────────────────────────────
@@ -1427,7 +1132,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 renderUsedCars();
-renderDeliveryWall();
+renderEventPhotoWall();
 
 // ── Scroll fade-in ─────────────────────────────────────────────────────────────
 const io = new IntersectionObserver((entries) => {
