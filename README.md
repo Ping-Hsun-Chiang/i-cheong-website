@@ -120,9 +120,3 @@ fig/                       車型圖片與 LOGO
 PDF/                       原廠規格書
 docs/screenshots/          README 使用的截圖
 ```
-
-## 未來規劃
-
-- 補齊 STC500T、STC700T、SRC500T、SAC2500E、SAC2500T 的車型介紹，以及 SAC2500T 的車輛圖片
-- 二手車資料也改由 Google Drive／Google Sheets 同步，讓業主自行上架
-- 加入 SEO 結構化資料（Product schema），提升搜尋引擎能見度
